@@ -138,7 +138,7 @@
             %>
 
             <% /* Recuperar el vector de anotaciones de la sesion. */
-                // #262348: Se comprueba si hay anotaciones para establecer una variable que dará valor al atributo disabled del nuevo botón
+                // #262348: Se comprueba si hay anotaciones para establecer una variable que darÃ¡ valor al atributo disabled del nuevo botÃ³n
                 String activo = "";
                 int numRelacionAnotaciones = ((Integer)session.getAttribute("NumRelacionAnotaciones")).intValue();
                 if(numRelacionAnotaciones <= 0){
@@ -176,11 +176,11 @@
                 columnaOrden = 0;
             console.log("cargarInicio: columnaOrden set to 0");
 
-            // Construcción dinámica de los campos/columnas
+            // ConstrucciÃ³n dinÃ¡mica de los campos/columnas
             var i = 1;
             console.log("cargarInicio: building listaCampos...");
             <logic:iterate id="campos" name="MantAnotacionRegistroForm" property="camposListados">
-            <%-- Si es campo CHECK, lo ponemos en posición 0 --%>
+            <%-- Si es campo CHECK, lo ponemos en posiciÃ³n 0 --%>
             <logic:equal name="campos" property="nomCampo" value="CHECK">
             listaCampos[0] = [
                 '<bean:write name="campos" property="codCampo"/>',
@@ -191,7 +191,7 @@
             ];
             console.log("  listaCampos[0] (CHECK) =", listaCampos[0]);
             </logic:equal>
-            <%-- Resto de campos, incrementamos índice --%>
+            <%-- Resto de campos, incrementamos Ã­ndice --%>
             <logic:notEqual name="campos" property="nomCampo" value="CHECK">
             listaCampos[i] = [
                 '<bean:write name="campos" property="codCampo"/>',
@@ -206,7 +206,7 @@
             </logic:iterate>
             console.log("cargarInicio: listaCampos built, length =", listaCampos.length);
 
-            // Variables de texto para columnas especiales según entrada/salida
+            // Variables de texto para columnas especiales segÃºn entrada/salida
             var cont = 0;
             var destino = "";
             var salida = "";
@@ -219,7 +219,7 @@
             <% } %>
             console.log("cargarInicio: destino =", destino, ", salida =", salida);
 
-            // Construcción de la configuración de columnas
+            // ConstrucciÃ³n de la configuraciÃ³n de columnas
             cont = 0;
             cols = [
                 { title: "<i class='fa fa-check' aria-hidden='true'></i>", sWidth: parseInt(listaCampos[cont++][2]) + '%', sClass: "centrado"  },
@@ -286,11 +286,11 @@
 
                 console.log("cargarInicio: columnaOrden set to 0");
 
-                // Construcción dinámica de los campos/columnas
+                // ConstrucciÃ³n dinÃ¡mica de los campos/columnas
                 var i = 1;
                 console.log("cargarInicio: building listaCampos...");
                 <logic:iterate id="campos" name="MantAnotacionRegistroForm" property="camposListados">
-                <%-- Si es campo CHECK, lo ponemos en posición 0 --%>
+                <%-- Si es campo CHECK, lo ponemos en posiciÃ³n 0 --%>
                 <logic:equal name="campos" property="nomCampo" value="CHECK">
                 listaCampos[0] = [
                     '<bean:write name="campos" property="codCampo"/>',
@@ -301,7 +301,7 @@
                 ];
                 console.log("  listaCampos[0] (CHECK) =", listaCampos[0]);
                 </logic:equal>
-                <%-- Resto de campos, incrementamos índice --%>
+                <%-- Resto de campos, incrementamos Ã­ndice --%>
                 <logic:notEqual name="campos" property="nomCampo" value="CHECK">
                 listaCampos[i] = [
                     '<bean:write name="campos" property="codCampo"/>',
@@ -316,7 +316,7 @@
                 </logic:iterate>
                 console.log("cargarInicio: listaCampos built, length =", listaCampos.length);
 
-                // Variables de texto para columnas especiales según entrada/salida
+                // Variables de texto para columnas especiales segÃºn entrada/salida
                 var cont = 0;
                 var destino = "";
                 var salida = "";
@@ -329,7 +329,7 @@
                 <% } %>
                 console.log("cargarInicio: destino =", destino, ", salida =", salida);
 
-                // Construcción de la configuración de columnas
+                // ConstrucciÃ³n de la configuraciÃ³n de columnas
                 cont = 0;
                 cols = [
                     { title: "<i class='fa fa-check' aria-hidden='true'></i>", sWidth: parseInt(listaCampos[cont++][2]) + '%', sClass: "centrado"  },
@@ -386,11 +386,11 @@
             }//enlaces
 
         function cargarPaginaSIR() {
-            // 1) Ver qué hay ahora en el hidden
+            // 1) Ver quÃ© hay ahora en el hidden
             console.log("cargarPaginaSIR: antes opcion =", document.getElementById('opcion').value);
 
             // 2) Asigna el valor SIR
-            // Logs de filtros SIR para depuración
+            // Logs de filtros SIR para depuraciÃ³n
             var idSIR = document.getElementById('identificadorRegistroSIRValue');
             var estadoSIR = document.getElementById('codEstadoSIR');
             var unidadSIR = document.getElementById('codigoUnidadDestinoSIRHidden');
@@ -399,12 +399,12 @@
             if (estadoSIR) console.log('cargarPaginaSIR: codEstadoSIR =', estadoSIR.value);
             if (unidadSIR) console.log('cargarPaginaSIR: codigoUnidadDestinoSIRHidden =', unidadSIR.value);
 
-            // Cambiar la opción a consultaOcultaEnSIR
+            // Cambiar la opciÃ³n a consultaOcultaEnSIR
             document.getElementById('opcion').value = "consultaOcultaEnSIR";
-            console.log("cargarPaginaSIR: después opcion =",
+            console.log("cargarPaginaSIR: despuÃ©s opcion =",
                 document.getElementById('opcion').value);
 
-            // 3) Envía al iframe
+            // 3) EnvÃ­a al iframe
             document.forms[0].target = "oculto";
             document.forms[0].action = "<%=request.getContextPath()%>/MantAnotacionRegistro.do";
             document.forms[0].paginaListado.value = 1;
@@ -426,7 +426,7 @@
                     document.forms[0].tipoOrden.value =tipoOrdenacion;
                     document.forms[0].procedoRelaciones.value=" ";
                     document.forms[0].opcion.value="cargar_pagina";
-                    console.log("cargaPagina: Enviando el formulario con la acción 'cargar_pagina'");
+                    console.log("cargaPagina: Enviando el formulario con la acciÃ³n 'cargar_pagina'");
                     document.forms[0].target="oculto";
                     document.forms[0].action="<%=request.getContextPath()%>/MantAnotacionRegistro.do";
                     document.forms[0].submit();
@@ -485,6 +485,9 @@
                     "paging" : paginaCliente,
                     "pageLength": lineasPagina,
                     "autoWidth": false,
+                    "createdRow": function(row, data, dataIndex) {
+                        $(row).attr("id", dataIndex);
+                    },
                     "language": {
                         "search": "<%=descriptor.getDescripcion("buscar")%>",
                         "paginate": {
@@ -499,14 +502,8 @@
                     }
                 });
 
-                // Solo una vez después de crear la tabla
-                if (esConsultaSIR == '1') {
-                    $('#tablaAnotaciones thead tr th').eq(1).html("Estado SIR"); // Añadir cuadro de texto para ir a una página concreta
-                    insertarInputPaginacion();
-                    dataTable.on('draw', actualizarInputPaginacion);
-                }
-
-                for(var i = 0; i < listaSel.length; i++) {
+                
+                $("#tablaAnotaciones tbody").off("dblclick", "tr").on("dblclick", "tr", function() {
                     $('#tablaAnotaciones tbody tr:nth-child('+(i+1)+')').attr('id', i);
                     // logs solo si te interesan
                 }
@@ -554,7 +551,7 @@
                         contenedor.style.display = '';
                     }
                 } else {
-                    // Puede quedar la paginación generada por el servidor
+                    // Puede quedar la paginaciÃ³n generada por el servidor
                     // de una consulta anterior. La ocultamos para evitar
                     // controles duplicados en pantalla.
                     var contenedor = document.getElementById('enlace');
@@ -587,13 +584,13 @@
 
                 var ind = parseInt(indice);
                 if (isNaN(ind) || ind < 0 || ind >= listaOriginal.length) {
-                    console.error("[seleccionRegistro] Índice fuera de rango: ind=", ind, "listaOriginal.length=", listaOriginal.length);
-                    alert("Error interno: la fila seleccionada no existe o no es válida. Contacta con soporte.");
+                    console.error("[seleccionRegistro] Ãndice fuera de rango: ind=", ind, "listaOriginal.length=", listaOriginal.length);
+                    alert("Error interno: la fila seleccionada no existe o no es vÃ¡lida. Contacta con soporte.");
                     return;
                 }
                 if (!listaOriginal[ind]) {
                     console.error("[seleccionRegistro] listaOriginal["+ind+"] es undefined:", listaOriginal);
-                    alert("Error interno: fila seleccionada vacía. Contacta soporte.");
+                    alert("Error interno: fila seleccionada vacÃ­a. Contacta soporte.");
                     return;
                 }
 
@@ -611,12 +608,12 @@
                         numero = valores[1] || "";
                     }
                 } else {
-                    // Si ya es solo el valor (sin HTML), úsalo directamente
+                    // Si ya es solo el valor (sin HTML), Ãºsalo directamente
                     ano = listaOriginal[ind][0];
                     numero = listaOriginal[ind][1];
                 }
 
-                // Log de los valores para depuración
+                // Log de los valores para depuraciÃ³n
                 console.log("[seleccionRegistro] Datos fila:", listaOriginal[ind]);
                 console.log("[seleccionRegistro] ano:", ano, "numero:", numero);
                 console.log("seleccionRegistro -> indice:", indice, " ano:", ano, " numero:", numero);
@@ -630,7 +627,7 @@
                 document.forms[0].target       = "mainFrame";
                 document.forms[0].action       = "<%=request.getContextPath()%>/MantAnotacionRegistro.do";
 
-                // Log para asegurarse de que todo está ok antes del submit
+                // Log para asegurarse de que todo estÃ¡ ok antes del submit
                 console.log("[seleccionRegistro] Form justo antes del submit:", document.forms[0]);
 
                 document.forms[0].submit();
@@ -675,7 +672,7 @@
 
                 $.each(checksPagina,function(index,value){
                     var valor = $(value).val();
-                    console.log("Valor recogido en check:", valor); // Añade esto
+                    console.log("Valor recogido en check:", valor); // AÃ±ade esto
                     if( $(value).is(':checked')) {
                         anotacionesCheck[pagina+index] = 1;
                         valoresAnotacionesCheck[pagina+index] = valor;
@@ -689,7 +686,7 @@
 
             function pulsarPrevioImprimir(opcion){
                 var salida        = "";
-                var separador = '§¥';
+                var separador = 'Â§Â¥';
                 var contador   = 0;
 
                 for(i=0;i<valoresAnotacionesCheck.length;i++){
@@ -726,7 +723,7 @@
                         <%--if(jsp_alerta("C","<%=descriptor.getDescripcion("msgErrorAnotacionSel")%>"+ " <%=descriptor.getDescripcion("msgImprimirTodoListado")%>")){
                            pulsarImprimirInforme('justificante_consulta',"");
                         }--%>
-                        jsp_alerta("A","Debe seleccionar al menos una anotación");
+                        jsp_alerta("A","Debe seleccionar al menos una anotaciÃ³n");
 
                     }
                 }
@@ -747,7 +744,7 @@
             }//pulsarImprimir
 
             function abrirInforme(nombre){
-                // A otra página que contiene el fichero PDF.
+                // A otra pÃ¡gina que contiene el fichero PDF.
                 if (!(nombre =='')){
                     // PDFS NUEVA SITUACION
                     var sourc = "<%=request.getContextPath()%>/jsp/verPdf.jsp?opcion=null&nombre="+nombre;
@@ -812,8 +809,8 @@
                 document.forms[0].action="<%=request.getContextPath()%>/InformesRegistro.do";
                 document.forms[0].submit();
             }
-        // Inserta un campo de texto para saltar a una página concreta cuando
-        // la paginación la gestiona DataTables (consultas SIR)
+        // Inserta un campo de texto para saltar a una pÃ¡gina concreta cuando
+        // la paginaciÃ³n la gestiona DataTables (consultas SIR)
         function insertarInputPaginacion() {
             var pagDiv = $('#tablaAnotaciones_paginate');
             if (pagDiv.length && pagDiv.find('#input_paginate').length === 0) {
@@ -832,7 +829,7 @@
             }
         }
 
-        // Actualiza el valor del input de salto de página al cambiar de página
+        // Actualiza el valor del input de salto de pÃ¡gina al cambiar de pÃ¡gina
         function actualizarInputPaginacion() {
             var info = dataTable.page.info();
             $('#input_paginate').val(info.page + 1);
@@ -929,16 +926,16 @@
                 <input type="button" title='<%=descriptor.getDescripcion("toolTip_bImprimir")%>' class="botonGeneral" value='<%=descriptor.getDescripcion("gbImprimir")%>' name="cmdImprimir" onClick="pulsarPrevioImprimir(0);return false;">
                 <% if ("S".equals(tipoAnotacion) || "Relacion_S".equals(tipoAnotacion) ){ %>
                 <logic:equal name="MantAnotacionRegistroForm" property="mostrarGenerarModelo" value="si">
-                    <!-- #262348: Se añade el botón para registros de salidas si el properties lo permite -->
+                    <!-- #262348: Se aÃ±ade el botÃ³n para registros de salidas si el properties lo permite -->
                     <input type="button" id="botonPeticionResp" class="botonMasLargo" title='<%=descriptor.getDescripcion("altModPetRpta")%>' alt='<%=descriptor.getDescripcion("altModPetRpta")%>' value="Imprimir mod. pet. resp." onClick="pulsarImprimirInforme('peticion_consulta');return false;" <%=activo%>/>
                 </logic:equal>
                 <logic:equal name="MantAnotacionRegistroForm" property="generarJustificanteConsulta" value="si">
-                    <!-- #288821: Se añade el botón para generar el justificante de registros de salida si el properties lo permite -->
+                    <!-- #288821: Se aÃ±ade el botÃ³n para generar el justificante de registros de salida si el properties lo permite -->
                     <input type="button" id="botonJusticanteDesdeConsulta" class="botonLargo" title='<%=descriptor.getDescripcion("altJustificSalida")%>' alt='<%=descriptor.getDescripcion("altJustificSalida")%>' value='<%=descriptor.getDescripcion("etiq_btnImprJustif")%>' onClick="pulsarPrevioImprimir(2);return false;" <%=activo%>/>
                 </logic:equal>
                 <% } else {%>
                 <logic:equal name="MantAnotacionRegistroForm" property="generarJustificanteConsulta" value="si">
-                    <!-- #288821: Se añade el botón para generar el justificante de registros de entrada si el properties lo permite -->
+                    <!-- #288821: Se aÃ±ade el botÃ³n para generar el justificante de registros de entrada si el properties lo permite -->
                     <input type="button" id="botonJusticanteDesdeConsulta" class="botonLargo" title='<%=descriptor.getDescripcion("altJustificEntrada")%>' alt='<%=descriptor.getDescripcion("altJustificEntrada")%>' value='<%=descriptor.getDescripcion("etiq_btnImprJustif")%>' onClick="pulsarPrevioImprimir(2);return false;" <%=activo%>/>
                 </logic:equal>
                 <% } %>
