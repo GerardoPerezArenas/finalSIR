@@ -71,12 +71,12 @@ import org.apache.commons.lang.math.NumberUtils;
 
 public class AnotacionRegistroManager {
     /**
-     * Esto es un código que sigue el patrón de diseño <code>Singleton</code>
-     * Los métodos de negocio gestionan que la persistencia sea manual o automática
-     * Es protected, por lo que la única manera de instanciar esta clase es usando el factory method <code>getInstance</code>
+     * Esto es un cÃ³digo que sigue el patrÃ³n de diseÃ±o <code>Singleton</code>
+     * Los mÃ©todos de negocio gestionan que la persistencia sea manual o automÃ¡tica
+     * Es protected, por lo que la Ãºnica manera de instanciar esta clase es usando el factory method <code>getInstance</code>
      */
     protected AnotacionRegistroManager() {
-        //Queremos usar el fichero de configuración technical
+        //Queremos usar el fichero de configuraciÃ³n technical
         m_ConfigTechnical = ConfigServiceHelper.getConfig("techserver");
         //Queremos tener acceso a los mensajes de error localizados
         m_ConfigError = ConfigServiceHelper.getConfig("error");
@@ -85,7 +85,7 @@ public class AnotacionRegistroManager {
     
     protected static Config registroConf = ConfigServiceHelper.getConfig("Registro");
 
-	// Encapsula la nueva llamada en la firma como era antes de añadir la posibilidad de ser gestionada por 
+	// Encapsula la nueva llamada en la firma como era antes de aÃ±adir la posibilidad de ser gestionada por 
 	// transacciones externas
 	public void insertRegistroValueObject(RegistroValueObject regESVO, String[] params) 
 			throws AnotacionRegistroException, TechnicalException {
@@ -151,7 +151,7 @@ public class AnotacionRegistroManager {
                                 regAnt.setNumReg(regESVO.getNumReg());
                                 regAnt.setTipoReg(regESVO.getTipoReg());
                                 m_Log.debug("*******************DATOS***********************");
-                                m_Log.debug("****************** AÑO REGISTRO"+regAnt.getAnoReg());
+                                m_Log.debug("****************** AÃ‘O REGISTRO"+regAnt.getAnoReg());
                                 m_Log.debug("****************** DEPARTAMENTO"+regAnt.getIdentDepart());
                                 m_Log.debug("****************** UOR"+regAnt.getUnidadOrgan());
                                 m_Log.debug("****************** NUMERO REGISTRO"+regAnt.getNumReg());
@@ -268,7 +268,7 @@ public class AnotacionRegistroManager {
                                 
                                                                 
                                 if(almacen.isPluginGestor()){
-                                    //  Si se trata de un plugin de un gestor documental, se pasa la información
+                                    //  Si se trata de un plugin de un gestor documental, se pasa la informaciÃ³n
                                     // extra necesaria                                    
                                     ResourceBundle config = ResourceBundle.getBundle("documentos");
                             
@@ -330,7 +330,7 @@ public class AnotacionRegistroManager {
                                 rellenarMetadatosDocumentoCotejado(datos, regDoc);
                                 
                                 if(almacen.isPluginGestor()){
-                                    //  Si se trata de un plugin de un gestor documental, se pasa la información
+                                    //  Si se trata de un plugin de un gestor documental, se pasa la informaciÃ³n
                                     // extra necesaria                                    
                                     ResourceBundle config = ResourceBundle.getBundle("documentos");                                 
                                     String carpetaRaiz       = config.getString(ConstantesDatos.PREFIJO_PROPIEDAD_ALMACENAMIENTO + codOrganizacion + ConstantesDatos.BARRA + almacen.getNombreServicio() + ConstantesDatos.SUFIJO_PLUGIN_GESTOR_CARPETA_RAIZ);
@@ -391,7 +391,7 @@ public class AnotacionRegistroManager {
                                 rellenarMetadatosDocumentoCotejado(datos, regDoc);
                                                                 
                                 if(almacen.isPluginGestor()){
-                                    //  Si se trata de un plugin de un gestor documental, se pasa la información
+                                    //  Si se trata de un plugin de un gestor documental, se pasa la informaciÃ³n
                                     // extra necesaria                                    
                                     ResourceBundle config = ResourceBundle.getBundle("documentos");
                             
@@ -426,7 +426,7 @@ public class AnotacionRegistroManager {
                         try{
                              almacen.setDocumentosRegistro(docsRegistroNuevos,con);
                              
-                              // Se procede a eliminar los ficheros nuevos de la anotación que residen 
+                              // Se procede a eliminar los ficheros nuevos de la anotaciÃ³n que residen 
                              // en el disco del servidor
                              eliminarDocumentosRegistroNuevosServidor(rutasDocumentosNuevos);
                              
@@ -518,7 +518,7 @@ public class AnotacionRegistroManager {
 
         } catch (Exception ce) {
             m_Log.error("JDBC Technical problem " + ce.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + ce.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + ce.getMessage());
         }
 
         return res;
@@ -560,7 +560,7 @@ public class AnotacionRegistroManager {
 
         } catch (Exception ce) {
             m_Log.error("JDBC Technical problem " + ce.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + ce.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + ce.getMessage());
         }
 
         return res;
@@ -575,7 +575,7 @@ public class AnotacionRegistroManager {
             resultado = AnotacionRegistroDAO.getInstance().consultaXML(gVO,params);
         } catch (Exception e) {
             m_Log.error("JDBC Technical problem " + e.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + e.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + e.getMessage());
         }
         return (resultado);
     }
@@ -597,7 +597,7 @@ public class AnotacionRegistroManager {
 
         } catch (Exception ce) {
             m_Log.error("JDBC Technical problem " + ce.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + ce.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + ce.getMessage());
         }
 
         return res;
@@ -621,7 +621,7 @@ public class AnotacionRegistroManager {
 
         } catch (Exception ce) {
             m_Log.error("JDBC Technical problem " + ce.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + ce.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + ce.getMessage());
         }
 
         return res;
@@ -645,7 +645,7 @@ public class AnotacionRegistroManager {
 
         } catch (Exception ce) {
             m_Log.error("JDBC Technical problem " + ce.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + ce.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + ce.getMessage());
         }
 
         return res;
@@ -669,7 +669,7 @@ public class AnotacionRegistroManager {
 
         } catch (Exception ce) {
             m_Log.error("JDBC Technical problem " + ce.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + ce.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + ce.getMessage());
         }
 
         return res;
@@ -693,7 +693,7 @@ public class AnotacionRegistroManager {
 
         } catch (Exception ce) {
             m_Log.error("JDBC Technical problem " + ce.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + ce.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + ce.getMessage());
         }
 
         return res;
@@ -713,7 +713,7 @@ public class AnotacionRegistroManager {
             m_Log.debug("Asiento recuperado");
         } catch (TechnicalException te) {
             m_Log.error("JDBC Technical problem " + te.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + te.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + te.getMessage());
         }
         return registroVO;
     }
@@ -733,16 +733,18 @@ public class AnotacionRegistroManager {
             m_Log.debug("Valor recuperado");
         } catch (BDException bde) {
             m_Log.error("JDBC Technical problem " + bde.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + bde.getMessage());
+        m_Log.debug("[getDatosAnotacion] parametros: ano=" + registro.getAnoReg() + ", num=" + registro.getNumReg() + ", tipo=" + registro.getTipoReg());
+            m_Log.debug("[getDatosAnotacion] resultado tipoEntrada=" + registroVO.getTipoAnot());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + bde.getMessage());
         } catch (TechnicalException te) {
             m_Log.error("JDBC Technical problem " + te.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + te.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + te.getMessage());
         } finally {
             try {
                 SigpGeneralOperations.devolverConexion(oad, con);
             } catch (TechnicalException ex) {
                 m_Log.error("JDBC Technical problem " + ex.getMessage());
-                throw new AnotacionRegistroException("Problema técnico de JDBC " + ex.getMessage());
+                throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + ex.getMessage());
             }
         }
         return registroVO;
@@ -793,15 +795,15 @@ public class AnotacionRegistroManager {
             m_Log.debug("Asiento recuperado");
         } catch (TechnicalException te) {
             m_Log.error("JDBC Technical problem " + te.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + te.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + te.getMessage());
         } catch (BDException bde) {
-            m_Log.error("Error al obtener una conexión a la BBDD.");
-            throw new AnotacionRegistroException("Error al obtener una conexión a la BBDD.");
+            m_Log.error("Error al obtener una conexiÃ³n a la BBDD.");
+            throw new AnotacionRegistroException("Error al obtener una conexiÃ³n a la BBDD.");
         } finally {
             try {
                 if(con!=null) con.close();
             } catch (SQLException ex){
-                m_Log.error("Error al cerrar la conexión a la BBDD");
+                m_Log.error("Error al cerrar la conexiÃ³n a la BBDD");
             }
         }
         return resultado;
@@ -850,15 +852,15 @@ public class AnotacionRegistroManager {
             m_Log.debug("Asiento recuperado");
         } catch (TechnicalException te) {
             m_Log.error("JDBC Technical problem " + te.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + te.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + te.getMessage());
         } catch (BDException bde) {
-            m_Log.error("Error al obtener una conexión a la BBDD.");
-            throw new AnotacionRegistroException("Error al obtener una conexión a la BBDD.");
+            m_Log.error("Error al obtener una conexiÃ³n a la BBDD.");
+            throw new AnotacionRegistroException("Error al obtener una conexiÃ³n a la BBDD.");
         } finally {
             try {
                 if(con!=null) con.close();
             } catch (SQLException ex){
-                m_Log.error("Error al cerrar la conexión a la BBDD");
+                m_Log.error("Error al cerrar la conexiÃ³n a la BBDD");
             }
         }
         return resultado;
@@ -912,7 +914,7 @@ public class AnotacionRegistroManager {
                                 regAnt.setNumReg(regESVO.getNumReg());
                                 regAnt.setTipoReg(regESVO.getTipoReg());
                                 m_Log.debug("*******************DATOS***********************");
-                                m_Log.debug("****************** AÑO REGISTRO"+regAnt.getAnoReg());
+                                m_Log.debug("****************** AÃ‘O REGISTRO"+regAnt.getAnoReg());
                                 m_Log.debug("****************** DEPARTAMENTO"+regAnt.getIdentDepart());
                                 m_Log.debug("****************** UOR"+regAnt.getUnidadOrgan());
                                 m_Log.debug("****************** NUMERO REGISTRO"+regAnt.getNumReg());
@@ -1042,7 +1044,7 @@ public class AnotacionRegistroManager {
                                     
                                                                                                 
                                 if(almacen.isPluginGestor()){
-                                    //  Si se trata de un plugin de un gestor documental, se pasa la información
+                                    //  Si se trata de un plugin de un gestor documental, se pasa la informaciÃ³n
                                     // extra necesaria                                    
                                     ResourceBundle config = ResourceBundle.getBundle("documentos");                                    
                                     String carpetaRaiz    = config.getString(ConstantesDatos.PREFIJO_PROPIEDAD_ALMACENAMIENTO + codOrganizacion + ConstantesDatos.BARRA + almacen.getNombreServicio() + ConstantesDatos.SUFIJO_PLUGIN_GESTOR_CARPETA_RAIZ);
@@ -1098,7 +1100,7 @@ public class AnotacionRegistroManager {
                                 
                                                                 
                                 if(almacen.isPluginGestor()){
-                                    //  Si se trata de un plugin de un gestor documental, se pasa la información
+                                    //  Si se trata de un plugin de un gestor documental, se pasa la informaciÃ³n
                                     // extra necesaria                                    
                                     ResourceBundle config = ResourceBundle.getBundle("documentos");                            
                                     String carpetaRaiz    = config.getString(ConstantesDatos.PREFIJO_PROPIEDAD_ALMACENAMIENTO + codOrganizacion + ConstantesDatos.BARRA + almacen.getNombreServicio() + ConstantesDatos.SUFIJO_PLUGIN_GESTOR_CARPETA_RAIZ);
@@ -1134,7 +1136,7 @@ public class AnotacionRegistroManager {
                             // Se dan de alta los documentos nuevos
                             almacen.setDocumentosRegistro(docsRegistroNuevos,con);
                             
-                            // Se procede a eliminar los ficheros nuevos de la anotación que residen en el disco del servidor
+                            // Se procede a eliminar los ficheros nuevos de la anotaciÃ³n que residen en el disco del servidor
                             eliminarDocumentosRegistroNuevosServidor(rutasDocumentosNuevos);
                             
                             //Se vuelven a dar de alta los metadatos de los documentos que se han modificado 
@@ -1209,7 +1211,7 @@ public class AnotacionRegistroManager {
             m_Log.debug("==========>");
             if(doc.getEstadoDocumentoRegistro().intValue()==ConstantesDatos.ESTADO_DOCUMENTO_ELIMINADO && 
                     doc.getRutaDocumento()!=null && !"".equals(doc.getRutaDocumento())){
-                // Han sido eliminado de la lista de ficheros de la anotación y no han sido grabado, así que
+                // Han sido eliminado de la lista de ficheros de la anotaciÃ³n y no han sido grabado, asÃ­ que
                 // se eliminan del directorio temporal en disco
                 
                 try{
@@ -1223,16 +1225,16 @@ public class AnotacionRegistroManager {
                    "".equals(doc.getRutaDocumento())){
                 
                 
-                // Se invoca al método que elimina el documento del plugin de almacenamiento correspondiente
+                // Se invoca al mÃ©todo que elimina el documento del plugin de almacenamiento correspondiente
                 try{
                     if(!almacen.eliminarDocumentoRegistro(doc,con)){
-                        throw new AlmacenDocumentoTramitacionException(4,"Error al eliminar el documento " + doc.getNombreDocumento() + " correspondiente a la anotación " + doc.getEjercicioAnotacion() + "-" + doc.getNumeroRegistro());
+                        throw new AlmacenDocumentoTramitacionException(4,"Error al eliminar el documento " + doc.getNombreDocumento() + " correspondiente a la anotaciÃ³n " + doc.getEjercicioAnotacion() + "-" + doc.getNumeroRegistro());
                     }
                     
                 }catch(AlmacenDocumentoTramitacionException e){
-                    // Si al tratar de eliminar un documento de algún repositorio de documentación, se propaga
-                    // la excepción, para cancelar la operación y deshacer los cambios realizados en base de datos
-                    m_Log.error("Error al eliminar un documento de registro a través del plugin: " + e.getMessage());
+                    // Si al tratar de eliminar un documento de algÃºn repositorio de documentaciÃ³n, se propaga
+                    // la excepciÃ³n, para cancelar la operaciÃ³n y deshacer los cambios realizados en base de datos
+                    m_Log.error("Error al eliminar un documento de registro a travÃ©s del plugin: " + e.getMessage());
                     e.printStackTrace();
                     throw e;
                 }
@@ -1255,7 +1257,7 @@ public class AnotacionRegistroManager {
             }
             
         }catch(Exception e){
-            m_Log.error("Error al eliminar archivos de disco y que se han asociado a una anotación de registro: " + e.getMessage());
+            m_Log.error("Error al eliminar archivos de disco y que se han asociado a una anotaciÃ³n de registro: " + e.getMessage());
             e.printStackTrace();
         }
         return exito;
@@ -1278,7 +1280,7 @@ public class AnotacionRegistroManager {
         } catch (Exception ce) {
             ce.printStackTrace();
             m_Log.error("JDBC Technical problem " + ce.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + ce.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + ce.getMessage());
         }
     }
 
@@ -1298,7 +1300,7 @@ public class AnotacionRegistroManager {
 
         } catch (Exception ce) {
             m_Log.error("JDBC Technical problem " + ce.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + ce.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + ce.getMessage());
         }
     }
 
@@ -1316,7 +1318,7 @@ public class AnotacionRegistroManager {
             m_Log.debug("getListaTiposIdentificadoresInteresado");
         } catch (Exception ce) {
             m_Log.error("JDBC Technical problem " + ce.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + ce.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + ce.getMessage());
         }
         return res;
     }
@@ -1327,12 +1329,12 @@ public class AnotacionRegistroManager {
             return AnotacionRegistroDAO.getInstance().getIndicadorPersonaFisicaJuridica(tipoDoc, params);
         } catch (TechnicalException te) {
             m_Log.error("JDBC Technical problem " + te.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + te.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + te.getMessage());
         }
     }
 
     /* *******************************************************************************************************
-   Relación de anotaciones.
+   RelaciÃ³n de anotaciones.
    ****************************************************************************************************** */
     public Vector relacionRegistroValueObject(RegistroValueObject patron, String[] params, int startIndex, int count,int columna,String tipoOrden)
             throws AnotacionRegistroException {
@@ -1347,13 +1349,13 @@ public class AnotacionRegistroManager {
 
             res = AnotacionRegistroDAO.getInstance().relacionRegistroValueObject(patron, params, startIndex, count,columna,tipoOrden);
 
-            m_Log.debug("Relación de registros value objects obtenidos");
+            m_Log.debug("RelaciÃ³n de registros value objects obtenidos");
             //We want to be informed when this method has finalized
             m_Log.debug("relacionRegistroValueObject");
 
         } catch (Exception ce) {
             m_Log.error("JDBC Technical problem " + ce.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + ce.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + ce.getMessage());
 
         }
         return res; 
@@ -1369,13 +1371,13 @@ public class AnotacionRegistroManager {
 
             res = AnotacionRegistroDAO.getInstance().relacionCampoRegistroValueObject(patron, campo, params);
 
-            m_Log.debug("Relación de registros value objects con datos de oficina de registro obtenidos");
+            m_Log.debug("RelaciÃ³n de registros value objects con datos de oficina de registro obtenidos");
             //We want to be informed when this method has finalized
             m_Log.info("relacionCampoRegistroValueObject()::END");
 
         } catch (Exception ce) {
             m_Log.error("JDBC Technical problem " + ce.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + ce.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + ce.getMessage());
 
         }
         return res; 
@@ -1395,13 +1397,13 @@ public class AnotacionRegistroManager {
 
             res = AnotacionRegistroDAO.getInstance().relacionRegistroValueObjectImprimirOptimo(patron, params, startIndex, count,columna,tipoOrden);
 
-            m_Log.debug("Relación de registros value objects obtenidos");
+            m_Log.debug("RelaciÃ³n de registros value objects obtenidos");
             //We want to be informed when this method has finalized
             m_Log.debug("relacionRegistroValueObjectImprimirOptimo");
 
         } catch (Exception ce) {
             m_Log.error("JDBC Technical problem " + ce.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + ce.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + ce.getMessage());
 
         }
         return res;
@@ -1417,11 +1419,11 @@ public class AnotacionRegistroManager {
 
         } catch (Exception ce) {
             m_Log.error("JDBC Technical problem " + ce.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + ce.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + ce.getMessage());
         }
     }
     /* ********************************************************************************************************
-     * Numero de Relación de anotaciones.
+     * Numero de RelaciÃ³n de anotaciones.
      * ****************************************************************************************************** */
     public int getNumeroTotalAnotaciones(RegistroValueObject patron, String[] params) throws AnotacionRegistroException {
 
@@ -1431,14 +1433,14 @@ public class AnotacionRegistroManager {
 
         } catch (Exception ce) {
             m_Log.error("JDBC Technical problem " + ce.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + ce.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + ce.getMessage());
         }
     }
 
     /**
      * Comprueba la existencia de un asiento.
      * @param reg SimpleRegistroValueObject con la clave del asiento.
-     * @param params Parametros de conexión a BD.
+     * @param params Parametros de conexiÃ³n a BD.
      * @return true si existe el asiento, false en caso contrario
      */
     public boolean existeAsiento(SimpleRegistroValueObject reg, String[] params) throws AnotacionRegistroException {
@@ -1448,7 +1450,7 @@ public class AnotacionRegistroManager {
 
         } catch (Exception ce) {
             m_Log.error("JDBC Technical problem " + ce.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + ce.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + ce.getMessage());
         }
     }
 
@@ -1488,9 +1490,9 @@ public class AnotacionRegistroManager {
 
 
     /**
-     * Recupera un documento determinado perteneciente a una anotación
+     * Recupera un documento determinado perteneciente a una anotaciÃ³n
      * @param reg SimpleRegistroValueObject con la clave del asiento.
-     * @param params Parametros de conexión a BD.
+     * @param params Parametros de conexiÃ³n a BD.
      * @return true si existe el asiento, false en caso contrario
      */
     public DocumentoValueObject getDocumento(RegistroValueObject reg, String[] params) throws AnotacionRegistroException {
@@ -1506,13 +1508,13 @@ public class AnotacionRegistroManager {
             doc = AnotacionRegistroDAO.getInstance().getDocumento(reg, con);
         } catch (Exception ce) {
             m_Log.error("JDBC Technical problem " + ce.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + ce.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + ce.getMessage());
         } finally {
             try {
                 SigpGeneralOperations.devolverConexion(abd, con);
             } catch (TechnicalException te) {
                 m_Log.error("JDBC Technical problem " + te.getMessage());
-                throw new AnotacionRegistroException("Problema técnico de JDBC " + te.getMessage());
+                throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + te.getMessage());
         }
     }
 
@@ -1549,7 +1551,7 @@ public class AnotacionRegistroManager {
      *  Obtiene la lista de los registros que tienen asociado un determinado asunto.
      *
      * @param asunto El MantAsuntosValueObject que representa el asunto.
-     * @param params Informacion de la conexión a la BD.
+     * @param params Informacion de la conexiÃ³n a la BD.
      * @return Vector con los registros que tienen asociado un determinado asunto.
      */
     public Vector<RegistroValueObject> getListaRegistrosPorAsunto(MantAsuntosValueObject asunto,String[] params){
@@ -1569,7 +1571,7 @@ public class AnotacionRegistroManager {
      *  Modifica el asunto de un determinado registro.
      *
      * @param registroValueObject RegistroValueObject que se va actualizar.
-     * @param conexion Conexión a la BD con transacción abierta.
+     * @param conexion ConexiÃ³n a la BD con transacciÃ³n abierta.
      */
     public void modificarAsuntoRegistro( RegistroValueObject registroValueObject, Connection conexion){       
 
@@ -1590,7 +1592,7 @@ public class AnotacionRegistroManager {
     public static AnotacionRegistroManager getInstance() {
         //Si no hay una instancia de esta clase tenemos que crear una
         if (instance == null) {
-            // Necesitamos sincronización aquí para serializar (no multithread)
+            // Necesitamos sincronizaciÃ³n aquÃ­ para serializar (no multithread)
             // las invocaciones a este metodo
             synchronized (AnotacionRegistroManager.class) {
                 if (instance == null) {
@@ -1636,7 +1638,7 @@ public class AnotacionRegistroManager {
       }
 
      /**
-     * Método auxiliar que te devuelve un nombre de oficina, para la funcionalidad
+     * MÃ©todo auxiliar que te devuelve un nombre de oficina, para la funcionalidad
      * imprimirCuneus
      * @param codigoOficina codigo de la oficina, de la que queremos obtener el nombre
      * @param params info para acceder a la BD
@@ -1661,10 +1663,10 @@ public class AnotacionRegistroManager {
  
      
      /**
-     * Método auxiliar que te devuelve un nombre de oficina, para la funcionalidad
+     * MÃ©todo auxiliar que te devuelve un nombre de oficina, para la funcionalidad
      * imprimirCuneus
-     * @param codUor codigo de la unidad órganica
-     * @param codAnotacion codigo de la anotación 
+     * @param codUor codigo de la unidad Ã³rganica
+     * @param codAnotacion codigo de la anotaciÃ³n 
      * @param resEje ejercicio de la anotacion
      * @param tipoReg tipo de la Anotacion (E->entrada/S->salida)
      * @return codigo Codigo de la oficina
@@ -1691,7 +1693,7 @@ public class AnotacionRegistroManager {
     /**
      * Recupera un documento determinado asociado a una determinada anotaciones de registro
      * @param doc: Objeto de tipo DocumentoAnotacionRegistroVO
-     * @param params: Parámetros de conexión a la BBDD
+     * @param params: ParÃ¡metros de conexiÃ³n a la BBDD
      * @return Objeto de tipo DocumentoAntacionRegistroVO
      */
      public DocumentoAnotacionRegistroVO getDocumentoAnotacionRegistro(DocumentoAnotacionRegistroVO doc,String[] params){
@@ -1705,14 +1707,14 @@ public class AnotacionRegistroManager {
              AnotacionRegistroDAO.getInstance().getDocumentoAnotacionRegistro(doc, con);
              
          }catch(BDException e){
-             m_Log.error(this.getClass().getName() + " - ERROR al recuperar una conexión a la BBDD: " + e.getMessage());
+             m_Log.error(this.getClass().getName() + " - ERROR al recuperar una conexiÃ³n a la BBDD: " + e.getMessage());
              
          }finally{
              try{
                  if(con!=null) con.close();
                  
              }catch(SQLException e){
-                 m_Log.error(this.getClass().getName() + " - ERROR al cerrar conexión a la BBDD: " + e.getMessage());
+                 m_Log.error(this.getClass().getName() + " - ERROR al cerrar conexiÃ³n a la BBDD: " + e.getMessage());
              }
          }         
          return doc;         
@@ -1733,9 +1735,9 @@ public class AnotacionRegistroManager {
 
         if(doc!=null){
             if (doc.getEstadoDocumentoRegistro() == ConstantesDatos.ESTADO_DOCUMENTO_NUEVO && doc.getRutaDocumentoRegistroDisco() != null) {
-                // No se ha confirmado todavía la grabación del documento en el repositorio de documentación, 
-                // que bien puede ser la base de datos o algún gestor documental, por tanto, para poder 
-                // visualizar su contenido habrá que leer el fichero del disco
+                // No se ha confirmado todavÃ­a la grabaciÃ³n del documento en el repositorio de documentaciÃ³n, 
+                // que bien puede ser la base de datos o algÃºn gestor documental, por tanto, para poder 
+                // visualizar su contenido habrÃ¡ que leer el fichero del disco
 
                 // Se recupera la ruta del fichero en el disco del servidor
                 String pathFile = doc.getRutaDocumentoRegistroDisco();
@@ -1757,7 +1759,7 @@ public class AnotacionRegistroManager {
 
             } else if (doc.getEstadoDocumentoRegistro() == ConstantesDatos.ESTADO_DOCUMENTO_GRABADO) {
 
-                        // Si el documento ya ha sido grabado con anterioridad, entonces habrá que invocar al 
+                        // Si el documento ya ha sido grabado con anterioridad, entonces habrÃ¡ que invocar al 
                 // plugin correspondiente para descargar su contenido
                 String[] params = usuario.getParamsCon();
                 AlmacenDocumento almacen = AlmacenDocumentoTramitacionFactoria.getInstance(Integer.toString(usuario.getOrgCod())).getImplClassRegistro(Integer.toString(usuario.getOrgCod()));
@@ -1784,7 +1786,7 @@ public class AnotacionRegistroManager {
                     datos.put("extension", MimeTypes.guessExtensionFromMimeType(doc.getTipoDoc()));
 
                     if (almacen.isPluginGestor()) {
-                                //  Si se trata de un plugin de un gestor documental, se pasa la información
+                                //  Si se trata de un plugin de un gestor documental, se pasa la informaciÃ³n
                         // extra necesaria                                    
                         ResourceBundle config = ResourceBundle.getBundle("documentos");
                         /**
@@ -1817,12 +1819,12 @@ public class AnotacionRegistroManager {
                             }
 
                         } catch (BDException e) {
-                            m_Log.error("Error al recuperar una conexión a la BBDD: " + e.getMessage());
+                            m_Log.error("Error al recuperar una conexiÃ³n a la BBDD: " + e.getMessage());
                         } finally {
                             try {
                                 adapt.devolverConexion(con);
                             } catch (BDException e) {
-                                m_Log.error("Error al cerrar la conexión a la BBDD: " + e.getMessage());
+                                m_Log.error("Error al cerrar la conexiÃ³n a la BBDD: " + e.getMessage());
                             }
                         }
 
@@ -1859,11 +1861,11 @@ public class AnotacionRegistroManager {
      
      
      /**
-      * Método llamado para duplicar una anotación de registro y los documentos asociados 
+      * MÃ©todo llamado para duplicar una anotaciÃ³n de registro y los documentos asociados 
       * a la misma
-      * @param regESVO: Objeto de la clase RegistroValueObject con los datos de la anotación a dar
+      * @param regESVO: Objeto de la clase RegistroValueObject con los datos de la anotaciÃ³n a dar
       * de alta
-      * @param params: Parámetros de conexión a la BBDD
+      * @param params: ParÃ¡metros de conexiÃ³n a la BBDD
       * @throws AnotacionRegistroException
       * @throws TechnicalException 
       */
@@ -1888,13 +1890,13 @@ public class AnotacionRegistroManager {
                         
             Vector<SimpleRegistroValueObject> relaciones = regESVO.getRelaciones();
             if(relaciones!=null && relaciones.size()>=1){
-                // Si se contesta una anotación, en relaciones está la anotación contestada, que es de entrada
+                // Si se contesta una anotaciÃ³n, en relaciones estÃ¡ la anotaciÃ³n contestada, que es de entrada
                 tipoAnotacionOrigen = relaciones.get(0).getTipo();
                 ejercicioAnotacionOriginal = Integer.parseInt(relaciones.get(0).getEjercicio());
                 numeroRegistroOriginal = new Long(relaciones.get(0).getNumero());  
                 infoAnotacionOriginal = "Anotacion contestada: ";
             }else{
-                // Si no hay relaciones, entonces se está duplicando la anotación, sea de entrada o de salida
+                // Si no hay relaciones, entonces se estÃ¡ duplicando la anotaciÃ³n, sea de entrada o de salida
                 tipoAnotacionOrigen = regESVO.getTipoReg();
                 ejercicioAnotacionOriginal = regESVO.getEjercicioAnotacionDuplicadaOrigen();
                 numeroRegistroOriginal    = regESVO.getNumReg();  
@@ -1985,12 +1987,12 @@ public class AnotacionRegistroManager {
                                         doc = almacen.getDocumentoRegistro(doc);      
                                     }catch(Exception e){                                   
                                         // No se ha podido recuperar el contenido binario del documento, pero eso quiere decir que es documento de registro, pero 
-                                        // sin binario. Este tipo de documento son los que se añaden a través de asuntos codificados, y no se sube el binario.
+                                        // sin binario. Este tipo de documento son los que se aÃ±aden a travÃ©s de asuntos codificados, y no se sube el binario.
                                         m_Log.error("No se ha podido recuperar el contenido binario del documento de registro: " + e.getMessage());                                    
                                     }
                                 }
                                                                
-                                // Se indica el ejercicio, número y tipo de la anotación para la 
+                                // Se indica el ejercicio, nÃºmero y tipo de la anotaciÃ³n para la 
                                 // que se dan de alta el documento
                                 doc.setEjercicioAnotacion(ejercicioAnotacionDuplicada);
                                 doc.setNumeroRegistro(numeroRegistroDuplicado);
@@ -2048,7 +2050,7 @@ public class AnotacionRegistroManager {
             throw new AnotacionRegistroException("Error al obtener una conexion a la base de datos");
         } catch (AnotacionRegistroException ex) {
             m_Log.error("JDBC Technical problem " + ex.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + ex.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + ex.getMessage());
         }
         
         return registro;
@@ -2065,15 +2067,15 @@ public class AnotacionRegistroManager {
             datosSga=AnotacionRegistroDAO.getInstance().getDatosSga(registro, con);
             m_Log.debug("Datos Sga recuperados");
         } catch (BDException bde) {
-            m_Log.error("Error al obtener una conexión a la BBDD.");
-            throw new AnotacionRegistroException("Error al obtener una conexión a la BBDD.");
+            m_Log.error("Error al obtener una conexiÃ³n a la BBDD.");
+            throw new AnotacionRegistroException("Error al obtener una conexiÃ³n a la BBDD.");
         }catch(Exception e){
            throw new AnotacionRegistroException(e.getMessage());
         } finally {
             try {
                 if(con!=null) con.close();
             } catch (SQLException ex){
-                m_Log.error("Error al cerrar la conexión a la BBDD");
+                m_Log.error("Error al cerrar la conexiÃ³n a la BBDD");
             }
         }
         return datosSga;
@@ -2194,7 +2196,7 @@ public class AnotacionRegistroManager {
                 descripcion = lista.get(0).getValue();
             }
         } catch (BDException e) {
-            m_Log.error(this.getClass().getName() + " - ERROR al recuperar una conexión a la BBDD: " + e.getMessage());
+            m_Log.error(this.getClass().getName() + " - ERROR al recuperar una conexiÃ³n a la BBDD: " + e.getMessage());
 
         } finally {
             try {
@@ -2203,7 +2205,7 @@ public class AnotacionRegistroManager {
                 }
 
             } catch (SQLException e) {
-                m_Log.error(this.getClass().getName() + " - ERROR al cerrar conexión a la BBDD: " + e.getMessage());
+                m_Log.error(this.getClass().getName() + " - ERROR al cerrar conexiÃ³n a la BBDD: " + e.getMessage());
             }
         }
         return descripcion;
@@ -2231,7 +2233,7 @@ public class AnotacionRegistroManager {
             lista = AnotacionRegistroDAO.getInstance().obtenerTiposMetadatosCotejo(id, enumTabla, con);
 
         } catch (BDException e) {
-            m_Log.error(this.getClass().getName() + " - ERROR al recuperar una conexión a la BBDD: " + e.getMessage());
+            m_Log.error(this.getClass().getName() + " - ERROR al recuperar una conexiÃ³n a la BBDD: " + e.getMessage());
 
         } finally {
             try {
@@ -2240,7 +2242,7 @@ public class AnotacionRegistroManager {
                 }
 
             } catch (SQLException e) {
-                m_Log.error(this.getClass().getName() + " - ERROR al cerrar conexión a la BBDD: " + e.getMessage());
+                m_Log.error(this.getClass().getName() + " - ERROR al cerrar conexiÃ³n a la BBDD: " + e.getMessage());
             }
         }
         return lista;
@@ -2404,7 +2406,7 @@ public class AnotacionRegistroManager {
         Boolean isExpHistorico = (Boolean) parametros.getAtributo("isExpHistorico");
         Integer idOrganizacion = (Integer) parametros.getAtributo("idOrganizacion");
 
-        //<ejercicio>§¥<numero>§¥<codTip>§¥<nombreDocumentoCSV>§¥<codOur>§¥<codDep>§¥<tipoMime>
+        //<ejercicio>Â§Â¥<numero>Â§Â¥<codTip>Â§Â¥<nombreDocumentoCSV>Â§Â¥<codOur>Â§Â¥<codDep>Â§Â¥<tipoMime>
         StringBuilder codigo = new StringBuilder();
         codigo.append(ejercicio)
                 .append(ConstantesDatos.SEPARADOR)
@@ -2477,7 +2479,7 @@ public class AnotacionRegistroManager {
                 m_Log.debug(String.format("extension: %s", extension));
                 m_Log.debug(String.format("rutaCompletaFichero: %s", rutaCompletaFichero));
                 m_Log.debug(String.format("metadatos: %s", metadatos));
-                m_Log.debug(String.format("tamaño fichero: %d", fichero.length));
+                m_Log.debug(String.format("tamaÃ±o fichero: %d", fichero.length));
             }
 
             // Iniciamos la transaccion a BD si fuese necesario
@@ -2532,7 +2534,7 @@ public class AnotacionRegistroManager {
             // ES NECESARIO REALIZAR PRUEBAS CON EL GESTOR DOCUMENTAL, YA QUE ESTA
             // PARTE ESTA SIN PROBAR
             if (almacen.isPluginGestor()) {
-                //  Si se trata de un plugin de un gestor documental, se pasa la información
+                //  Si se trata de un plugin de un gestor documental, se pasa la informaciÃ³n
                 // extra necesaria
                 String unidOrgUsuarioQRegistra = codDep;
                 String descripcionOrganizacion = OrganizacionesDAO.getInstance().getDescripcionOrganizacion(idOrganizacion, con);
@@ -2601,7 +2603,7 @@ public class AnotacionRegistroManager {
             mapaEtiquetas = AnotacionRegistroDAO.getInstance().consultaHashEtiquetasValor(gVO,params);
         } catch (Exception e) {
             m_Log.error("JDBC Technical problem " + e.getMessage());
-            throw new AnotacionRegistroException("Problema técnico de JDBC " + e.getMessage());
+            throw new AnotacionRegistroException("Problema tÃ©cnico de JDBC " + e.getMessage());
         }
         return mapaEtiquetas;
     }
@@ -2631,8 +2633,8 @@ public class AnotacionRegistroManager {
              listadoPendientesFinalizar = AnotacionRegistroDAO.getInstance().getListadoPendientesDigitalizar(regVO, filtro, con);
             
         }catch(BDException bde){
-            m_Log.error("Error al obtener una conexión a la BBDD");
-            throw new AnotacionRegistroException("Error al obtener una conexión a la BBDD " + bde);
+            m_Log.error("Error al obtener una conexiÃ³n a la BBDD");
+            throw new AnotacionRegistroException("Error al obtener una conexiÃ³n a la BBDD " + bde);
         } catch(Exception e){
              m_Log.error("JDBC Technical problem in getListadoPendientesFinalizar" + e.getMessage());
                 e.printStackTrace();
@@ -2713,10 +2715,10 @@ public class AnotacionRegistroManager {
             
             codProcedimiento = anotacionDAO.getCodProcedimientoRegistro(regVO, con);
          }catch(BDException bde){
-            m_Log.error("Error al obtener una conexión a la BBDD");
-            throw new AnotacionRegistroException("Error al obtener una conexión a la BBDD " + bde);    
+            m_Log.error("Error al obtener una conexiÃ³n a la BBDD");
+            throw new AnotacionRegistroException("Error al obtener una conexiÃ³n a la BBDD " + bde);    
         }catch(Exception ex){
-            m_Log.error("Ha ocurrido un error al recuperar el código de procedimiento "+ex.getMessage());
+            m_Log.error("Ha ocurrido un error al recuperar el cÃ³digo de procedimiento "+ex.getMessage());
         }finally{
              try {
                  SigpGeneralOperations.devolverConexion(adapt, con);
@@ -2740,10 +2742,10 @@ public class AnotacionRegistroManager {
             
             finDigitalizacion = anotacionDAO.getFinDigitalizacionAnotacion(regVO, con);
          }catch(BDException bde){
-            m_Log.error("Error al obtener una conexión a la BBDD");
-            throw new AnotacionRegistroException("Error al obtener una conexión a la BBDD " + bde);    
+            m_Log.error("Error al obtener una conexiÃ³n a la BBDD");
+            throw new AnotacionRegistroException("Error al obtener una conexiÃ³n a la BBDD " + bde);    
         }catch(Exception ex){
-            m_Log.error("Ha ocurrido un error al comprobar si el proceso de digitalización había finalizado "+ex.getMessage());
+            m_Log.error("Ha ocurrido un error al comprobar si el proceso de digitalizaciÃ³n habÃ­a finalizado "+ex.getMessage());
         }finally{
              try {
                  SigpGeneralOperations.devolverConexion(adapt, con);
@@ -2775,8 +2777,8 @@ public class AnotacionRegistroManager {
             
             finDigitalizacion = anotacionDAO.getDocumentoMigrado( ejercicio, numeroEntrada, tituloDocumento, con);
          }catch(BDException bde){
-            m_Log.error("Error al obtener una conexión a la BBDD");
-            throw new AnotacionRegistroException("Error al obtener una conexión a la BBDD " + bde);    
+            m_Log.error("Error al obtener una conexiÃ³n a la BBDD");
+            throw new AnotacionRegistroException("Error al obtener una conexiÃ³n a la BBDD " + bde);    
         }catch(Exception ex){
             m_Log.error("Ha ocurrido un error al recuperar si un documento es migrado "+ex.getMessage());
         }finally{
@@ -2802,10 +2804,10 @@ public class AnotacionRegistroManager {
             
             anotacionDAO.cancelarFinDigitalizacionDocumentos(regVO, con);
          }catch(BDException bde){
-            m_Log.error("Error al obtener una conexión a la BBDD");
-            throw new AnotacionRegistroException("Error al obtener una conexión a la BBDD " + bde);    
+            m_Log.error("Error al obtener una conexiÃ³n a la BBDD");
+            throw new AnotacionRegistroException("Error al obtener una conexiÃ³n a la BBDD " + bde);    
         }catch(Exception ex){
-            m_Log.error("Ha ocurrido un error al cancelar la finalización de digitalización de documentos "+ex.getMessage());
+            m_Log.error("Ha ocurrido un error al cancelar la finalizaciÃ³n de digitalizaciÃ³n de documentos "+ex.getMessage());
         }finally{
              try {
                  SigpGeneralOperations.devolverConexion(adapt, con);
@@ -2828,10 +2830,10 @@ public class AnotacionRegistroManager {
             
             anotacionDAO.cancelarCambioProcedimiento(regVO,codProAnterior, con);
          }catch(BDException bde){
-            m_Log.error("Error al obtener una conexión a la BBDD");
-            throw new AnotacionRegistroException("Error al obtener una conexión a la BBDD " + bde);    
+            m_Log.error("Error al obtener una conexiÃ³n a la BBDD");
+            throw new AnotacionRegistroException("Error al obtener una conexiÃ³n a la BBDD " + bde);    
         }catch(Exception ex){
-            m_Log.error("Ha ocurrido un error al cancelar el cambio de procedimiento de una anotación "+ex.getMessage());
+            m_Log.error("Ha ocurrido un error al cancelar el cambio de procedimiento de una anotaciÃ³n "+ex.getMessage());
         }finally{
              try {
                  SigpGeneralOperations.devolverConexion(adapt, con);

@@ -618,6 +618,8 @@
                 console.log("[seleccionRegistro] ano:", ano, "numero:", numero);
                 console.log("seleccionRegistro -> indice:", indice, " ano:", ano, " numero:", numero);
                 console.log("Recibido indice=" + indice + ", ano=" + ano + ", numero=" + numero);
+                  var tipoEntradaRaw = (listaAnotacionesCompleta && listaAnotacionesCompleta[ind]) ? listaAnotacionesCompleta[ind][20] : "NA";
+                  console.log("[seleccionRegistro] tipoEntradaRaw:", tipoEntradaRaw);
 
                 // Rellenar campos del form
                 document.forms[0].posicionAnotacion.value = (paginaActual - 1) * document.forms[0].numLineasPaginaListado.value + ind + 1;

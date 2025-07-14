@@ -261,7 +261,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                         ordenarNombre = false;
                     } else {
                         request.setAttribute("marcarCodigo", "false");
-                        // Si la petici�n no llega de la p�gina que muestra el �rbol de uors.
+                        // Si la peticiï¿½n no llega de la pï¿½gina que muestra el ï¿½rbol de uors.
                         ResourceBundle config = ResourceBundle.getBundle("Registro");
                         try {
                             String tipoOrdenacion = config.getString(usuario.getOrgCod() + "/ORDENACION_ARBOL");
@@ -269,7 +269,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                                 ordenarNombre = true;
                             }
                         } catch (Exception e) {
-                            // Se ordena por c�digo
+                            // Se ordena por cï¿½digo
                             ordenarNombre = false;
                         }
                     }
@@ -293,7 +293,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                         ordenarNombre = false;
                     } else {
                         request.setAttribute("marcarCodigo", "false");
-                        // Si la petici�n no llega de la p�gina que muestra el �rbol de uors.
+                        // Si la peticiï¿½n no llega de la pï¿½gina que muestra el ï¿½rbol de uors.
                         ResourceBundle config = ResourceBundle.getBundle("Registro");
                         try {
                             String tipoOrdenacion = config.getString(usuario.getOrgCod() + "/ORDENACION_ARBOL");
@@ -301,7 +301,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                                 ordenarNombre = true;
                             }
                         } catch (Exception e) {
-                            // Se ordena por c�digo
+                            // Se ordena por cï¿½digo
                             ordenarNombre = false;
                         }
                     }
@@ -346,7 +346,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                 }
 
                 m_Log.debug("Recuperadas " + uors.size() + " UORs");
-                m_Log.debug("Recuperadas " + (arboluors.contarNodos() - 1) + " UORs en el árbol");
+                m_Log.debug("Recuperadas " + (arboluors.contarNodos() - 1) + " UORs en el Ã¡rbol");
                 request.setAttribute("arbolUORs", arboluors);
                 request.setAttribute("listaUORs", uors);
                 opcion = "seleccionUOR";
@@ -381,7 +381,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
             traductorAplicacionBean.setApl_cod(ConstantesDatos.APP_REGISTRO_ENTRADA_SALIDA);
             traductorAplicacionBean.setIdi_cod(usuarioVO.getIdioma());
 
-            // #291976: a�adimos a la sesion la propiedad SERVICIO_DIGITALIZACION_ACTIVO de Registro.properties
+            // #291976: aï¿½adimos a la sesion la propiedad SERVICIO_DIGITALIZACION_ACTIVO de Registro.properties
             String servDigitalizacionAct = (String) session.getAttribute("servicioDigitalizacionActivo");
             m_Log.info(session.getId() + " " + usuarioActualLog + " (String) session.getAttribute(\"servicioDigitalizacionActivo\") : " + servDigitalizacionAct);
             if (servDigitalizacionAct == null) {
@@ -534,7 +534,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                 registroForm.setBloquearFechaHoraPresentacion("SI");
             }
 
-            //Comprobamos si en el fichero de propiedades de registro existe una entrada que nos indice si el campo asunto ser� obligatorio
+            //Comprobamos si en el fichero de propiedades de registro existe una entrada que nos indice si el campo asunto serï¿½ obligatorio
             m_Log.info(session.getId() + " " + usuarioActualLog + " Recuperamos del fichero de propiedades de registro la entrada que indica si el asunto"
                     + " es obligatorio, si la entrada no existe se toma por defecto el valor falso");
             Boolean asuntoObligatorio = false;
@@ -761,7 +761,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     //Obtenemos los documentos presentados, para indicar cuales fueron presentados en el momento del Alta
 
                     /**
-                     * * SE ALMACENA EN EL OBJETO elRegistroESVO EL C�DIGO DE LA
+                     * * SE ALMACENA EN EL OBJETO elRegistroESVO EL Cï¿½DIGO DE LA
                      * OFICINA DE REGISTRO DEL USUARIO *
                      */
                     elRegistroESVO.setCodOficinaRegistro(regUsuarioVO.getCodOficinaRegistro());
@@ -769,7 +769,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     StringTokenizer valores = null;
                     String txtListaDocEntregados = request.getParameter("txtListaDocEntregados");
                     m_Log.info(session.getId() + " " + usuarioActualLog + " txtListaDocEntregados: " + txtListaDocEntregados);
-                    valores = new StringTokenizer(txtListaDocEntregados, "��", false);
+                    valores = new StringTokenizer(txtListaDocEntregados, "ï¿½ï¿½", false);
                     Vector docsEntregados = new Vector();
                     while (valores.hasMoreTokens()) {
                         String valor = valores.nextToken();
@@ -826,11 +826,11 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     }
 
                     if (!"duplicar".equals(opcion)) {
-                        m_Log.error("(NO ERROR) Traza de control - No estamos duplicando: " + opcion + ". Digitalizaci�n: " + elRegistroESVO.isFinDigitalizacion());
+                        m_Log.error("(NO ERROR) Traza de control - No estamos duplicando: " + opcion + ". Digitalizaciï¿½n: " + elRegistroESVO.isFinDigitalizacion());
                         AnotacionRegistroManager.getInstance().insertRegistroValueObject(elRegistroESVO, params);
                         m_Log.error("(NO ERROR) Traza de control - Se ha creado la entrada : " + elRegistroESVO.getNumReg());
 
-                        //si esta el servicio de digitalizaci�n activo  y se finaliza el proceso de digtalizaci�n de documentos
+                        //si esta el servicio de digitalizaciï¿½n activo  y se finaliza el proceso de digtalizaciï¿½n de documentos
                         String digitalizacionActivo = registroConf.getString(usuarioVO.getOrgCod() + "/SERVICIO_DIGITALIZACION_ACTIVO");
                         m_Log.info(session.getId() + " " + usuarioActualLog + " digitalizacionActivo " + digitalizacionActivo);
                         if (digitalizacionActivo.equalsIgnoreCase("si")) {
@@ -839,7 +839,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                                 ArrayList<DocumentoAnotacionRegistroVO> documentosRegistro = (ArrayList<DocumentoAnotacionRegistroVO>) digitalizarManager.getDocumentosRegistro(elRegistroESVO, params);
                                 m_Log.info(session.getId() + " " + usuarioActualLog + " Documentos de registro recuperados: " + documentosRegistro.size());
                                 String codProcedimiento = AnotacionRegistroManager.getInstance().getCodProcedimientoRegistro(elRegistroESVO, params);
-                                // se cambia el documento de contexto Registro a Tramitaci�n
+                                // se cambia el documento de contexto Registro a Tramitaciï¿½n
                                 m_Log.info(session.getId() + " " + usuarioActualLog + " codProcedimiento : " + codProcedimiento);
                                 if (codProcedimiento != null && !codProcedimiento.isEmpty()) {
                                     for (DocumentoAnotacionRegistroVO docuReg : documentosRegistro) {
@@ -918,7 +918,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                             || "proc_mal_relacionado".equals(elRegistroESVO.getRespOpcion())) {
                         opcion = "init_alta_entrada"; // Otro valor => cambiar struts_config.xml
                     } else if ("actualizacion_ya_realizada".equals(elRegistroESVO.getRespOpcion())) {
-                        opcion = "actualizacion_ya_realizada";//la actualización del buzón ya la realizó otro usuario
+                        opcion = "actualizacion_ya_realizada";//la actualizaciÃ³n del buzÃ³n ya la realizÃ³ otro usuario
                     } else if ("registrar_alta_entrada_denegada".equals(elRegistroESVO.getRespOpcion())) {
                         opcion = "error";
                         elRegistroESVO.setRespOpcion(opcion);
@@ -1016,7 +1016,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     elRegistroESVO.setNumeroAnotacionContestada(null);
                 }
 
-                // Comprobaci�n de si la anotaci�n de registro se ha dado de alta desde el servicio web WSRegistroES
+                // Comprobaciï¿½n de si la anotaciï¿½n de registro se ha dado de alta desde el servicio web WSRegistroES
                 registroForm.setRegistroTelematico(elRegistroESVO.isRegistroTelematico());
                 // Recuperamos la propiedad REGISTRO_TELEMATICO_MODIFICABLE. Si la propiedad es si y el registro no tiene expedientes asociados indicamos que el registro puede ser modificado
                 boolean regTelemMod = false;
@@ -1116,7 +1116,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                 }
 
                 if ("bien".equals(fallo)) {
-                    // Recuperamos los terceros asociados a la anotación.
+                    // Recuperamos los terceros asociados a la anotaciÃ³n.
                     BusquedaTercerosForm btForm = new BusquedaTercerosForm();
                     btForm.setListaInteresados(getListaInteresados(elRegistroESVO, params));
 
@@ -1185,7 +1185,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
 
                             } else if ("contestar".equals(opcion) || "responder".equals(opcion) || "relacionar".equals(opcion)) {
 
-                                // Insertamos en el VO relación con el asiento contestado/respondido/relacionado
+                                // Insertamos en el VO relaciÃ³n con el asiento contestado/respondido/relacionado
                                 SimpleRegistroValueObject relacion = new SimpleRegistroValueObject();
                                 relacion.setUor(Integer.toString(elRegistroESVO.getUnidadOrgan()));
                                 relacion.setDep(Integer.toString(elRegistroESVO.getIdentDepart()));
@@ -1336,8 +1336,8 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                             m_Log.info(session.getId() + " " + usuarioActualLog + " Opcion antes de dejar MantAnotacionRegistroAction: " + opcion);
                             m_Log.debug("<================= MantAnotacionRegistroAction ======================");
 
-                            // Leemos las propiedades de configuración del fichero
-                            // que serán pasadas a la página jsp.
+                            // Leemos las propiedades de configuraciÃ³n del fichero
+                            // que serÃ¡n pasadas a la pÃ¡gina jsp.
                             String mostrarCuneus = registroConf.getString(REG_DUPLICAR_RESERVAS_MOSTRAR_CUNEUS);
                             request.setAttribute("mostrarCuneus", mostrarCuneus);
 
@@ -1363,7 +1363,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
 
                 } else {
                     //m_Log.info("Salida de opcion buscar/iniciar_duplicar/contestar/cancelar_contestar por noHay");
-                    m_Log.info(session.getId() + " " + usuarioActualLog + " ----------------------------Opción antes de dejar MantAnotacionRegistroAction: " + opcion);
+                    m_Log.info(session.getId() + " " + usuarioActualLog + " ----------------------------OpciÃ³n antes de dejar MantAnotacionRegistroAction: " + opcion);
                     m_Log.debug("<================= MantAnotacionRegistroAction ======================");
                     return mapping.findForward("noHay");
                 }
@@ -1661,9 +1661,9 @@ public final class MantAnotacionRegistroAction extends ActionSession {
 
                     AnotacionRegistroManager.getInstance().modify(registro, finDigitalizacionAntesMod, params);
 
-                    //DIGITALIZACI�N LANBIDE
+                    //DIGITALIZACIï¿½N LANBIDE
                     if (servicioDigitalizacionActivo.equalsIgnoreCase("si")) {
-                        //comprueba que se finaliza la digitalizaci�n por primera vez
+                        //comprueba que se finaliza la digitalizaciï¿½n por primera vez
                         m_Log.info(session.getId() + " " + usuarioActualLog + " Entramos en servicioDigitalizacionActivo.equalsIgnoreCase(\"si\")");
                         if (registro.isFinDigitalizacion() && !finDigitalizacionAntesMod) {
                             m_Log.info(session.getId() + " " + usuarioActualLog + " Se marca el registro como finalizado por primera vez(registro.isFinDigitalizacion() && !finDigitalizacionAntesMod) -> comprueba si tiene documentos para tramitar");
@@ -1672,7 +1672,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                             m_Log.info(session.getId() + " " + usuarioActualLog + " Documentos de registro compulsados recuperados: " + documentosRegistro.size());
                             String codProcedimiento = AnotacionRegistroManager.getInstance().getCodProcedimientoRegistro(registro, params);
                             m_Log.info(session.getId() + " " + usuarioActualLog + " codProcedimiento : " + codProcedimiento);
-                            // se cambia el documento de contexto Registro a Tramitaci�n
+                            // se cambia el documento de contexto Registro a Tramitaciï¿½n
                             if (codProcedimiento != null && !codProcedimiento.equals("")) {
                                 for (DocumentoAnotacionRegistroVO docReg : documentosRegistro) {
                                     String idDocumento = docReg.getIdDocGestor();
@@ -1689,7 +1689,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                             }
 
                         } else {
-                            m_Log.info(session.getId() + " " + usuarioActualLog + " El registro ya hab�a sido finalizado con anterioridad.");
+                            m_Log.info(session.getId() + " " + usuarioActualLog + " El registro ya habï¿½a sido finalizado con anterioridad.");
                         }
                     }
 
@@ -1916,7 +1916,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
             } else if ("iniciar_anular".equals(opcion)) {
 
                 elRegistroESVO = registroForm.getRegistro();
-                // Al venir de modificar está vacío.
+                // Al venir de modificar estÃ¡ vacÃ­o.
                 elRegistroESVO.setIdentDepart(cod_dep);
                 elRegistroESVO.setUnidadOrgan(cod_uni);
                 String ejercicio = request.getParameter("ano");
@@ -1981,7 +1981,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
 
                 m_Log.debug(" *************************** POSICION ANOTACION REQUEST: " + request.getParameter("posicionAnotacion"));
 
-                elRegistroESVO = registroForm.getRegistro(); // Está en sesión
+                elRegistroESVO = registroForm.getRegistro(); // EstÃ¡ en sesiÃ³n
 
                 elRegistroESVO.setEstAnotacion(9);
                 // Datos usuario que registra.
@@ -1991,7 +1991,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
 
                 m_Log.debug(" *************************** POSICION ANOTACION elRegistroESVO: " + elRegistroESVO.getPosicionAnotacion());
                 try {
-                    //Boolean nos dice si hay digitalizaci�n o no
+                    //Boolean nos dice si hay digitalizaciï¿½n o no
                     servDigitalizacionAct = (String) session.getAttribute("servicioDigitalizacionActivo");
                     m_Log.debug("(String) session.getAttribute(\"servicioDigitalizacionActivo\") : " + servDigitalizacionAct);
                     if (servDigitalizacionAct == null) {
@@ -2029,6 +2029,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
             } // Fin anular
             else if ("cancelar_anular".equals(opcion)) {
 
+                m_Log.debug("[cancelar_anular] Inicio con ano=" + request.getParameter("ano") + ", numero=" + request.getParameter("numero") + ", tipoEntrada=" + request.getParameter("cbTipoEntrada"));
                 m_Log.info(session.getId() + " " + usuarioActualLog + " desdeEntradasRechazadas" + request.getParameter("desdeEntradasRechazadas"));
                 m_Log.info(session.getId() + " " + usuarioActualLog + " desdePendientesFinalizar" + request.getParameter("desdePendientesFinalizar"));
                 if ("S".equals(request.getParameter("desdeEntradasRechazadas")) || "S".equals(request.getParameter("desdePendientesFinalizar"))) {
@@ -2048,9 +2049,10 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     if ((request.getParameter("ano") != null) && (request.getParameter("numero") != null)) {
                         if ((!"".equals(request.getParameter("ano").trim())) && (!"".equals(request.getParameter("numero").trim()))) {
                             storedConsulta.setAnoReg(Integer.parseInt(request.getParameter("ano")));
-                            m_Log.debug("a�o anotacion " + request.getParameter("ano"));
+                        m_Log.debug("[cancelar_anular] anotacion recuperada ano=" + elRegistroESVO.getAnoReg() + ", numero=" + elRegistroESVO.getNumReg() + ", tipoAnot=" + elRegistroESVO.getTipoAnot());
+                            m_Log.debug("aï¿½o anotacion " + request.getParameter("ano"));
                             storedConsulta.setNumReg(Long.parseLong(request.getParameter("numero")));
-                            m_Log.debug("numero anotaci�n " + request.getParameter("numero"));
+                            m_Log.debug("numero anotaciï¿½n " + request.getParameter("numero"));
                         }
 
                         storedConsulta.setIdentDepart(regUsuarioVO.getDepCod());
@@ -2142,7 +2144,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                 try {
                     elRegistroESVO.setRespOpcion("actualizacion_confirmada");
                     AnotacionRegistroManager.getInstance().anular(elRegistroESVO, digitalizacion, params);
-                    // Llegados aqui� suponemos que esta bien.
+                    // Llegados aquiï¿½ suponemos que esta bien.
                     if ("modify_no_realizado".equals(elRegistroESVO.getRespOpcion())) {
                         elRegistroESVO.setRespOpcion("anulacion_no_realizada");
                     } else if ("modify_no_autorizado".equals(elRegistroESVO.getRespOpcion())) {
@@ -2204,7 +2206,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                 //===============================
                 //nuevas UORs
                 registroForm.setListaNuevasUORs(nuevasUOR);
-                // arbol de jerarquía de uors
+                // arbol de jerarquÃ­a de uors
                 registroForm.setArbol(arbol);
                 //===============================
                 // Cargar rol por defecto
@@ -2282,9 +2284,9 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                 } else {
                     arbolUORs = UORsManager.getInstance().getArbolUORs(false, false, true, params);
                 }
-                // arbol de jerarquía de uors
+                // arbol de jerarquÃ­a de uors
 
-                m_Log.debug("Cargado árbol:" + arbol.contarNodos());
+                m_Log.debug("Cargado Ã¡rbol:" + arbol.contarNodos());
                 registroForm.setArbol(arbolUORs);
                 request.setAttribute("listaUORs", nUOR);
                 request.setAttribute("arbolUORs", arbolUORs);
@@ -2409,11 +2411,11 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                  * Los posibles operadores son: =, like, in, >=, <=
                  *
                  * Los valores posibles para cd_doc_fisica son:
-                 *   1 = Acompa�a documentaci�n f�sica requerida
-                 *   2 = Acompa�a documentaci�n f�sica complementaria
-                 *   3 = No acompa�a documentaci�n f�sica
+                 *   1 = Acompaña documentación física requerida
+                 *   2 = Acompaña documentación física complementaria
+                 *   3 = No acompaña documentación física
                  */
-                // 1) Log de todos los par�metros recibidos
+                // 1) Log de todos los parámetros recibidos
                 java.util.Enumeration<String> paramNames = request.getParameterNames();
                 while (paramNames.hasMoreElements()) {
                     String paramName = paramNames.nextElement();
@@ -2421,7 +2423,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     m_Log.info("Parametro recibido: " + paramName + " = " + java.util.Arrays.toString(values));
                 }
 
-                // 2) Recuperar los filtros principales y crear un objeto RegistroValueObject con estos filtros, adem�s de tipo entrada 1, para almacenar la consulta en sesi�n
+                // 2) Recuperar los filtros principales y crear un objeto RegistroValueObject con estos filtros, además de tipo entrada 1, para almacenar la consulta en sesión
                 String identificador          = request.getParameter("identificadorRegistroSIRValue");
                 String codEstadoSIR           = request.getParameter("codEstadoSIR");
                 String codigoUnidadDestinoSIR = request.getParameter("codigoUnidadDestinoSIRHidden");
@@ -2446,7 +2448,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                 filtro.setEstAnotacion(ConstantesDatos.REG_ANOTACION_BUSCAR_TODAS);
                 session.setAttribute("registroValueObjectConsulta", filtro);
 
-                // 3) Invocaci�n al servicio y construcci�n del vector final
+                // 3) Invocación al servicio y construcción del vector final
                 Vector listaFinal = new Vector();
 
                 int contador = 0;
@@ -2455,7 +2457,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     List<Lan6AsientoRegistralRespuesta> listaRegistros =
                             registroSIRService.buscarRegistrosSIR(codEstadoSIR, identificador, codigoUnidadDestinoSIR, codigoUnidadOrigenSIR, params);
 
-                    m_Log.info("N�mero de registros SIR recuperados: " +
+                    m_Log.info("Número de registros SIR recuperados: " +
                             (listaRegistros != null ? listaRegistros.size() : "null"));
 
                     if (listaRegistros != null) {
@@ -2470,7 +2472,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                             //filtro.setTipoAnot(-1);
                             //filtro.setEstAnotacion(ConstantesDatos.REG_ANOTACION_BUSCAR_TODAS);
 
-                            // Llamada a la l�gica de relaci�n
+                            // Llamada a la lógica de relación
                             Vector datosAnotacion = AnotacionRegistroManager
                                     .getInstance()
                                     .relacionRegistroValueObject(filtro, params, 1, listaRegistros.size(), 0, null);
@@ -2479,13 +2481,13 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                                     && !datosAnotacion.isEmpty()
                                     && datosAnotacion.firstElement() instanceof Collection<?>) {
                                 datosAnotacion = new Vector((Collection<?>) datosAnotacion.firstElement());
-                                m_Log.info("Vector interno obtenido: tama�o " + datosAnotacion.size());
+                                m_Log.info("Vector interno obtenido: tamaño " + datosAnotacion.size());
 
-                                // Rellenar los campos SIR (�ndices 24?26)
-//                  // aqu� podr�as inyectar filtros adicionales m�s tarde
-                                datosAnotacion.add(registroSIR.getEstado());              // �ndice 24
-                                datosAnotacion.add(DateOperations.toString(registroSIR.getFechaEstado(), DateOperations.LATIN_DATETIME_FORMAT));         // �ndice 25 aplicar un
-                                datosAnotacion.add(registroSIR.getIdentificadorIntercambio()); // �ndice 26
+                                // Rellenar los campos SIR (índices 24?26)
+//                  // aquí podrías inyectar filtros adicionales más tarde
+                                datosAnotacion.add(registroSIR.getEstado());              // índice 24
+                                datosAnotacion.add(DateOperations.toString(registroSIR.getFechaEstado(), DateOperations.LATIN_DATETIME_FORMAT));         // índice 25 aplicar un
+                                datosAnotacion.add(registroSIR.getIdentificadorIntercambio()); // índice 26
 
                                 // Insertar en listaFinal sin convertir a VO
                                 listaFinal.add(datosAnotacion);
@@ -2493,14 +2495,14 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                             }
                         }
                     } else {
-                        m_Log.warn("listaRegistros es NULL, se muestra lista vac�a");
+                        m_Log.warn("listaRegistros es NULL, se muestra lista vacía");
                     }
                 } catch (Exception e) {
                     m_Log.error("Error al obtener los datos SIR o al construir la lista", e);
                 }
 
                 /*
-                 * 4) Guardar la lista en sesi�n y volcar filtros en el form bean
+                 * 4) Guardar la lista en sesión y volcar filtros en el form bean
                  */
                 request.setAttribute("esConsultaSIR", "1");
                 session.setAttribute("RelacionAnotaciones",     listaFinal);
@@ -2513,7 +2515,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                 registroForm.setCodEstadoSIR(                    codEstadoSIR);
                 registroForm.setCodigoUnidadDestinoSIR(           codigoUnidadDestinoSIR);
 
-                // muy importante: volver a guardar el form bean en sesi�n
+                // muy importante: volver a guardar el form bean en sesión
                 session.setAttribute("MantAnotacionRegistroForm", registroForm);
 
                 m_Log.info("[consultaEnSIR] registros finales = " + contador);
@@ -2674,7 +2676,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     //===============================
                     //nuevas UORs
                     registroForm.setListaNuevasUORs(nuevasUOR);
-                    // arbol de jerarquía de uors
+                    // arbol de jerarquÃ­a de uors
                     registroForm.setArbol(arbol);
                     //===============================
                     elRegistroESVO = new RegistroValueObject();
@@ -2912,11 +2914,11 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                 int count;
                 int startIndex;
                 if (registroForm.getNumLineasPaginaListado().equals("")) {
-                    // La recarga viene a partir de un modificar de una anotación en particular.
+                    // La recarga viene a partir de un modificar de una anotaciÃ³n en particular.
                     count = 1;
                     startIndex = 1;
                 } else {
-                    // La recarga viene de una relación de anotaciones.
+                    // La recarga viene de una relaciÃ³n de anotaciones.
                     count = Integer.parseInt(registroForm.getNumLineasPaginaListado());
                     int pagina = Integer.parseInt(registroForm.getPaginaListado());
                     startIndex = (pagina - 1) * count + 1;
@@ -3021,7 +3023,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     elRegistroESVO.setFecEntrada(fecEntrada);
 
                 } catch (Exception e) {
-                    m_Log.error("Salt� excepci�n formateando la fecha, en ManAntoacionRegistroAction", e);
+                    m_Log.error("Saltï¿½ excepciï¿½n formateando la fecha, en ManAntoacionRegistroAction", e);
                     e.printStackTrace();
 
                 }
@@ -3041,13 +3043,13 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                 m_Log.debug("PROTOCOLO en uso : " + protocolo);
                 String sUrl = protocolo + "://" + request.getHeader("Host") + request.getContextPath();
                 if (m_Log.isDebugEnabled()) {
-                    m_Log.debug("MantAnotacionRegistroAction. ImprimirSello. posicion cuño: " + posicionSello);
+                    m_Log.debug("MantAnotacionRegistroAction. ImprimirSello. posicion cuÃ±o: " + posicionSello);
                 }
                 if (m_Log.isDebugEnabled()) {
-                    m_Log.debug("MantAnotacionRegistroAction. ImprimirSello. idioma cuño: " + idiomaSello);
+                    m_Log.debug("MantAnotacionRegistroAction. ImprimirSello. idioma cuÃ±o: " + idiomaSello);
                 }
                 if (m_Log.isDebugEnabled()) {
-                    m_Log.debug("MantAnotacionRegistroAction. ImprimirSello. nCopias cuño: " + nCopiasSello);
+                    m_Log.debug("MantAnotacionRegistroAction. ImprimirSello. nCopias cuÃ±o: " + nCopiasSello);
                 }
                 String realPath = this.getServlet().getServletContext().getRealPath("");
                 request.setAttribute("nombre", ImpresionCuneusManager.getInstance().imprimirCuneus(elRegistroESVO,
@@ -3078,7 +3080,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     elRegistroESVO.setFecEntrada(fecEntrada);
 
                 } catch (Exception e) {
-                    m_Log.error("Salt� excepci�n formateando la fecha, en ManAntoacionRegistroAction", e);
+                    m_Log.error("Saltï¿½ excepciï¿½n formateando la fecha, en ManAntoacionRegistroAction", e);
                     e.printStackTrace();
 
                 }
@@ -3098,10 +3100,10 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                 m_Log.debug("PROTOCOLO en uso : " + protocolo);
                 String sUrl = protocolo + "://" + request.getHeader("Host") + request.getContextPath();
                 if (m_Log.isDebugEnabled()) {
-                    m_Log.debug("MantAnotacionRegistroAction. ImprimirSello. posicion cuño: " + posicionSello);
+                    m_Log.debug("MantAnotacionRegistroAction. ImprimirSello. posicion cuÃ±o: " + posicionSello);
                 }
                 if (m_Log.isDebugEnabled()) {
-                    m_Log.debug("MantAnotacionRegistroAction. ImprimirSello. idioma cuño: " + idiomaSello);
+                    m_Log.debug("MantAnotacionRegistroAction. ImprimirSello. idioma cuÃ±o: " + idiomaSello);
                 }
 
                 String realPath = this.getServlet().getServletContext().getRealPath("");
@@ -3130,7 +3132,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     arboluors = UORsManager.getInstance().getArbolUORs(false, true, false, params);
                 }
 
-                m_Log.debug("Recuperadas " + (arboluors.contarNodos() - 1) + " UORs en el árbol");
+                m_Log.debug("Recuperadas " + (arboluors.contarNodos() - 1) + " UORs en el Ã¡rbol");
                 request.setAttribute("arbolUORs", arboluors);
                 request.setAttribute("listaUORs", uors);
                 opcion = "seleccionUOR";
@@ -3142,7 +3144,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                 Vector uors = UORsManager.getInstance().getListaUORsPorNoVisRegistroPermisoUsuario('0', usuario, params);
                 m_Log.debug("Recuperadas " + uors.size() + " UORs");
                 ArbolImpl arboluors = UORsManager.getInstance().getArbolUORsPermisoUsuario(true, false, usuario, params);
-                m_Log.debug("Recuperadas " + (arboluors.contarNodos() - 1) + " UORs en el árbol");
+                m_Log.debug("Recuperadas " + (arboluors.contarNodos() - 1) + " UORs en el Ã¡rbol");
                 request.setAttribute("arbolUORs", arboluors);
                 request.setAttribute("listaUORs", uors);
                 opcion = "seleccionUOR";
@@ -3187,12 +3189,12 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                 request.setAttribute("hijos", hijos);
                 request.setAttribute("descripcions", descripciones);
                 request.setAttribute("codigos", codigos);
-                //El hijo que vamos a desplegar ser� el que tenga la clasificaci�n, a la que pertenezca
+                //El hijo que vamos a desplegar serï¿½ el que tenga la clasificaciï¿½n, a la que pertenezca
                 //el codAsunto seleccionado
                 m_Log.debug("El hijo para desplegar es.... :" + hijoParaDesplegar);
                 request.setAttribute("hijoParaDesplegar", hijoParaDesplegar);
                 request.setAttribute("codAsuntoSel", codAsunto);
-                m_Log.debug("A �rbore ten un tama�o de.... :" + arbolClasifAsuntos.size());
+                m_Log.debug("A ï¿½rbore ten un tamaï¿½o de.... :" + arbolClasifAsuntos.size());
                 m_Log.debug("Salimos de la opcion:  SELECCION CLASIFICACION");
             } else if (opcion.equals("obtenerOficinaRegistro")) {
                 String ofiReg = "SINOFI";
@@ -3342,7 +3344,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     m_Log.debug(" ====== MantAnotacionRegistroAction antes de getOficinaUorRegistro() =================>");
                     uorRegistro = AnotacionRegistroDAO.getInstance().getOficinaUorRegistro(elRegistroESVO.getTipoReg(), elRegistroESVO.getAnoReg(), elRegistroESVO.getNumReg(), elRegistroESVO.getIdentDepart(), params);
                     m_Log.debug(" ====== uorRegistro: " + uorRegistro);
-                    // Se recupera el justificante de registro personalizado que est� activo, si lo hay
+                    // Se recupera el justificante de registro personalizado que estï¿½ activo, si lo hay
                     if (generarJustificanteSir)
                         justif = JusticanteRegistro.getJustificantebyName("justificanteRegistroSIR", params);
                     else
@@ -3356,7 +3358,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
 
                 boolean errorJustificante = false;
                 if (justif != null) {
-                    // Se realiza la redirecci�n al action que se encarga de mostrar el justificante
+                    // Se realiza la redirecciï¿½n al action que se encarga de mostrar el justificante
                     // personalizado en formato PDF
                     String propiedad = usuarioVO.getOrgCod() + ConstantesDatos.RUTA_PLANTILLAS_JUSTIFICANTE;
                     m_Log.debug("======== carpeta plantillas registro: " + propiedad);
@@ -3471,7 +3473,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                 String tipoInforme = "justificante";
                 m_Log.debug("Tipo del informe a generar: " + tipoInforme);
                 try {
-                    // Se recupera el justificante de registro personalizado que est� activo, si lo hay
+                    // Se recupera el justificante de registro personalizado que estï¿½ activo, si lo hay
                     justif = JustificanteRegistroPersonalizadoManager.getInstance().getJustificanteActivo(tipoInforme, params);
                     m_Log.debug(" ====== justificante activo: " + justif);
                 } catch (Exception e) {
@@ -3554,7 +3556,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                                 elRegistroESVO.setAnoReg((anoRegistro.intValue()));
                                 gVO.setAtributo("numero", Long.toString(elRegistroESVO.getNumReg()));
                                 gVO.setAtributo("ejercicio", Integer.toString(elRegistroESVO.getAnoReg()));
-                                // Obtenemos el xml con los datos de la anotaci�n
+                                // Obtenemos el xml con los datos de la anotaciï¿½n
                                 xml = AnotacionRegistroManager.getInstance().consultaXML(gVO, params);
 
                                 uorRegistro = AnotacionRegistroDAO.getInstance().getOficinaUorRegistro(elRegistroESVO.getTipoReg(), elRegistroESVO.getAnoReg(), elRegistroESVO.getNumReg(), elRegistroESVO.getIdentDepart(), params);
@@ -3568,7 +3570,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                                     m_Log.error("*********** Error al generar el pdf correspondiente al justificante de registro activo: " + e.getMessage());
                                 }
                                 if (informe != null) {
-                                    m_Log.debug(" =========== MantAnotacionRegistroAction tama�o byte[] pdf generado: " + informe.length);
+                                    m_Log.debug(" =========== MantAnotacionRegistroAction tamaï¿½o byte[] pdf generado: " + informe.length);
                                     listaPdfs.add(new ByteArrayInputStream(informe));
                                 }
                             }
@@ -3579,7 +3581,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                                 request.setAttribute("FICHERO_JUSTIFICANTE", nombreFicheroDestino);
                                 request.setAttribute("ERROR_JUSTIFICANTE_REGISTRO_PERSONALIZADO", "GENERACION_MASIVA_PDF_CORRECTA");
                             } else {
-                                m_Log.debug("No se ha generado el pdf de justificante de registro para ninguna anotaci�n. No se puede hacer el merge.");
+                                m_Log.debug("No se ha generado el pdf de justificante de registro para ninguna anotaciï¿½n. No se puede hacer el merge.");
                                 request.setAttribute("ERROR_JUSTIFICANTE_REGISTRO_PERSONALIZADO", "GENERACION_PDF_INCORRECTA");
                             }// else
                         }
@@ -3589,7 +3591,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     request.setAttribute("ERROR_JUSTIFICANTE_REGISTRO_PERSONALIZADO", "NO_EXISTE_PLANTILLA_ACTIVA");
                 }
 
-                // Se realiza la redirecci�n al action que se encarga de mostrar el justificante
+                // Se realiza la redirecciï¿½n al action que se encarga de mostrar el justificante
                 // personalizado en formato PDF
                 opcion = "justificanteRegistroPersonalizado";
                 m_Log.info(session.getId() + " " + usuarioActualLog + "  ==================> Redirigiendo a opcion: " + opcion);
@@ -3617,7 +3619,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                 gVO.setAtributo("codTip", String.valueOf(elRegistroESVO.getTipoReg()));
                 gVO.setAtributo("codDep", String.valueOf(elRegistroESVO.getIdentDepart()));
 
-                // #239565: Es necesario a�adir un atributo a gVO que indique que el tipo de informe es 'justificante' para que consultaXML funcione correctamente
+                // #239565: Es necesario aï¿½adir un atributo a gVO que indique que el tipo de informe es 'justificante' para que consultaXML funcione correctamente
                 gVO.setAtributo("tipoInforme", "justificante");
 
                 String xml = "";
@@ -3779,7 +3781,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                 registroForm.setAsuntoVO(asunto);
                 registroForm.setRespOpcion("cargarAsunto");
 
-                // Comprobamos si se trata de un acceso externo y si es as� lo indicamos en la respuesta
+                // Comprobamos si se trata de un acceso externo y si es así lo indicamos en la respuesta
                 String esAccesoExterno = request.getParameter("esAccesoExterno");
                 if (esAccesoExterno != null && ((String) esAccesoExterno).equals("si")) {
                     request.setAttribute("esAccesoExterno", esAccesoExterno);
@@ -3827,7 +3829,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                 // Comprobamos si los roles de los terceros tienen todos mapeo.
                 boolean sePierdenRoles = false;
                 String listaDescRol = request.getParameter("listaDescRol");
-                StringTokenizer rolesAnteriores = new StringTokenizer(listaDescRol, "��", false);
+                StringTokenizer rolesAnteriores = new StringTokenizer(listaDescRol, "§¥", false);
                 while (rolesAnteriores.hasMoreTokens()) {
                     String rol = rolesAnteriores.nextToken();
                     if (!descRolesNuevos.contains(rol)) {
@@ -3932,7 +3934,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
 
                     registroForm.setRespOpcion("cargarProcedimiento");
 
-                    // Comprobamos si se trata de un acceso externo y si es as� lo indicamos en la respuesta
+                    // Comprobamos si se trata de un acceso externo y si es así lo indicamos en la respuesta
                     String esAccesoExterno = request.getParameter("esAccesoExterno");
                     if (esAccesoExterno != null && ((String) esAccesoExterno).equals("si")) {
                         request.setAttribute("esAccesoExterno", esAccesoExterno);
@@ -3961,7 +3963,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     // Comprobamos si los roles de los terceros tienen todos mapeo.
                     boolean sePierdenRoles = false;
                     String listaDescRol = request.getParameter("listaDescRol");
-                    StringTokenizer rolesAnteriores = new StringTokenizer(listaDescRol, "��", false);
+                    StringTokenizer rolesAnteriores = new StringTokenizer(listaDescRol, "§¥", false);
                     while (rolesAnteriores.hasMoreTokens()) {
                         String rol = rolesAnteriores.nextToken();
                         if (!descRolesNuevos.contains(rol)) {
@@ -4041,10 +4043,10 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     inicializarListas(elRegistroESVO, false, params); // Cargar listas.
                     session.setAttribute("tipEntrada", request.getParameter("tipo"));
                 } else if ("cerrarBusquedaRelaciones".equals(opcion)) {
-                    // Descartamos la información guardada de la búsqueda.
+                    // Descartamos la informaciÃ³n guardada de la bÃºsqueda.
                     session.removeAttribute("registroValueObjectConsulta");
 
-                    // Recuperamos la información de la anotacion de trabajo
+                    // Recuperamos la informaciÃ³n de la anotacion de trabajo
                     elRegistroESVO = new RegistroValueObject();
                     elRegistroESVO = (RegistroValueObject) session.getAttribute("registroTrabajo");
                     elRegistroESVO.setTipoReg((String) session.getAttribute("tipoTrabajo"));
@@ -4115,21 +4117,21 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                         elRegistroESVO.setNumReg(Long.parseLong((String) request.getParameter("numReg")));
                     }
 
-                    // Clave para buscar la anotación en el histórico
+                    // Clave para buscar la anotaciÃ³n en el histÃ³rico
                     String claveHistorico
                             = HistoricoAnotacionHelper.crearClaveHistorico(elRegistroESVO);
                     m_Log.debug("Buscar los movimientos de la anotacion " + claveHistorico);
-                    m_Log.info(session.getId() + " " + usuarioActualLog + " (NO ERROR)Traza control opci�n  cargarHistorico antes de llamar a obtenerHistoricoAnotacion ");
+                    m_Log.info(session.getId() + " " + usuarioActualLog + " (NO ERROR)Traza control opciï¿½n  cargarHistorico antes de llamar a obtenerHistoricoAnotacion ");
                     Vector<HistoricoMovimientoValueObject> listadoMovimientos
                             = HistoricoMovimientoManager.getInstance().obtenerHistoricoAnotacion(claveHistorico, params);
-                    m_Log.info(session.getId() + " " + usuarioActualLog + " (NO ERROR)Traza control opci�n  cargarHistorico despues de llamar a obtenerHistoricoAnotacion ");
+                    m_Log.info(session.getId() + " " + usuarioActualLog + " (NO ERROR)Traza control opciï¿½n  cargarHistorico despues de llamar a obtenerHistoricoAnotacion ");
                     // Hay que obtener las descripciones de cada tipo de movimiento
                     // Creamos un traductor para el usuario actual
 //                    TraductorAplicacionBean traductor = new TraductorAplicacionBean();
 //                    traductor.setApl_cod(ConstantesDatos.APP_REGISTRO_ENTRADA_SALIDA);
 //                    traductor.setIdi_cod(usuarioVO.getIdioma());
 
-                    m_Log.info(session.getId() + " " + usuarioActualLog + " (NO ERROR)Traza control opci�n  cargarHistorico antes de llamar a getDescripcionMovimiento ");
+                    m_Log.info(session.getId() + " " + usuarioActualLog + " (NO ERROR)Traza control opciï¿½n  cargarHistorico antes de llamar a getDescripcionMovimiento ");
                     for (HistoricoMovimientoValueObject hvo : listadoMovimientos) {
                         hvo.setDescMovimiento(
                                 HistoricoAnotacionTraductorHTML.getDescripcionMovimiento(
@@ -4139,7 +4141,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     }
 
                     registroForm.setMovimientosHistorico(listadoMovimientos);
-                    m_Log.info(session.getId() + " " + usuarioActualLog + " (NO ERROR)Traza control opci�n  cargarHistorico END ");
+                    m_Log.info(session.getId() + " " + usuarioActualLog + " (NO ERROR)Traza control opciï¿½n  cargarHistorico END ");
 
                     //**************************************
                     // CARGAR MOVIMIENTO HISTORICO
@@ -4150,12 +4152,12 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     String codigoMovimiento = request.getParameter("operacion");
                     m_Log.debug("Buscar el movimiento numero " + codigoMovimiento);
 
-                    // Recuperamos el movimiento por su código
+                    // Recuperamos el movimiento por su cÃ³digo
                     HistoricoMovimientoValueObject mov
                             = HistoricoMovimientoManager.getInstance().obtenerMovimiento(Integer.parseInt(codigoMovimiento), params);
                     m_Log.debug(mov);
 
-                    // Transformar la información en HTML para mostrar
+                    // Transformar la informaciÃ³n en HTML para mostrar
 //                    TraductorAplicacionBean mensajes = new TraductorAplicacionBean();
 //                    mensajes.setApl_cod(ConstantesDatos.APP_REGISTRO_ENTRADA_SALIDA);
 //                    mensajes.setIdi_cod(usuarioVO.getIdioma());
@@ -4183,7 +4185,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
 
                     if (regCargaBusqueda.getFallo().equals("fallo")) {
                         request.setAttribute("errorCargaDatos", "0");
-                        m_Log.debug("ERROR AL CARGAR LA ANOTACI�?N. NO EXISTE");
+                        m_Log.debug("ERROR AL CARGAR LA ANOTACIï¿½?N. NO EXISTE");
                         return mapping.findForward(opcion);
                     }
 
@@ -4199,7 +4201,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                         return mapping.findForward(opcion);
                     }
 
-                    // Creo la relación con la anotacion buscada.
+                    // Creo la relaciÃ³n con la anotacion buscada.
                     regCargaBusqueda.getRelaciones().clear();
                     SimpleRegistroValueObject simpleRegRel = new SimpleRegistroValueObject();
                     simpleRegRel.setDep(Integer.toString(elRegistroESVO.getIdentDepart()));
@@ -4209,7 +4211,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     simpleRegRel.setUor(Integer.toString(elRegistroESVO.getUnidadOrgan()));
                     regCargaBusqueda.getRelaciones().add(simpleRegRel);
 
-                    // Recuperamos los terceros asociados a la anotación.
+                    // Recuperamos los terceros asociados a la anotaciÃ³n.
                     BusquedaTercerosForm btForm = new BusquedaTercerosForm();
                     btForm.setListaInteresados(getListaInteresados(regCargaBusqueda, params));
                     Vector tercero = getTerceroPrincipal(elRegistroESVO, params);
@@ -4220,7 +4222,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     return mapping.findForward(opcion);
 
                 } else if ("comprobarAsociacionMultiple".equalsIgnoreCase(opcion)) {
-                    //Recuperamos del fichero de propiedades de registro la propiedad que indica si se permite la la asociaci�n o el inicio de multiples
+                    //Recuperamos del fichero de propiedades de registro la propiedad que indica si se permite la la asociaciï¿½n o el inicio de multiples
                     //expedientes con una misma entrada en el registro
                     if (m_Log.isDebugEnabled()) {
                         m_Log.debug("Recuperamos la propiedad que indica si se pueden asociar o iniciar mas de un expediente con"
@@ -4238,11 +4240,11 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                                 m_Log.debug("origenesPermitidos = " + origenesPermitidos);
                             }
                         } catch (Exception ex) {
-                            m_Log.error("Se ha producido un error recuperando los origenes de registro que permiten mantener la anotaci�n en el buz�n", ex);
+                            m_Log.error("Se ha producido un error recuperando los origenes de registro que permiten mantener la anotaciï¿½n en el buzï¿½n", ex);
                             opcionPermanencia = false;
                         }//try-catch
 
-                        //Recuperamos el valor que indica si se permite la permanencia de la anotaci�n en el buz�n
+                        //Recuperamos el valor que indica si se permite la permanencia de la anotaciï¿½n en el buzï¿½n
                         String permanencia = null;
                         try {
                             permanencia = registroConf.getString(usuarioVO.getOrgCod() + ConstantesDatos.PERMANENCIA_ANOTACION_BUZON_ENTRADA);
@@ -4250,7 +4252,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                                 m_Log.debug("permanencia = " + permanencia);
                             }
                         } catch (Exception ex) {
-                            m_Log.error("Se ha producido un error recuperando el valor que indica si se que permite mantener la anotaci�n en el buz�n", ex);
+                            m_Log.error("Se ha producido un error recuperando el valor que indica si se que permite mantener la anotaciï¿½n en el buzï¿½n", ex);
                             opcionPermanencia = false;
                         }//try-catch
 
@@ -4258,7 +4260,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                             if (permanencia.equalsIgnoreCase("SI")) {
                                 String numExpediente = (String) request.getParameter("numExpediente");
                                 if (m_Log.isDebugEnabled()) {
-                                    m_Log.debug("Recuperamos el n�mero de expediente seleccionado = " + numExpediente);
+                                    m_Log.debug("Recuperamos el nï¿½mero de expediente seleccionado = " + numExpediente);
                                 }
                                 if (numExpediente != null && !"".equalsIgnoreCase(numExpediente)) {
                                     String[] datosNumExpediente = numExpediente.split("/");
@@ -4267,14 +4269,14 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                                     String exp = datosNumExpediente[2];
 
                                     if (m_Log.isDebugEnabled()) {
-                                        m_Log.debug("Comprobamos que el origen de la anotaci�n este incluido en los servicios v�lidos");
+                                        m_Log.debug("Comprobamos que el origen de la anotaciï¿½n este incluido en los servicios vï¿½lidos");
                                     }
                                     String[] origenes = origenesPermitidos.split(";");
                                     Boolean origenValido = false;
                                     for (int x = 0; x < origenes.length; x++) {
                                         if (registroOrigen.equalsIgnoreCase(origenes[x])) {
                                             if (m_Log.isDebugEnabled()) {
-                                                m_Log.debug("El origen de del registro es v�lido");
+                                                m_Log.debug("El origen de del registro es vï¿½lido");
                                             }
                                             origenValido = true;
                                         }//if(registroOrigen.equalsIgnoreCase(origenes[x]))
@@ -4282,7 +4284,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
 
                                     if (!origenValido) {
                                         if (m_Log.isDebugEnabled()) {
-                                            m_Log.debug("El origen de la anotaci�n no es v�lido para mantener la anotaci�n en el buz�n -> " + registroOrigen);
+                                            m_Log.debug("El origen de la anotaciï¿½n no es vï¿½lido para mantener la anotaciï¿½n en el buzï¿½n -> " + registroOrigen);
                                         }
                                         opcionPermanencia = false;
                                     }//if(!origenValido)
@@ -4292,17 +4294,17 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                                             m_Log.debug("Expediente seleccionado = " + datosNumExpediente);
                                         }
                                         if (m_Log.isDebugEnabled()) {
-                                            m_Log.debug("c�digo de procedimiento seleccionado = " + codProc);
+                                            m_Log.debug("cï¿½digo de procedimiento seleccionado = " + codProc);
                                         }
                                         if (m_Log.isDebugEnabled()) {
                                             m_Log.debug("Recuperamos los expedientes para los que no se puede "
-                                                    + "mantener la anotaci�n en el buz�n");
+                                                    + "mantener la anotaciï¿½n en el buzï¿½n");
                                         }
                                         try {
                                             String codProcsRestringidos = registroConf.getString(usuarioVO.getOrgCod()
                                                     + ConstantesDatos.PROCEDIMIENTOS_RESTRINGIDOS_PERMANENCIA_ANOTACION);
                                             if (m_Log.isDebugEnabled()) {
-                                                m_Log.debug("C�digos procedimientos restringidos = " + codProcsRestringidos);
+                                                m_Log.debug("Cï¿½digos procedimientos restringidos = " + codProcsRestringidos);
                                             }
                                             String[] procsRestringidos = codProcsRestringidos.split(";");
                                             for (int i = 0; i < procsRestringidos.length; i++) {
@@ -4316,7 +4318,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                                         } catch (Exception ex) {
                                             opcionPermanencia = false;
                                             m_Log.error("Se ha producido un error recuperando los procedimientos restringidos "
-                                                    + "que no pueden mantener la anotaci�n en el buz�n", ex);
+                                                    + "que no pueden mantener la anotaciï¿½n en el buzï¿½n", ex);
                                         }//try-catch
                                     }//if(opcionPermanencia)
                                 } else {
@@ -4329,7 +4331,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
 
                     } catch (Exception ex) {
                         opcionPermanencia = false;
-                        m_Log.error("Se ha producido un error recuperando la propiedad que indica si las anotaciones pueden permanecer en el buz�n", ex);
+                        m_Log.error("Se ha producido un error recuperando la propiedad que indica si las anotaciones pueden permanecer en el buzï¿½n", ex);
                     }//try-catch
                     if (m_Log.isDebugEnabled()) {
                         m_Log.debug("opcion = comprobarAsociacionMultiple : END");
@@ -4470,7 +4472,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
     }
 
     /**
-     * Obtiene la lista de roles correspondientes al código y municipio de
+     * Obtiene la lista de roles correspondientes al cÃ³digo y municipio de
      * procedimiento que se pasan en el GeneralValueObject. Los roles del
      * procedimiento traen de "valor por defecto" 1 y 0 que se traducen a SI y
      * NO.
@@ -4488,13 +4490,13 @@ public final class MantAnotacionRegistroAction extends ActionSession {
 
     // Obtener la lista de temas seleccionados de un input cuyo value es una variable
     // declarada como un array javascript.
-    // RegistroValueObject tiene un vector que contiene la lista de códigos de temas.
+    // RegistroValueObject tiene un vector que contiene la lista de cÃ³digos de temas.
     private Vector listaTemasSeleccionados(String listTemasSelecc) {
         Vector lista = new Vector();
         StringTokenizer codigos = null;
 
         if (listTemasSelecc != null) {
-            codigos = new StringTokenizer(listTemasSelecc, "��,", false);
+            codigos = new StringTokenizer(listTemasSelecc, "§¥,", false);
 
             while (codigos.hasMoreTokens()) {
                 String cod = codigos.nextToken();
@@ -4516,7 +4518,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
         StringTokenizer elementos = null;
 
         if (listCriterios != null) {
-            elementos = new StringTokenizer(listCriterios, "��,", false);
+            elementos = new StringTokenizer(listCriterios, "§¥,", false);
 
             while (elementos.hasMoreTokens()) {
                 String clave = elementos.nextToken();
@@ -4532,15 +4534,15 @@ public final class MantAnotacionRegistroAction extends ActionSession {
     }
 
     /**
-     * M�todo que inicializa las listas del formulario: tipo de documentos, tipo
+     * Mï¿½todo que inicializa las listas del formulario: tipo de documentos, tipo
      * de remitentes, tipo de transportes, tipo de actuaciones, tipo de temas,
      *
      * @param elRegistroESVO:        RegistroValueObject
-     * @param recuperarTodosAsuntos: si est� a true , al recuperar los asuntos
+     * @param recuperarTodosAsuntos: si estï¿½ a true , al recuperar los asuntos
      *                               de registro, se recuperan todos los asuntos, incluidos los que han sido
-     *                               dados de baja.Si est� a false, s�lo se recuperan los que no han sido
+     *                               dados de baja.Si estï¿½ a false, sï¿½lo se recuperan los que no han sido
      *                               eliminados
-     * @param params:                Par�metros de conexi�n a la BBDD
+     * @param params:                Parï¿½metros de conexiï¿½n a la BBDD
      */
     private void inicializarListas(RegistroValueObject elRegistroESVO,
                                    boolean recuperarTodosAsuntos, String[] params)
@@ -4668,7 +4670,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
 
     }
 
-    /* Función: ImprimirCuneus*/
+    /* FunciÃ³n: ImprimirCuneus*/
     private String imprimirCuneus(RegistroValueObject elRegistroESVO, UsuarioValueObject usuVO, String posicionSello,
                                   String idiomaSello, String nCopiasSello, String sUrl) {
 
@@ -4727,7 +4729,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
     }
 
     /**
-     * Envía correos notificando el alta del asiento a las unidades orgánicas
+     * EnvÃ­a correos notificando el alta del asiento a las unidades orgÃ¡nicas
      * que se hayan especificado.
      *
      * @param registroForm El form que contiene la informacion del asiento y
@@ -4736,7 +4738,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
     private void notificarUnidadesOrganicas(MantAnotacionRegistroForm registroForm) {
 
         // En Lanbide existe una unica unidad de registro por lo que el email se enviara siempre desde la misma direccion (definida en techserver.propertie)
-        // En dicho cliente el env�o es independiente de que la unidad de registro tenga o no configurado un mail.
+        // En dicho cliente el envï¿½o es independiente de que la unidad de registro tenga o no configurado un mail.
 
         Vector<String> codigosUorsNotificar = registroForm.getListaUorsCorreo();
         Vector<UORDTO> listaUors = registroForm.getListaNuevasUORs();
@@ -4814,9 +4816,9 @@ public final class MantAnotacionRegistroAction extends ActionSession {
     }
 
     /**
-     * Obtiene la lista de roles correspondientes al código de procedimiento y
-     * código de municipio pasados. Si el codigo de procedimiento es nulo o
-     * vacío devuelve los roles por defecto.
+     * Obtiene la lista de roles correspondientes al cÃ³digo de procedimiento y
+     * cÃ³digo de municipio pasados. Si el codigo de procedimiento es nulo o
+     * vacÃ­o devuelve los roles por defecto.
      */
     private Vector<GeneralValueObject> obtenerRoles(String proc, String mun, String[] params) {
 
@@ -5004,9 +5006,9 @@ public final class MantAnotacionRegistroAction extends ActionSession {
 
     /**
      * Asigna la lista de documentos al form, conservando los documentos
-     * existentes en el form que tengan contenido y añadiendo solo los
+     * existentes en el form que tengan contenido y aÃ±adiendo solo los
      * documentos nuevos que no tengan un nombre ya existente entre los
-     * conservados. Si la lista pasada está vacía se conservan todos los del
+     * conservados. Si la lista pasada estÃ¡ vacÃ­a se conservan todos los del
      * form, con contenido o sin el.
      */
     private void asignarDocumentos(Vector<ElementoListaValueObject> listaDocs,
@@ -5033,7 +5035,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
             }
 
             if (listaDocs.size() > 0) {
-                // Se añaden los documentos del asunto, pero solo si no
+                // Se aÃ±aden los documentos del asunto, pero solo si no
                 // existe ya un documento del mismo nombre.
                 for (ElementoListaValueObject docAsunto : listaDocs) {
                     m_Log.debug(docAsunto.getDescripcion());
@@ -5062,7 +5064,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
         StringTokenizer codigos;
 
         if (listSelecc != null) {
-            codigos = new StringTokenizer(listSelecc, "��", false);
+            codigos = new StringTokenizer(listSelecc, "§¥", false);
 
             while (codigos.hasMoreTokens()) {
                 String cod = codigos.nextToken();
@@ -5103,7 +5105,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
         if (m_Log.isDebugEnabled()) {
             m_Log.debug("getOpcionPermanencia() : BEGIN");
         }
-        //Recuperamos del fichero de propiedades de registro la propiedad que indica si se permite la la asociaci�n o el inicio de multiples
+        //Recuperamos del fichero de propiedades de registro la propiedad que indica si se permite la la asociaciï¿½n o el inicio de multiples
         //expedientes con una misma entrada en el registro
         if (m_Log.isDebugEnabled()) {
             m_Log.debug("Recuperamos la propiedad que indica si se pueden asociar o iniciar mas de un expediente con"
@@ -5121,11 +5123,11 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     m_Log.debug("origenesPermitidos = " + origenesPermitidos);
                 }
             } catch (Exception ex) {
-                m_Log.error("Se ha producido un error recuperando los origenes de registro que permiten mantener la anotaci�n en el buz�n", ex);
+                m_Log.error("Se ha producido un error recuperando los origenes de registro que permiten mantener la anotaciï¿½n en el buzï¿½n", ex);
                 opcionPermanencia = false;
             }//try-catch
 
-            //Recuperamos el valor que indica si se permite la permanencia de la anotaci�n en el buz�n
+            //Recuperamos el valor que indica si se permite la permanencia de la anotaciï¿½n en el buzï¿½n
             String permanencia = null;
             try {
                 permanencia = registroConf.getString(usuarioVO.getOrgCod() + ConstantesDatos.PERMANENCIA_ANOTACION_BUZON_ENTRADA);
@@ -5133,13 +5135,13 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     m_Log.debug("permanencia = " + permanencia);
                 }
             } catch (Exception ex) {
-                m_Log.error("Se ha producido un error recuperando el valor que indica si se que permite mantener la anotaci�n en el buz�n", ex);
+                m_Log.error("Se ha producido un error recuperando el valor que indica si se que permite mantener la anotaciï¿½n en el buzï¿½n", ex);
                 opcionPermanencia = false;
             }//try-catch
             if (opcionPermanencia) {
                 if (permanencia.equalsIgnoreCase("SI")) {
                     if (m_Log.isDebugEnabled()) {
-                        m_Log.debug("Recuperamos el n�mero de expediente seleccionado = " + numExpediente);
+                        m_Log.debug("Recuperamos el nï¿½mero de expediente seleccionado = " + numExpediente);
                     }
                     if (numExpediente != null && !"".equalsIgnoreCase(numExpediente)) {
                         String[] datosNumExpediente = numExpediente.split("/");
@@ -5148,14 +5150,14 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                         String exp = datosNumExpediente[2];
 
                         if (m_Log.isDebugEnabled()) {
-                            m_Log.debug("Comprobamos que el origen de la anotaci�n este incluido en los servicios v�lidos");
+                            m_Log.debug("Comprobamos que el origen de la anotaciï¿½n este incluido en los servicios vï¿½lidos");
                         }
                         String[] origenes = origenesPermitidos.split(";");
                         Boolean origenValido = false;
                         for (int x = 0; x < origenes.length; x++) {
                             if (registroOrigen.equalsIgnoreCase(origenes[x])) {
                                 if (m_Log.isDebugEnabled()) {
-                                    m_Log.debug("El origen de del registro es v�lido");
+                                    m_Log.debug("El origen de del registro es vï¿½lido");
                                 }
                                 origenValido = true;
                             }//if(registroOrigen.equalsIgnoreCase(origenes[x]))
@@ -5163,7 +5165,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
 
                         if (!origenValido) {
                             if (m_Log.isDebugEnabled()) {
-                                m_Log.debug("El origen de la anotaci�n no es v�lido para mantener la anotaci�n en el buz�n -> " + registroOrigen);
+                                m_Log.debug("El origen de la anotaciï¿½n no es vï¿½lido para mantener la anotaciï¿½n en el buzï¿½n -> " + registroOrigen);
                             }
                             opcionPermanencia = false;
                         }//if(!origenValido)
@@ -5173,17 +5175,17 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                                 m_Log.debug("Expediente seleccionado = " + datosNumExpediente);
                             }
                             if (m_Log.isDebugEnabled()) {
-                                m_Log.debug("c�digo de procedimiento seleccionado = " + codProc);
+                                m_Log.debug("cï¿½digo de procedimiento seleccionado = " + codProc);
                             }
                             if (m_Log.isDebugEnabled()) {
                                 m_Log.debug("Recuperamos los expedientes para los que no se puede "
-                                        + "mantener la anotaci�n en el buz�n");
+                                        + "mantener la anotaciï¿½n en el buzï¿½n");
                             }
                             try {
                                 String codProcsRestringidos = registroConf.getString(usuarioVO.getOrgCod()
                                         + ConstantesDatos.PROCEDIMIENTOS_RESTRINGIDOS_PERMANENCIA_ANOTACION);
                                 if (m_Log.isDebugEnabled()) {
-                                    m_Log.debug("C�digos procedimientos restringidos = " + codProcsRestringidos);
+                                    m_Log.debug("Cï¿½digos procedimientos restringidos = " + codProcsRestringidos);
                                 }
                                 String[] procsRestringidos = codProcsRestringidos.split(";");
                                 for (int i = 0; i < procsRestringidos.length; i++) {
@@ -5197,7 +5199,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                             } catch (Exception ex) {
                                 opcionPermanencia = false;
                                 m_Log.error("Se ha producido un error recuperando los procedimientos restringidos "
-                                        + "que no pueden mantener la anotaci�n en el buz�n", ex);
+                                        + "que no pueden mantener la anotaciï¿½n en el buzï¿½n", ex);
                             }//try-catch
                         }//if(opcionPermanencia)
                     } else {
@@ -5209,7 +5211,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
             }//if(opcionPermanencia)
         } catch (Exception ex) {
             opcionPermanencia = false;
-            m_Log.error("Se ha producido un error recuperando la propiedad que indica si las anotaciones pueden permanecer en el buz�n", ex);
+            m_Log.error("Se ha producido un error recuperando la propiedad que indica si las anotaciones pueden permanecer en el buzï¿½n", ex);
         }//try-catch
         if (m_Log.isDebugEnabled()) {
             m_Log.debug("getOpcionPermanencia() : END");
@@ -5218,7 +5220,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
     }//getOpcionPermanencia
 
     /**
-     * M�todo auxiliar para la funcionalidad de ImprimirCuneus Ahora se necesita
+     * Mï¿½todo auxiliar para la funcionalidad de ImprimirCuneus Ahora se necesita
      * imprimir el nombre de oficina
      *
      * @param codigoOficina codigo de la oficina
@@ -5237,7 +5239,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
     }
 
     /**
-     * M�todo auxiliar para la funcionalidad de ImprimirCuneus Ahora se necesita
+     * Mï¿½todo auxiliar para la funcionalidad de ImprimirCuneus Ahora se necesita
      * imprimir el nombre de oficina, y para ello necesitamos el codigo de
      * oficina
      *
@@ -5257,11 +5259,11 @@ public final class MantAnotacionRegistroAction extends ActionSession {
     }
 
     /**
-     * M�todo llamado para devolver un String en formato JSON al cliente que ha
-     * realiza la petici�n a alguna de las operaciones de este action
+     * Mï¿½todo llamado para devolver un String en formato JSON al cliente que ha
+     * realiza la peticiï¿½n a alguna de las operaciones de este action
      *
      * @param json:     String que contiene el JSON a devolver
-     * @param response: Objeto de tipo HttpServletResponse a trav�s del cual se
+     * @param response: Objeto de tipo HttpServletResponse a travï¿½s del cual se
      *                  devuelve la salida al cliente que ha realizado la solicitud
      */
     private void retornarJSON(String json, HttpServletResponse response) {
@@ -5282,8 +5284,8 @@ public final class MantAnotacionRegistroAction extends ActionSession {
     }
 
     /**
-     * Env�a los datos necesarios (PK) de un registro para recuperar toda la
-     * informaci�n pertinente de la base de datos y enviarla a la oficina
+     * Envï¿½a los datos necesarios (PK) de un registro para recuperar toda la
+     * informaciï¿½n pertinente de la base de datos y enviarla a la oficina
      * apropiada.
      *
      * @param mapping
@@ -5300,7 +5302,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
         UsuarioValueObject usuario = (UsuarioValueObject) session.getAttribute("usuario");
         int ejercicio = Integer.valueOf(request.getParameter("anoEjercicio"));
         int numeroRegistro = Integer.valueOf(request.getParameter("numeroRegistro"));
-        int departamento = 1; // Por ahora siempre es as�
+        int departamento = 1; // Por ahora siempre es asï¿½
         String tipo = UtilidadesRegistro.parsearTipoEntradaSalida(tipoES);
 
         GestionSir gestionSir = new GestionSir();
@@ -5323,7 +5325,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
 
     @SuppressWarnings("unchecked")
     private RegistroValueObject getRegistro(Vector datosAnotacionOriginal) {
-        // 1) Log tama�o y contenido original
+        // 1) Log tamaño y contenido original
         if (datosAnotacionOriginal == null) {
             m_Log.warn("getRegistro: datosAnotacionOriginal es null");
             return new RegistroValueObject();
@@ -5341,7 +5343,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                 + ", contenido=" + datosAnotacion);
 
         if (datosAnotacion.isEmpty()) {
-            m_Log.warn("getRegistro: datosAnotacion vac�o tras desanidar");
+            m_Log.warn("getRegistro: datosAnotacion vacío tras desanidar");
             return new RegistroValueObject();
         }
 
@@ -5383,32 +5385,32 @@ public final class MantAnotacionRegistroAction extends ActionSession {
         if (hasText(v)) reg.setTipoAnot(toInteger(v));
 
 
-        // ? RAW_FECHA_DOCU ? �ndice 21 ? la fecha de documento tal cual viene de la consulta
+        // ? RAW_FECHA_DOCU ? índice 21 ? la fecha de documento tal cual viene de la consulta
         Object rawFechaDocu = safeElem(datosAnotacion, 21);
         if (hasText(rawFechaDocu)) {
-            // Aseg�rate de que tu VO tenga este setter:
+            // Asegúrate de que tu VO tenga este setter:
             reg.setFechaDocu(toString(rawFechaDocu));
         }
 
-        // FIN DIGITALIZACI�N ? �ndice 22
+        // FIN DIGITALIZACIÓN ? índice 22
         v = safeElem(datosAnotacion, 22);
         if (hasText(v)) reg.setFinDigitalizacion(toBoolean(v));
 
-        // ESTADO EXPEDIENTE ? �ndice 23
+        // ESTADO EXPEDIENTE ? índice 23
         v = safeElem(datosAnotacion, 23);
         if (hasText(v)) reg.setEstadoExpediente(toInteger(v));
 
-        // ESTADO SIR ? �ndice 24
+        // ESTADO SIR ? índice 24
         v = safeElem(datosAnotacion, 24);
         if (hasText(v)) reg.setEstadoSIR(toInteger(v));
 
-        // FECHA ESTADO SIR ? �ndice 25
+        // FECHA ESTADO SIR ? índice 25
         Object v25 = safeElem(datosAnotacion, 25);
         if (hasText(v25)) {
             reg.setFechaEstadoSIR(toDateOrParse(v25));
         }
 
-        // IDENTIFICADOR REGISTRO SIR ? �ndice 26
+        // IDENTIFICADOR REGISTRO SIR ? índice 26
         reg.setIdentificadorRegistroSIR(toString(safeElem(datosAnotacion, 26)));
 
         return reg;
@@ -5425,7 +5427,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
     }
 
     // =======================
-    // M�todos de conversi�n
+    // Métodos de conversión
     // =======================
     private Integer toInteger(Object value) {
         if (value == null) return null;
@@ -5434,7 +5436,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
         try {
             return Integer.valueOf(s);
         } catch (NumberFormatException e) {
-            m_Log.warn("toInteger: valor no num�rico '" + s + "', devolviendo null", e);
+            m_Log.warn("toInteger: valor no numérico '" + s + "', devolviendo null", e);
             return null;
         }
     }
@@ -5446,7 +5448,7 @@ public final class MantAnotacionRegistroAction extends ActionSession {
         try {
             return Long.valueOf(s);
         } catch (NumberFormatException e) {
-            m_Log.warn("toLong: valor no num�rico '" + s + "', devolviendo null", e);
+            m_Log.warn("toLong: valor no numérico '" + s + "', devolviendo null", e);
             return null;
         }
     }

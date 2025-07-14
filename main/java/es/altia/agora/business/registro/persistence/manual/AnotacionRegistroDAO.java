@@ -303,7 +303,7 @@ public class AnotacionRegistroDAO {
 	protected static String sql_rel_numeroA;
 	protected static String sql_rel_numeroB;
 
-	protected static char caracterEscape='·';
+	protected static char caracterEscape='Â·';
 	/**
 	 * Construye un nuevo SelectListaDAO. Es protected, por lo que la unica manera de instanciar esta clase
 	 * es usando el factory method <code>getInstance</code>
@@ -598,9 +598,9 @@ public class AnotacionRegistroDAO {
     }
 
     /**
-     * Prepara la sentencia SQL que se debe ejecutar para modificar una determinada anotación de registro
+     * Prepara la sentencia SQL que se debe ejecutar para modificar una determinada anotaciÃ³n de registro
      * @param registro: Datos del registro actuales
-     * @param asuntoAnteriorBaja: Si está a true indica que la anotación anteriormente a la modificación tenía un código de asunto codificado asignado
+     * @param asuntoAnteriorBaja: Si estÃ¡ a true indica que la anotaciÃ³n anteriormente a la modificaciÃ³n tenÃ­a un cÃ³digo de asunto codificado asignado
      *                            dado de baja
      * @param oad: Objeto de la clase AdaptadorSQLBD necesario para realizar la consulta
      * @return Consulta SQL
@@ -839,7 +839,7 @@ public class AnotacionRegistroDAO {
         String codAsunto = registro.getCodAsunto();
         
         if (!asuntoAnteriorBaja && (codAsunto == null || codAsunto.equals(""))) {
-            // Si no hay asunto y además anteriormente la anotación no tenía asignada un código de asunto dado de baja, se pone a null
+            // Si no hay asunto y ademÃ¡s anteriormente la anotaciÃ³n no tenÃ­a asignada un cÃ³digo de asunto dado de baja, se pone a null
             sql += ", ASUNTO = null";            
         } else
         if(codAsunto!=null && !"".equals(codAsunto)){
@@ -996,7 +996,7 @@ public class AnotacionRegistroDAO {
         }
     }
 
-    /* Función para dar de alta un registro... pero no solo inserta la anotación.
+    /* FunciÃ³n para dar de alta un registro... pero no solo inserta la anotaciÃ³n.
      * Usa insertarAnotacion para insertar los datos principales, y otras funciones para insertar
      * otros datos (documentos, temas...) */
     public RegistroValueObject insertRegistroValueObject(Connection con,RegistroValueObject regESVO_BD, String[] params)
@@ -1027,7 +1027,7 @@ public class AnotacionRegistroDAO {
             }
         }
 
-        // Búsqueda de los ids de los temas asignados. Sin transaccion.
+        // BÃºsqueda de los ids de los temas asignados. Sin transaccion.
         Vector idsTemasAsignados = new Vector();
         Vector temas = regESVO_BD.getListaTemasAsignados();
         String id;
@@ -1069,7 +1069,7 @@ public class AnotacionRegistroDAO {
 
             oad = new AdaptadorSQLBD(params);
 
-            // Comprobar si el registro está abierto.
+            // Comprobar si el registro estÃ¡ abierto.
             m_Log.debug("conseguir fecha de entrada a partir de : " + regESVO_BD.getFecEntrada());
             Date fEntr = Fecha.obtenerDateCompleto2(regESVO_BD.getFecEntrada());
             Date fEntrSinhora=Fecha.obtenerDate(regESVO_BD.getFecEntrada());
@@ -1151,10 +1151,10 @@ public class AnotacionRegistroDAO {
                 /* Fin Enlace con SGE. */
 
                 if ("registrar_alta_entrada_aceptada".equals(regESVO_BD.getRespOpcion())) {   // Seguimos con el alta.
-                    // Coger número de entrada.
+                    // Coger nÃºmero de entrada.
                     Long numeroAnotacion = getNumeroEntrada(con, regESVO_BD);
                     
-                    if (numeroAnotacion != null) { // Si falla se recibe una excepción.
+                    if (numeroAnotacion != null) { // Si falla se recibe una excepciÃ³n.
 						
                         if (insertarAnotacion(oad, con, regESVO_BD) > 0) {
                             insertarTemasAsignados(con, regESVO_BD, idsTemasAsignados);
@@ -1163,7 +1163,7 @@ public class AnotacionRegistroDAO {
                             	insertarRelaciones(con, regESVO_BD);
 							}
 
-                            // Insertar alta (normal o de finalización) en el historico de movimientos
+                            // Insertar alta (normal o de finalizaciÃ³n) en el historico de movimientos
 							insertarAltaHistorico(regESVO_BD, con, params);
 							
                             regESVO_BD.setRespOpcion("registrar_alta_entrada_aceptada");
@@ -1196,7 +1196,7 @@ public class AnotacionRegistroDAO {
                             }
 
                             /* Cuando el registro de salida se le asocia un expediente se le pone
-                             * automaticamente aceptada a esa anotación */
+                             * automaticamente aceptada a esa anotaciÃ³n */
                             if ("S".equals(regESVO_BD.getTipoReg()) && existeExpediente) {
                                 aceptarAnotacion(con, regESVO_BD);
                             }
@@ -1224,12 +1224,12 @@ public class AnotacionRegistroDAO {
                                                 regESVO_BD.getTipoRegOrigen() + "' and " +
                                                 sql_estAnot + "=1";
                                         if (m_Log.isDebugEnabled()) {
-                                            m_Log.debug("Sentencia para comprobar que el buzón no" + " ha sido todavía actualizado: " + sql);
+                                            m_Log.debug("Sentencia para comprobar que el buzÃ³n no" + " ha sido todavÃ­a actualizado: " + sql);
                                         }
                                         ps = con.prepareStatement(sql);
                                         rs = ps.executeQuery();
 
-                                        if (rs.next()) {//todavía está en el buzón
+                                        if (rs.next()) {//todavÃ­a estÃ¡ en el buzÃ³n
                                             String sqlUpdate = "UPDATE R_RES SET " + sql_estAnot + "=0 " +
                                                     "where " + sql_codDptoAnotacion + "=" +
                                                     regESVO_BD.getIdDepOrigen() + " and " +
@@ -1247,18 +1247,18 @@ public class AnotacionRegistroDAO {
                                             int res = psUpdate.executeUpdate(sqlUpdate);
 
                                             if (res < 1) {
-                                                m_Log.debug("No se pudo actualizar el buzón");
+                                                m_Log.debug("No se pudo actualizar el buzÃ³n");
                                                 regESVO_BD.setRespOpcion("registrar_alta_entrada_denegada");
                                             } else {
                                                 regESVO_BD.setRespOpcion("registrar_alta_entrada_aceptada");
-                                                m_Log.debug("Actualización del buzón realizada");
+                                                m_Log.debug("ActualizaciÃ³n del buzÃ³n realizada");
                                             }
                                         } else {
-                                            m_Log.debug("El buzón ya estaba actualizado");
+                                            m_Log.debug("El buzÃ³n ya estaba actualizado");
                                             regESVO_BD.setRespOpcion("actualizacion_ya_realizada");
                                         }
 
-                                    } else {//no veníamos del buzón
+                                    } else {//no venÃ­amos del buzÃ³n
                                         regESVO_BD.setRespOpcion("registrar_alta_entrada_aceptada");
                                     }
                                 } // fin res2
@@ -1334,7 +1334,7 @@ public class AnotacionRegistroDAO {
             }
             if (m_Log.isDebugEnabled()) {
                 m_Log.debug("AnotacionRegistroDAO, getListaTiposDocumentos: Lista tipos documentos cargada");
-                m_Log.debug("AnotacionRegistroDAO, getListaTiposDocumentos: Tamaño lista:" + list.size());
+                m_Log.debug("AnotacionRegistroDAO, getListaTiposDocumentos: TamaÃ±o lista:" + list.size());
             }
 
             return list;
@@ -1441,7 +1441,7 @@ public class AnotacionRegistroDAO {
 
             }
             if (m_Log.isDebugEnabled()) {
-                m_Log.debug("AnotacionRegistroDAO, getListaDocumentosJustificantes: Tamaño lista:" + list.size() + ", " + list.toString());
+                m_Log.debug("AnotacionRegistroDAO, getListaDocumentosJustificantes: TamaÃ±o lista:" + list.size() + ", " + list.toString());
             }
             return list;
 
@@ -1582,10 +1582,10 @@ public class AnotacionRegistroDAO {
 
 
         } catch (BDException ex) {
-            expedientes = new Vector<GeneralValueObject>(); // Vacío
+            expedientes = new Vector<GeneralValueObject>(); // VacÃ­o
             Logger.getLogger(AnotacionRegistroDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException e) {
-            expedientes = new Vector<GeneralValueObject>(); // Vacío
+            expedientes = new Vector<GeneralValueObject>(); // VacÃ­o
             if (m_Log.isErrorEnabled()) {
                 m_Log.error(e.getMessage());
             }
@@ -1600,8 +1600,8 @@ public class AnotacionRegistroDAO {
 
 
  /**
-  * Recupera los documentos de los interesados de una anotación de registro y los concatena en un String
-  * @param datos: Colección a partir de la cual se construye el XML
+  * Recupera los documentos de los interesados de una anotaciÃ³n de registro y los concatena en un String
+  * @param datos: ColecciÃ³n a partir de la cual se construye el XML
   * @return String
   */
   private String getDocumentosInteresadosAnotacion(java.util.Collection datos){
@@ -1657,7 +1657,7 @@ public class AnotacionRegistroDAO {
         try{
             eeRaiz = UtilidadesXerador.construyeEstructuraEntidadesInforme(params, "", raiz);
             eeRaiz.setValoresParametrosConsulta(parametros);
-            // #239565: se indica en la estructura el tipo de informe que se solicita, solo para peticion o justificante, para otros será nulo
+            // #239565: se indica en la estructura el tipo de informe que se solicita, solo para peticion o justificante, para otros serÃ¡ nulo
             eeRaiz.setDescTipoInforme(tipoInforme);
             // #267396: se indica en la estructura el formato de fecha
             eeRaiz.setFormatoFecha((String) gvo.getAtributo("formatoFecha"));
@@ -1720,7 +1720,7 @@ public class AnotacionRegistroDAO {
                 list.addElement(elemListVO);
             }
             m_Log.debug("AnotacionRegistroDAO, getListaTiposRemitentes: Lista tipos remitentes cargada");
-            m_Log.debug("AnotacionRegistroDAO, getListaTiposRemitentes: Tamaño lista:" + list.size());
+            m_Log.debug("AnotacionRegistroDAO, getListaTiposRemitentes: TamaÃ±o lista:" + list.size());
 
             return list;
         } catch (BDException ex) {
@@ -1764,7 +1764,7 @@ public class AnotacionRegistroDAO {
                 list.addElement(elemListVO);
             }
                 m_Log.debug("AnotacionRegistroDAO, getListaTiposTransportes: Lista tipos Transportes cargada");
-                m_Log.debug("AnotacionRegistroDAO, getListaTiposTransportes: Tamaño lista:" + list.size());
+                m_Log.debug("AnotacionRegistroDAO, getListaTiposTransportes: TamaÃ±o lista:" + list.size());
 
             return list;
 
@@ -1810,7 +1810,7 @@ public class AnotacionRegistroDAO {
                 list.addElement(elemListVO);
             }
                 m_Log.debug("AnotacionRegistroDAO, getListaActuaciones: Lista Actuaciones cargada");
-                m_Log.debug("AnotacionRegistroDAO, getListaActuaciones: Tamaño lista:" + list.size());
+                m_Log.debug("AnotacionRegistroDAO, getListaActuaciones: TamaÃ±o lista:" + list.size());
 
             return list;
         } catch (Exception e) {
@@ -2105,7 +2105,7 @@ public class AnotacionRegistroDAO {
                 
                 String codigo_asunto = rs.getString("ASUNTO");
                 registro.setCodAsunto(codigo_asunto);
-                m_Log.debug(" *********** LA ANOTACIÓN " + numeroRegistro + " y ejercicio: " + ejercicio + " tiene como asunto: " + codigo_asunto);
+                m_Log.debug(" *********** LA ANOTACIÃ“N " + numeroRegistro + " y ejercicio: " + ejercicio + " tiene como asunto: " + codigo_asunto);
                 String fecBaja = MantAsuntosDAO.getInstance().estaDeBajaAsuntoCodificado(codigo_asunto,Integer.toString(codigoUnidad),tipoRegistro,con);
                 registro.setAsuntoAnotacionBaja(false);
                 if(fecBaja!=null && !"".equals(fecBaja)){
@@ -2195,16 +2195,16 @@ public class AnotacionRegistroDAO {
             SigpGeneralOperations.closeResultSet(rs);
             SigpGeneralOperations.closeStatement(ps);
 
-            m_Log.debug("el tamaño del vector listaTemas es : " + temas.size());
+            m_Log.debug("el tamaÃ±o del vector listaTemas es : " + temas.size());
             registro.setListaTemasAsignados(temas);
-            m_Log.debug("el tamaño del vector listaTemas es : " + registro.getListaTemasAsignados().size());
+            m_Log.debug("el tamaÃ±o del vector listaTemas es : " + registro.getListaTemasAsignados().size());
 
 
             // Recuperacion de la lista de asientos relacionados.
             registro.setRelaciones(getRelaciones(registro, con));
             m_Log.debug("Relaciones recuperadas: " + registro.getRelaciones());
 
-            m_Log.debug("el tamaño del vector listaDocs es : " + docs.size());
+            m_Log.debug("el tamaÃ±o del vector listaDocs es : " + docs.size());
 
             //Vector documentos = getDocumentos(registro, con, params);
             
@@ -2222,7 +2222,7 @@ public class AnotacionRegistroDAO {
             registro.setListaDocsAnteriores(documentosAnteriores);
             
 
-            m_Log.debug("el tamaño del vector listaDocs es : " + documentos.size());
+            m_Log.debug("el tamaÃ±o del vector listaDocs es : " + documentos.size());
             if (cont == 0) {
 
                 String sql1 = "SELECT " + oad.convertir(sql_fechaRER, AdaptadorSQLBD.CONVERTIR_COLUMNA_TEXTO, "DD/MM/YYYY HH24:MI:SS") +
@@ -2379,8 +2379,8 @@ public class AnotacionRegistroDAO {
         Vector<SimpleRegistroValueObject> lista = new Vector<SimpleRegistroValueObject>();
 
         try {
-            // Como la relación es simétrica y sólo hay una fila por cada par de asientos relacionados,
-            // hay que hacer la consulta comparando con el primero y con el segundo de la relación.
+            // Como la relaciÃ³n es simÃ©trica y sÃ³lo hay una fila por cada par de asientos relacionados,
+            // hay que hacer la consulta comparando con el primero y con el segundo de la relaciÃ³n.
             long numReg = asiento.getNumReg();
             String sql = "SELECT " + sql_rel_tipoB + ", " + sql_rel_ejercicioB + ", " + sql_rel_numeroB +
                     " FROM R_REL" +
@@ -2507,10 +2507,10 @@ public class AnotacionRegistroDAO {
     }
 
      /**
-     * Recupera una lista de documentos entregados enteriormente a una determinada anotación de registro
-     * @param registro: Objeto de tipo RegistroValueObject que contiene toda la información de la anotación de registro
-     * @param con: Conexión a la Base de Datos
-     * @return Vector de objetos RegistroValueObject con la información de los objetos a recuperar
+     * Recupera una lista de documentos entregados enteriormente a una determinada anotaciÃ³n de registro
+     * @param registro: Objeto de tipo RegistroValueObject que contiene toda la informaciÃ³n de la anotaciÃ³n de registro
+     * @param con: ConexiÃ³n a la Base de Datos
+     * @return Vector de objetos RegistroValueObject con la informaciÃ³n de los objetos a recuperar
      * @throws AnotacionRegistroException
      */
     private Vector<RegistroValueObject> getListaEntregadosAnterior(RegistroValueObject registro, Connection con)
@@ -2576,18 +2576,18 @@ public class AnotacionRegistroDAO {
     }
     
     /**
-     * Recupera una lista de documentos asociados a un determinada anotación de registro
-     * @param registro: Objeto de tipo RegistroValueObject que contiene toda la información de la anotación de registro
-     * @param con: Conexión a la BBDD
-     * @return Vector de objetos RegistroValueObject con la información de los objetos a recuperar
+     * Recupera una lista de documentos asociados a un determinada anotaciÃ³n de registro
+     * @param registro: Objeto de tipo RegistroValueObject que contiene toda la informaciÃ³n de la anotaciÃ³n de registro
+     * @param con: ConexiÃ³n a la BBDD
+     * @return Vector de objetos RegistroValueObject con la informaciÃ³n de los objetos a recuperar
      * @throws AnotacionRegistroException 
      */
     
     /**
-     * Recupera una lista de documentos asociados a un determinada anotación de registro
-     * @param registro: Objeto de tipo RegistroValueObject que contiene toda la información de la anotación de registro
-     * @param con: Conexión a la BBDD
-     * @return Vector de objetos RegistroValueObject con la información de los objetos a recuperar
+     * Recupera una lista de documentos asociados a un determinada anotaciÃ³n de registro
+     * @param registro: Objeto de tipo RegistroValueObject que contiene toda la informaciÃ³n de la anotaciÃ³n de registro
+     * @param con: ConexiÃ³n a la BBDD
+     * @return Vector de objetos RegistroValueObject con la informaciÃ³n de los objetos a recuperar
      * @throws AnotacionRegistroException 
      */
     public Vector getListaDocumentos(RegistroValueObject registro, Connection con)
@@ -2811,9 +2811,9 @@ public class AnotacionRegistroDAO {
 
 
 	/* *******************************************************************************************
-	 * Sólo se pueden modificar o anular (baja lógica) entradas con fecha igual a la que esta
+	 * SÃ³lo se pueden modificar o anular (baja lÃ³gica) entradas con fecha igual a la que esta
 	 * abierto el registro.
-	 * Transacción.
+	 * TransacciÃ³n.
 	 **********************************************************************************************/
     public RegistroValueObject modify(Connection con, RegistroValueObject registro, boolean digitFinalizada, String[] params)
             throws AnotacionRegistroException, TechnicalException {
@@ -2896,8 +2896,8 @@ public class AnotacionRegistroDAO {
 
             oad = new AdaptadorSQLBD(params);
 
-            // Comprobar si el registro está abierto.
-            // La entrada tiene la misma fecha que en la que está abierto el registro.
+            // Comprobar si el registro estÃ¡ abierto.
+            // La entrada tiene la misma fecha que en la que estÃ¡ abierto el registro.
             m_Log.debug("conseguir fecha de entrada a partir de : " + registro.getFecEntrada());
             Date fEntr = Fecha.obtenerDateCompleto2(registro.getFecEntrada());
             m_Log.debug("fecha de entrada es : " + fEntr);
@@ -2924,9 +2924,9 @@ public class AnotacionRegistroDAO {
                     String txtPrimeraFechaPosterior = getPrimeraFechaPosterior(oad, con, registro, txtFechaOriginal);
                     m_Log.debug("y la fecha posterior a esa en BD es : " + txtPrimeraFechaPosterior);
 
-                    /*Si la fecha de presentación no se modifica no se realizan las comprobaciones. Esto se debe a que
-                     la anotación puede no tener una fecha "validada" si se dio de alta permitiendo meter cualquier
-                     fecha. Para más señas mirar #45022.*/
+                    /*Si la fecha de presentaciÃ³n no se modifica no se realizan las comprobaciones. Esto se debe a que
+                     la anotaciÃ³n puede no tener una fecha "validada" si se dio de alta permitiendo meter cualquier
+                     fecha. Para mÃ¡s seÃ±as mirar #45022.*/
                     if (!txtFechaOriginal.equals(Fecha.obtenerStringCompleto(fEntr)) &&
                             m_ConfigRegistro.getString("restriccion_fecha_presentacion").equalsIgnoreCase("SI")){
                     if ((txtUltimaFechaAnterior != null) && (!"".equals(txtUltimaFechaAnterior))) {
@@ -2962,7 +2962,7 @@ public class AnotacionRegistroDAO {
                         if (!"".equals(registro.getNumExpediente().trim())) {
 
                             // SE COMPRUEBA LA EXISTENCIA DEL EXPEDIENTE RELACIONADO ANTES DE PROCEDER A REALIZAR
-                            // LA MODIFICACIÓN DE LA ANOTACIÓN
+                            // LA MODIFICACIÃ“N DE LA ANOTACIÃ“N
                             ExpedienteRelacionadoVO expediente = new ExpedienteRelacionadoVO();
                             expediente.setCodigoOrganizacion(Integer.toString(registro.getIdOrganizacion()));
                             expediente.setCodProcedimiento(registro.getCodProcedimiento());
@@ -3005,7 +3005,7 @@ public class AnotacionRegistroDAO {
                     // Seguimos con la actualizacion
                     // No es un alta desde reserva
                     if (registro.getContador() == 0) {
-                        // Obtener VO anterior para comparación en el histórico.
+                        // Obtener VO anterior para comparaciÃ³n en el histÃ³rico.
                         RegistroValueObject antiguo = new RegistroValueObject();
                         antiguo.setIdentDepart(registro.getIdentDepart());
                         antiguo.setUnidadOrgan(registro.getUnidadOrgan());
@@ -3024,8 +3024,8 @@ public class AnotacionRegistroDAO {
 						antiguoVO =	crearVOParaHistorico(antiguo, true, antiguo.getCodProcedimientoRoles(), con, params);
 						
 
-                        /** Se comprueba si hay que recuperar el código del municipio del procedimiento para poder construir correctamente la
-                         *  sentencia de actualización de la anotación
+                        /** Se comprueba si hay que recuperar el cÃ³digo del municipio del procedimiento para poder construir correctamente la
+                         *  sentencia de actualizaciÃ³n de la anotaciÃ³n
                          */
                         
                         if( !"".equals(registro.getCodProcedimiento())) registro.setMunProcedimiento(antiguo.getMunProcedimiento());
@@ -3192,7 +3192,7 @@ public class AnotacionRegistroDAO {
             }
 
             /* Cuando el registro de salida se le asocia un expediente se le pone
-             * automaticamente aceptada a esa anotación */
+             * automaticamente aceptada a esa anotaciÃ³n */
             if ("S".equals(registro.getTipoReg()) && !((tvo.getNumeroExpediente()==null) || ("".equals(tvo.getNumeroExpediente())))) {
                 aceptarAnotacion(con, registro);
             }
@@ -3288,10 +3288,10 @@ public class AnotacionRegistroDAO {
 
         try {
             con = oad.getConnection();
-            oad.inicioTransaccion(con); // Inicio transacción
+            oad.inicioTransaccion(con); // Inicio transacciÃ³n
 
-            // Comprobar si el registro está abierto.
-            // La entrada tiene la misma fecha que en la que está abierto el registro.
+            // Comprobar si el registro estÃ¡ abierto.
+            // La entrada tiene la misma fecha que en la que estÃ¡ abierto el registro.
             Date fEntr = Fecha.obtenerDate(registro.getFecEntrada());
             Date fRegCerrado = RegistroAperturaCierreManager.getInstance().getFechaRegistroCerrado(con, registro);
 
@@ -3431,7 +3431,7 @@ public class AnotacionRegistroDAO {
                 list.addElement(elemListVO);
             }
                 m_Log.debug("AnotacionRegistroDAO, getListaTiposIdentificadoresInteresado: Lista cargada");
-                m_Log.debug("AnotacionRegistroDAO, getListaTiposIdentificadoresInteresado: Tamaño lista:" + list.size());
+                m_Log.debug("AnotacionRegistroDAO, getListaTiposIdentificadoresInteresado: TamaÃ±o lista:" + list.size());
             return list;
 
         } catch (Exception e) {
@@ -3498,7 +3498,7 @@ public class AnotacionRegistroDAO {
 
 
     /* ***********************************************************************************
-    Función: getListaTemas.
+    FunciÃ³n: getListaTemas.
     Recupera de la base de datos los temas que pueden asignarse a las entradas.
      ************************************************************************************** */
     public Vector getListaTemas(String[] params)
@@ -3545,10 +3545,10 @@ public class AnotacionRegistroDAO {
     }
 
     /* *************************************************************************************
-    Función: insertarEntrada.
+    FunciÃ³n: insertarEntrada.
     Insertar la entrada que se quiere dar de alta.
-    La inserción se realiza dentro de la transacción abierta por la conexión c.
-    Lanza al método que lo invoca las excepciones SQL que genera.
+    La inserciÃ³n se realiza dentro de la transacciÃ³n abierta por la conexiÃ³n c.
+    Lanza al mÃ©todo que lo invoca las excepciones SQL que genera.
      ************************************************************************************* */
     public int insertarAnotacion(AdaptadorSQLBD oad, Connection c, RegistroValueObject reg)
             throws AnotacionRegistroException, TechnicalException {
@@ -3729,7 +3729,7 @@ public class AnotacionRegistroDAO {
             // Se permite insertar una anotacion en cualquier estado.
             sql += ", " + reg.getEstAnotacion();
 
-            // Diligencia de anulación
+            // Diligencia de anulaciÃ³n
             if (reg.getDilAnulacion() != null) {
                 sql += ",'" + reg.getDilAnulacion() + "'";
             } else {
@@ -3837,10 +3837,10 @@ public class AnotacionRegistroDAO {
     }
 
     /* *************************************************************************************
-    Función: insertarTemasAsignados.
+    FunciÃ³n: insertarTemasAsignados.
     Insertar los temas asignados a una entrada al realizar su alta.
-    La inserción se realiza dentro de la transacción abierta por la conexión c.
-    Lanza al método que lo invoca las excepciones SQL que genera.
+    La inserciÃ³n se realiza dentro de la transacciÃ³n abierta por la conexiÃ³n c.
+    Lanza al mÃ©todo que lo invoca las excepciones SQL que genera.
      ************************************************************************************* */
     private void insertarTemasAsignados(Connection c, RegistroValueObject reg, Vector list)
             throws AnotacionRegistroException, TechnicalException {
@@ -3849,7 +3849,7 @@ public class AnotacionRegistroDAO {
         PreparedStatement ps = null;
         long numReg = reg.getNumReg(); 
         try {
-            // Común para todos.
+            // ComÃºn para todos.
             String sql = "INSERT INTO R_RET ( ";
             sql += sql_temasDepto + "," + sql_temasUnid + "," + sql_temasEjerc + "," + sql_temasNum;
             sql += "," + sql_temasTipo + "," + sql_temasOrden + "," + sql_temasIdTema + ") VALUES (";
@@ -3866,7 +3866,7 @@ public class AnotacionRegistroDAO {
                 }
                 ps = c.prepareStatement(sql2);
                 ps.executeUpdate();
-                m_Log.debug("insertarListaTemas: Inserción realizada");
+                m_Log.debug("insertarListaTemas: InserciÃ³n realizada");
                 SigpGeneralOperations.closeStatement(ps);
             }
 
@@ -3883,9 +3883,9 @@ public class AnotacionRegistroDAO {
     /**
      * Inserta los documentos asociados a un registro
      *
-     * @param con Conexión con la BD
+     * @param con ConexiÃ³n con la BD
      * @param docsReg Lista de documentos a insertar     
-     * @throws AnotacionRegistroException. En caso de que se produzca algún error.
+     * @throws AnotacionRegistroException. En caso de que se produzca algÃºn error.
      */
     public void insertarDocsRegistro(Connection con, ArrayList<Documento> docsReg)
             throws AnotacionRegistroException {
@@ -3987,16 +3987,16 @@ public class AnotacionRegistroDAO {
                 SigpGeneralOperations.closeStatement(ps);
                 SigpGeneralOperations.closeStatement(st);
             }catch(TechnicalException e){
-                m_Log.error("Error al cerrar recurso asociado a la conexión de base de datos: " + e.getMessage());
+                m_Log.error("Error al cerrar recurso asociado a la conexiÃ³n de base de datos: " + e.getMessage());
             }
         }
     }
     
     /**
-    *Inserta los datos de los documentos aportados anteriormente a una anotación de registro en la tabla R_DOC_APORTADOS_ANTERIOR
-    * @param con Conexión con la BD
+    *Inserta los datos de los documentos aportados anteriormente a una anotaciÃ³n de registro en la tabla R_DOC_APORTADOS_ANTERIOR
+    * @param con ConexiÃ³n con la BD
     * @param docsAntReg Lista de documentos a insertar
-    * @throws AnotacionRegistroException. En caso de que se produzca algún error
+    * @throws AnotacionRegistroException. En caso de que se produzca algÃºn error
     */
     public void insertarDocsEntregadosAnterior(Connection con, ArrayList<RegistroValueObject> docsReg)
             throws AnotacionRegistroException, TechnicalException, ParseException{
@@ -4043,11 +4043,11 @@ public class AnotacionRegistroDAO {
     
     
      /**
-     * Inserta los documentos asociados a una anotación de registro en la tabla R_RED, pero sin 
-     * almacenar el archivo en base de datos, porque se envía a un gestor documental, como puede ser alfresco     
-     * @param con Conexión con la BD
+     * Inserta los documentos asociados a una anotaciÃ³n de registro en la tabla R_RED, pero sin 
+     * almacenar el archivo en base de datos, porque se envÃ­a a un gestor documental, como puede ser alfresco     
+     * @param con ConexiÃ³n con la BD
      * @param docsReg Lista de documentos a insertar     
-     * @throws AnotacionRegistroException. En caso de que se produzca algún error.
+     * @throws AnotacionRegistroException. En caso de que se produzca algÃºn error.
      */
     public void insertarDocsRegistroSinBinario(Connection con, ArrayList<Documento> docsReg)
             throws AnotacionRegistroException {
@@ -4140,7 +4140,7 @@ public class AnotacionRegistroDAO {
             try{
                 SigpGeneralOperations.closeStatement(ps);
             }catch(TechnicalException e){
-                m_Log.error("Error al cerrar recurso asociado a la conexión de base de datos: " + e.getMessage(),e);
+                m_Log.error("Error al cerrar recurso asociado a la conexiÃ³n de base de datos: " + e.getMessage(),e);
             }
         }
     }
@@ -4209,10 +4209,10 @@ public class AnotacionRegistroDAO {
     /**
      * Elimina los documentos asociados a un registro
      *
-     * @param con Conexión con la BD
+     * @param con ConexiÃ³n con la BD
      * @param regVO Registro
      * @param params Parametros de la conexion
-     * @throws AnotacionRegistroException. En caso de que se produzca algún error.
+     * @throws AnotacionRegistroException. En caso de que se produzca algÃºn error.
      */
     public void eliminarDocsRegistro(Connection con, RegistroValueObject regVO, String[] params)
             throws AnotacionRegistroException, TechnicalException {
@@ -4251,10 +4251,10 @@ public class AnotacionRegistroDAO {
     }
 
     /* *************************************************************************************
-    Función: inserta los intesados.
+    FunciÃ³n: inserta los intesados.
     Insertar los interesados pertenecientes a este registro en R_EXT
-    La inserción se realiza dentro de la transacción abierta por la conexión c.
-    Lanza al método que lo invoca las excepciones SQL que genera.
+    La inserciÃ³n se realiza dentro de la transacciÃ³n abierta por la conexiÃ³n c.
+    Lanza al mÃ©todo que lo invoca las excepciones SQL que genera.
      ************************************************************************************* */
     public void insertarInteresados(Connection c, RegistroValueObject reg)
             throws AnotacionRegistroException, TechnicalException {
@@ -4307,7 +4307,7 @@ public class AnotacionRegistroDAO {
     /**
      * Inserta la lista de relaciones incluida en el VO pasado como argumento. Primero se borran
      * todas las relaciones existentes para ese asiento y despues se introducen las nuevas.
-     * Usa una conexión con una transacción ya abierta.
+     * Usa una conexiÃ³n con una transacciÃ³n ya abierta.
      */
     private void insertarRelaciones(Connection c, RegistroValueObject reg)
             throws AnotacionRegistroException, TechnicalException {
@@ -4316,8 +4316,8 @@ public class AnotacionRegistroDAO {
         long numReg = reg.getNumReg();
         m_Log.debug("insertarRelaciones");
         try {
-            // Como la relación es simétrica y sólo hay una fila por cada par de asientos relacionados,
-            // hay que hacer el borrado comparando con el primero y con el segundo de la relación.
+            // Como la relaciÃ³n es simÃ©trica y sÃ³lo hay una fila por cada par de asientos relacionados,
+            // hay que hacer el borrado comparando con el primero y con el segundo de la relaciÃ³n.
             String sql = "DELETE FROM R_REL" +
                     " WHERE (" + sql_rel_uor + "=" + reg.getUnidadOrgan() +
                     " AND " + sql_rel_dep + "=" + reg.getIdentDepart() +
@@ -4363,9 +4363,9 @@ public class AnotacionRegistroDAO {
     }
 
     /* *************************************************************************************
-    Función: aceptarAnotacion.
+    FunciÃ³n: aceptarAnotacion.
     Acepta la anotacion de salida cuando esta asociada a un expediente
-    La inserción se realiza dentro de la transacción abierta por la conexión c.
+    La inserciÃ³n se realiza dentro de la transacciÃ³n abierta por la conexiÃ³n c.
      ************************************************************************************* */
     private int aceptarAnotacion(Connection c, RegistroValueObject reg)
             throws AnotacionRegistroException, TechnicalException {
@@ -4394,7 +4394,7 @@ public class AnotacionRegistroDAO {
         } catch (SQLException ex) {
             ex.printStackTrace();
             m_Log.error("SQLException: " + ex.getMessage());
-            throw new AnotacionRegistroException(m_ConfigError.getString("Error.AnotacionRegistroDAO.insertarBuzón.sql"), ex);
+            throw new AnotacionRegistroException(m_ConfigError.getString("Error.AnotacionRegistroDAO.insertarBuzÃ³n.sql"), ex);
         } finally {
             SigpGeneralOperations.closeStatement(ps);
         }
@@ -4402,7 +4402,7 @@ public class AnotacionRegistroDAO {
 
     /* **********************************************************************************************
     relacionRegistroValueObject: lista con las claves primarias de las anotaciones que cumplen
-    las condiciones de un  "value object" de tipo Registro que se toma como patrón.
+    las condiciones de un  "value object" de tipo Registro que se toma como patrÃ³n.
      ********************************************************************************************* */
     public Vector relacionRegistroValueObject(RegistroValueObject patron, String[] params, int startIndex, int count, int columna, String tipoOrden)
             throws AnotacionRegistroException, TechnicalException, Exception {
@@ -4668,7 +4668,7 @@ public class AnotacionRegistroDAO {
 		try{
 			sql = "SELECT EXP_EST FROM E_EXP WHERE EXP_NUM = ?";
 			m_Log.debug("Query = " + sql);
-			m_Log.debug("Parámetros de query: " + numExpediente);
+			m_Log.debug("ParÃ¡metros de query: " + numExpediente);
 			
 			ps = con.prepareStatement(sql);
 			ps.setString(1, numExpediente);
@@ -5083,7 +5083,7 @@ public class AnotacionRegistroDAO {
             ps.setInt(10,numero);
             rs = ps.executeQuery();
             
-            m_Log.debug("parámetros: "+departamento+","+codUor+","+tipo+","+ejercicio+","+numero);
+            m_Log.debug("parÃ¡metros: "+departamento+","+codUor+","+tipo+","+ejercicio+","+numero);
             
             String procedimiento="";
             String numeroExpediente="";
@@ -5111,7 +5111,7 @@ public class AnotacionRegistroDAO {
                 if(rs!=null) rs.close();
                 if(ps!=null) ps.close();
             }catch(SQLException e){
-               m_Log.error("Error en la claúsula finally al cerrar los recursos asociados a la conexión de BD: " + e.getMessage());
+               m_Log.error("Error en la claÃºsula finally al cerrar los recursos asociados a la conexiÃ³n de BD: " + e.getMessage());
             }
         }
         return resultado;
@@ -5455,7 +5455,7 @@ public class AnotacionRegistroDAO {
                 joinComunes.add("A_UOR OFI");
                 joinComunes.add("RES_OFI = OFI.UOR_COD");
             }
-            // #288821: Se construye una select para obtener únicamente los números de registro de las anotaciones que superan los filtros
+            // #288821: Se construye una select para obtener Ãºnicamente los nÃºmeros de registro de las anotaciones que superan los filtros
             String sqlSelectResNum = "";
             if(resNum) {       
                 sqlSelectResNum += "RES_NUM AS NUMREG ";
@@ -5637,7 +5637,7 @@ public class AnotacionRegistroDAO {
                 }
             }
             
-            // rango de fechas de anotación (se emplea en el filtro de entradas rechazadas)
+            // rango de fechas de anotaciÃ³n (se emplea en el filtro de entradas rechazadas)
             if(patron.getFechaDesde()!= null && !patron.getFechaDesde().equals("")){
                 partesWhere.addElement("RES_FEC BETWEEN ? AND ?");
                 filtros.add(posfiltros++, patron.getFechaDesde());
@@ -6036,7 +6036,7 @@ public class AnotacionRegistroDAO {
     /**
      * Comprueba la existencia de un asiento.
      * @param reg SimpleRegistroValueObject con la clave del asiento.
-     * @param params Parametros de conexión a BD.
+     * @param params Parametros de conexiÃ³n a BD.
      * @return true si existe el asiento, false en caso contrario
      * @throws AnotacionRegistroException
      * * @throws TechnicalException
@@ -6207,7 +6207,7 @@ public class AnotacionRegistroDAO {
     }
 
     /**
-     * Obtiene la descripción de un tipo de asunto.
+     * Obtiene la descripciÃ³n de un tipo de asunto.
      * @param codigo codigo del asunto
      * @param unidad unidad organica del asiento
      * @param con conexion a BD
@@ -6251,16 +6251,16 @@ public class AnotacionRegistroDAO {
     }
 
     /**
-     * Crea un VO con los datos del VO que se pasa pero que contiene también
+     * Crea un VO con los datos del VO que se pasa pero que contiene tambiÃ©n
      * las descripciones de los distintos valores y de los interesados.
      * @param reg RegistroValueObject con los datos
      * @param temasVO indica si los temas que contiene el asiento son
      *        String o RegistroValueObject.
      * @param codProc codigo del procedimiento que esten usando los terceros para
      *        sus roles
-     * @param codAsuntoNuevo: Código del asunto codificado actual de la anotación de registro
-     * @param con conexión a BD con transaccion abierta
-     * @param params parametros de conexión a BD
+     * @param codAsuntoNuevo: CÃ³digo del asunto codificado actual de la anotaciÃ³n de registro
+     * @param con conexiÃ³n a BD con transaccion abierta
+     * @param params parametros de conexiÃ³n a BD
      * @return VO con descripciones incluidas
      */
     public DescripcionRegistroValueObject crearVOParaHistorico(
@@ -6321,7 +6321,7 @@ public class AnotacionRegistroDAO {
           vo.setUnidad(desc);
       }
 
-      // Tipo entrada, hay que recuperar la descripción de la utilidad de
+      // Tipo entrada, hay que recuperar la descripciÃ³n de la utilidad de
       // mensajes al hacer la traduccion, los codigos de los mensajes son:
       // 'entradaOrd', 'DestOtroReg' y 'procOtroReg'
       int tipoEntrada = reg.getTipoAnot();
@@ -6465,7 +6465,7 @@ public class AnotacionRegistroDAO {
         vo.setCotejoDocs(cotejoDocs);
      }
       // TERCEROS - Recuperamos todos los datos de los terceros de esta anotacion
-      // de BD, pasando el código de procedimiento correspondiente a los roles que
+      // de BD, pasando el cÃ³digo de procedimiento correspondiente a los roles que
       // esten usando los terceros de la anotacion.
       Vector<GeneralValueObject> terceros =
           InteresadosDAO.getInstance().getListaInteresadosRegistro(reg, codProc, con, params);
@@ -6483,7 +6483,7 @@ public class AnotacionRegistroDAO {
 
       for (GeneralValueObject genVO : terceros) {
           // Vectores que se usaran para comparar los terceros, para los roles
-          // usamos la descripción del rol para comprobar si ha cambiado.
+          // usamos la descripciÃ³n del rol para comprobar si ha cambiado.
           codTerceros.add((String) genVO.getAtributo("codigoTercero"));
           versionTerceros.add((String) genVO.getAtributo("versionTercero"));
           codDomicilios.add((String) genVO.getAtributo("domicilio"));
@@ -6549,7 +6549,7 @@ public class AnotacionRegistroDAO {
      *  Obtiene la lista de los registros que tienen asociado un determinado asunto.
      *
      * @param asunto El MantAsuntosValueObject que representa el asunto.
-     * @param conexion Conexión a la BD con transacción abierta.
+     * @param conexion ConexiÃ³n a la BD con transacciÃ³n abierta.
      * @return Vector con los registros que tienen asociado un determinado asunto.
      */
     public Vector<RegistroValueObject> getListaRegistrosPorAsunto(MantAsuntosValueObject asunto, String[] params)
@@ -6633,7 +6633,7 @@ public class AnotacionRegistroDAO {
      *  Modifica el asunto de un determinado registro.
      *
      * @param registroValueObject RegistroValueObject que se va actualizar.
-     * @param conexion Conexión a la BD con transacción abierta.
+     * @param conexion ConexiÃ³n a la BD con transacciÃ³n abierta.
      */
     public void modificarAsuntoRegistro(RegistroValueObject registroValueObject, Connection conexion)
             throws AnotacionRegistroException, TechnicalException {
@@ -6720,11 +6720,11 @@ public class AnotacionRegistroDAO {
     /**** oscar **/
 
     /**
-     * Comprueba cual es la anotación más antigua que ha iniciado o que se ha adjuntado a un expediente.
+     * Comprueba cual es la anotaciÃ³n mÃ¡s antigua que ha iniciado o que se ha adjuntado a un expediente.
      * Se debe comprobar tanto para las anotaciones que se dan de alta en el SIGP como las que proceden de
      * fuentes externas
-     * @param numeroExpediente: Número del expediente
-     * @param con: Conexión a la base de datos
+     * @param numeroExpediente: NÃºmero del expediente
+     * @param con: ConexiÃ³n a la base de datos
      * @return GeneralValueObject
      * @throws es.altia.agora.business.registro.exception.AnotacionRegistroException
      * @throws es.altia.common.exception.TechnicalException
@@ -6736,7 +6736,7 @@ public class AnotacionRegistroDAO {
         ResultSet rs = null;        
         GeneralValueObject anotacion = new GeneralValueObject();        
         String BARRA = "/";
-        /** Se recupera la anotación más antigua que esté asociada al expediente de entre las que se han dado
+        /** Se recupera la anotaciÃ³n mÃ¡s antigua que estÃ© asociada al expediente de entre las que se han dado
          * de alta en el SIGP
          */
         String sql = "select res_fec, exr_ejr,exr_nre from e_exr,r_res " +
@@ -6775,7 +6775,7 @@ public class AnotacionRegistroDAO {
             SigpGeneralOperations.closeResultSet(rs);
             SigpGeneralOperations.closeStatement(ps);
 
-            /** Se obtiene la anotación más antigua que pueda tener asociada el expediente para las anotaciones
+            /** Se obtiene la anotaciÃ³n mÃ¡s antigua que pueda tener asociada el expediente para las anotaciones
              * procedentes de fuentes externas
              */
              sql = "SELECT EXREXT_FECALTA, EXREXT_EJR, EXREXT_NRE " +
@@ -6842,10 +6842,10 @@ public class AnotacionRegistroDAO {
 
      
       /**
-     * Método auxiliar que te devuelve un nombre de oficina, para la funcionalidad
+     * MÃ©todo auxiliar que te devuelve un nombre de oficina, para la funcionalidad
      * imprimirCuneus
      * @param codOficinaRegistro codigo de la oficina, de la que queremos obtener el nombre
-     * @param params información para conectarse a la BD
+     * @param params informaciÃ³n para conectarse a la BD
      * @return String nombre de la oficina
      * @throws AnotacionRegistroException
      * * @throws TechnicalException
@@ -6867,9 +6867,9 @@ public class AnotacionRegistroDAO {
  
     
        /**
-     * Método auxiliar que te devuelve un codigo de oficina, para la funcionalidad
+     * MÃ©todo auxiliar que te devuelve un codigo de oficina, para la funcionalidad
      * imprimirCuneus
-     * @param codUor codigo  de la unidad orgánica
+     * @param codUor codigo  de la unidad orgÃ¡nica
      * @param numAnotacion numero de Anotacion
      * @param resEje ejercicio de la Anotacion
      * @param tipoReg tipo de registro (Entrada "E" o Salida "S") 
@@ -7032,7 +7032,7 @@ public class AnotacionRegistroDAO {
             try{
                 SigpGeneralOperations.closeStatement(ps);
             }catch(TechnicalException e){
-                m_Log.error("Error al cerrar recurso asociado a la conexión a la BBDD:" + e.getMessage());
+                m_Log.error("Error al cerrar recurso asociado a la conexiÃ³n a la BBDD:" + e.getMessage());
             }
         }
     }
@@ -7041,10 +7041,10 @@ public class AnotacionRegistroDAO {
     
      /**
      * Modifica un determinado documento aportado anteriormente 
-     * @param con Conexión con la BD
+     * @param con ConexiÃ³n con la BD
      * @param regVO Registro
-     * @param params Paramétros de la conexión
-     * @throws AnotaciónRegistroException. En caso de que se produzca algún error
+     * @param params ParamÃ©tros de la conexiÃ³n
+     * @throws AnotaciÃ³nRegistroException. En caso de que se produzca algÃºn error
      */
     public void modificarEntregadosAnterior(RegistroValueObject doc, Connection con)throws AnotacionRegistroException, ParseException{
         m_Log.debug("ModificarEntregadorAnterior =====>");
@@ -7088,16 +7088,16 @@ public class AnotacionRegistroDAO {
             try{
                 SigpGeneralOperations.closeStatement(psUpdate);
             }catch(TechnicalException e){
-                m_Log.error("Error al cerrar recursos asociados a la conexión de base de datos: " + e.getMessage());
+                m_Log.error("Error al cerrar recursos asociados a la conexiÃ³n de base de datos: " + e.getMessage());
             }
         }
     }
     /**
      * Elimina un determinado documento aportado anteriormente registro
-     * @param con Conexión con la BD
+     * @param con ConexiÃ³n con la BD
      * @param regVO Registro
-     * @param params Paramétros de la conexión
-     * @throws AnotacionRegistroException. En caso de que se produzca algún error
+     * @param params ParamÃ©tros de la conexiÃ³n
+     * @throws AnotacionRegistroException. En caso de que se produzca algÃºn error
      */
     public void eliminarEntregadosAnterior(RegistroValueObject doc, Connection con)throws AnotacionRegistroException{
         m_Log.debug("EliminarEntregadosAnterior  ====>");
@@ -7123,7 +7123,7 @@ public class AnotacionRegistroDAO {
             try{
                 SigpGeneralOperations.closeStatement(st);
             }catch(TechnicalException e){
-                m_Log.error("Error al cerrar recursos asociados a la conexión de base de datos: " + e.getMessage());
+                m_Log.error("Error al cerrar recursos asociados a la conexiÃ³n de base de datos: " + e.getMessage());
             }
         }
     }
@@ -7132,10 +7132,10 @@ public class AnotacionRegistroDAO {
     
     /**
      * Elimina un determinado documento de registro     
-     * @param con Conexión con la BD
+     * @param con ConexiÃ³n con la BD
      * @param regVO Registro
      * @param params Parametros de la conexion
-     * @throws AnotacionRegistroException. En caso de que se produzca algún error.
+     * @throws AnotacionRegistroException. En caso de que se produzca algÃºn error.
      */
     public void eliminarDocumentoRegistro(Documento doc,Connection con) throws AnotacionRegistroException {
         m_Log.debug("eliminarDocumentoRegistro ===>");        
@@ -7171,7 +7171,7 @@ public class AnotacionRegistroDAO {
             try{
                 SigpGeneralOperations.closeStatement(st);
             }catch(TechnicalException e){
-                m_Log.error("Error al cerrar recursos asociados a la conexión de base de datos: " + e.getMessage());
+                m_Log.error("Error al cerrar recursos asociados a la conexiÃ³n de base de datos: " + e.getMessage());
             }
         }
     }
@@ -7231,6 +7231,7 @@ public class AnotacionRegistroDAO {
             if(rs.next()){
                 anotacion.setFecEntrada(rs.getString("FECHA"));
                 anotacion.setFecHoraDoc(rs.getString("FECHADOC"));
+                m_Log.debug("[getDatosAnotacionById] recuperado tipo=" + tipo);
                 anotacion.setAsunto(AdaptadorSQLBD.js_escape(rs.getString("RES_ASU")));
                 anotacion.setNombreInteresado(rs.getString("HTE_NOM"));
                 anotacion.setApellido1Interesado(rs.getString("APELLIDO1"));
@@ -7548,7 +7549,7 @@ public class AnotacionRegistroDAO {
         try{
             eeRaiz = UtilidadesXerador.construyeEstructuraEntidadesInforme(params, "", raiz);
             eeRaiz.setValoresParametrosConsulta(parametros);
-            // #239565: se indica en la estructura el tipo de informe que se solicita, solo para peticion o justificante, para otros será nulo
+            // #239565: se indica en la estructura el tipo de informe que se solicita, solo para peticion o justificante, para otros serÃ¡ nulo
             eeRaiz.setDescTipoInforme(tipoInforme);
             // #267396: se indica en la estructura el formato de fecha
             eeRaiz.setFormatoFecha((String) gvo.getAtributo("formatoFecha"));
@@ -7636,7 +7637,7 @@ public class AnotacionRegistroDAO {
                 fechaGrabacion = DateOperations.toCalendar(rs.getTimestamp("RES_FED"));
                 registroPendienteFinalizar.setFechaDocu(DateOperations.toString(fechaGrabacion, "dd/MM/yyyy HH:mm:ss"));
                 registroPendienteFinalizar.setAsunto(rs.getString("RES_ASU"));  //extracto
-                registroPendienteFinalizar.setCodAsunto(rs.getString("ASUNTO")); // código asunto
+                registroPendienteFinalizar.setCodAsunto(rs.getString("ASUNTO")); // cÃ³digo asunto
 
                 if (rs.getInt("NUM_TERCEROS") > 1) {
                     registroPendienteFinalizar.setMasInteresados(true);
@@ -7652,7 +7653,7 @@ public class AnotacionRegistroDAO {
                 listadoPendientesFinalizar.add(registroPendienteFinalizar);
             }
 
-            // se obtiene la descripción del asunto de cada anotación
+            // se obtiene la descripciÃ³n del asunto de cada anotaciÃ³n
             for (RegistroValueObject regERVO : listadoPendientesFinalizar) {
                 MantAsuntosValueObject asuntoVO = new MantAsuntosValueObject();
                 Vector<MantAsuntosValueObject> listadoAsuntos = new Vector();
@@ -7791,7 +7792,7 @@ public class AnotacionRegistroDAO {
                 fechaGrabacion = DateOperations.toCalendar(rs.getTimestamp("RES_FED"));
                 registroEntradaRechazada.setFechaDocu(DateOperations.toString(fechaGrabacion, "dd/MM/yyyy HH:mm:ss"));
                 registroEntradaRechazada.setAsunto(rs.getString("RES_ASU"));  //extracto
-                registroEntradaRechazada.setCodAsunto(rs.getString("ASUNTO")); // código asunto
+                registroEntradaRechazada.setCodAsunto(rs.getString("ASUNTO")); // cÃ³digo asunto
                
                 if(rs.getInt("NUM_TERCEROS")>1){
                     registroEntradaRechazada.setMasInteresados(true);
@@ -7809,7 +7810,7 @@ public class AnotacionRegistroDAO {
                 listadoEntradasRechazadas.add(registroEntradaRechazada);
             }
             
-            // se obtiene la descripción del asunto de cada anotación
+            // se obtiene la descripciÃ³n del asunto de cada anotaciÃ³n
             for(RegistroValueObject regERVO: listadoEntradasRechazadas){
                 MantAsuntosValueObject asuntoVO = new MantAsuntosValueObject();
                 Vector<MantAsuntosValueObject> listadoAsuntos = new Vector();
@@ -8003,7 +8004,7 @@ public class AnotacionRegistroDAO {
             rs = ps.executeUpdate();
                     
         } catch (SQLException sqle) {
-            m_Log.error("Error al cancelar el fin de digitalización de documentos");
+            m_Log.error("Error al cancelar el fin de digitalizaciÃ³n de documentos");
             sqle.printStackTrace();
             
         } finally {
@@ -8032,7 +8033,7 @@ public class AnotacionRegistroDAO {
             rs = ps.executeUpdate();
                     
         } catch (SQLException sqle) {
-            m_Log.error("Error al cancelar el cambio de procedimiento de una anotación");
+            m_Log.error("Error al cancelar el cambio de procedimiento de una anotaciÃ³n");
             sqle.printStackTrace();
             
         } finally {
