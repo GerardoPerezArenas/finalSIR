@@ -33,7 +33,7 @@ import org.json.JSONObject;
 
 public class MantAnotacionRegistroForm extends ActionForm {
 
-    //Queremos usar el fichero de configuración technical
+    //Queremos usar el fichero de configuraciÃ³n technical
     protected static Config m_ConfigTechnical = ConfigServiceHelper.getConfig("techserver");
     //Necesitamos el servicio de log
     protected static Log m_Log =
@@ -50,7 +50,7 @@ public class MantAnotacionRegistroForm extends ActionForm {
     ArbolImpl arbol;
     Vector listaInteresadosSoloRegistro=new Vector();  //Lista de interesados que van a estar en registro y no en expediente (al adjuntar un registro)
     
-    //Arbol de clasificación de asuntos
+    //Arbol de clasificaciÃ³n de asuntos
     private ArrayList<HojaArbolClasifAsuntosValueObject> arbolClasifAsuntos; 
     //Los hijos del arbol, como un arrayList de vectores
     private ArrayList<Vector<MantAsuntosValueObject>> hijosArbolClasifAsuntos;
@@ -240,7 +240,7 @@ public class MantAnotacionRegistroForm extends ActionForm {
         else return "";
     }
 
-    // Fecha anotacion (= fecha en q. está abierto el registro) .
+    // Fecha anotacion (= fecha en q. estÃ¡ abierto el registro) .
 
     public String getDiaAnotacion(){
         diaAnotacion = laAnotacionVO.getDiaAnotacion();
@@ -471,8 +471,8 @@ public class MantAnotacionRegistroForm extends ActionForm {
     }
 
 
-    // Unidad tramitadora (pestaña destino)
-    // Unidad tramitadora (pestaña destino)
+    // Unidad tramitadora (pestaÃ±a destino)
+    // Unidad tramitadora (pestaÃ±a destino)
     public String getCod_unidadTramitadora(){
 /*    if (laAnotacionVO.getIdUndTramitad()!=0)
       return new Integer(laAnotacionVO.getIdUndTramitad()).toString();
@@ -643,7 +643,7 @@ public class MantAnotacionRegistroForm extends ActionForm {
 
     }
 
-    // Diligencias de anulación.
+    // Diligencias de anulaciÃ³n.
     public String getTxtDiligenciasAnulacion() {
         if (laAnotacionVO.getDilAnulacion() != null)
             return laAnotacionVO.getDilAnulacion();
@@ -897,7 +897,7 @@ public class MantAnotacionRegistroForm extends ActionForm {
         laAnotacionVO.setMunProcedimiento(munProcedimiento);
     }
 
-    // Capa interesado, página altaRE.jsp
+    // Capa interesado, pÃ¡gina altaRE.jsp
 /*    public int getCbTipoDoc(){
         // return _cbTipoDoc;
     return laAnotacionVO.getTipoDocInteresado();
@@ -1159,7 +1159,7 @@ public class MantAnotacionRegistroForm extends ActionForm {
         return errors;
     }
 
-    /* Función que procesa los errores de validación a formato struts */
+    /* FunciÃ³n que procesa los errores de validaciÃ³n a formato struts */
     private ActionErrors validationException(ValidationException ve,ActionErrors errors){
         Iterator iter = ve.getMessages().get();
         while (iter.hasNext()) {
@@ -1294,7 +1294,7 @@ public class MantAnotacionRegistroForm extends ActionForm {
         this.tipoRegistro = tipoRegistro;
     }
     
-    // Métodos para relaciones entre asientos
+    // MÃ©todos para relaciones entre asientos
     public Vector<SimpleRegistroValueObject> getRelaciones() {
         return laAnotacionVO.getRelaciones();
     }
@@ -1342,9 +1342,9 @@ public class MantAnotacionRegistroForm extends ActionForm {
     private void construirListaRelaciones() {
         Vector<SimpleRegistroValueObject> listaRelaciones = new Vector<SimpleRegistroValueObject>();
         if (!txtTiposRelaciones.equals("")) {
-            String[] listaTipos = txtTiposRelaciones.split("§¥");
-            String[] listaEjercicios = txtEjerciciosRelaciones.split("§¥");
-            String[] listaNumeros = txtNumerosRelaciones.split("§¥");        
+            String[] listaTipos = txtTiposRelaciones.split("Â§Â¥");
+            String[] listaEjercicios = txtEjerciciosRelaciones.split("Â§Â¥");
+            String[] listaNumeros = txtNumerosRelaciones.split("Â§Â¥");        
             for (int i=0; i<listaTipos.length; i++) {
                 SimpleRegistroValueObject reg = new SimpleRegistroValueObject();
                 reg.setTipo(listaTipos[i]);
@@ -1362,7 +1362,7 @@ public class MantAnotacionRegistroForm extends ActionForm {
         this.setRelaciones(listaRelaciones); 
     }
     
-    // Métodos para el rol por defecto
+    // MÃ©todos para el rol por defecto
     public String getCodRolDefecto() {
         return codRolDefecto;
     }
@@ -1425,8 +1425,8 @@ public class MantAnotacionRegistroForm extends ActionForm {
         Vector<String> listaUorsCorreo = new Vector<String>();
         String[] listaTxt = asuntoVO.getTxtListaUorsCorreo().split(",");
         
-        // Si la lista estaba vacía, tendremos una array con un elemento: ""
-        // en este caso devolvemos el vector vacío.
+        // Si la lista estaba vacÃ­a, tendremos una array con un elemento: ""
+        // en este caso devolvemos el vector vacÃ­o.
         if (listaTxt.length == 1) {
             if (listaTxt[0].equals("")) return listaUorsCorreo;
         }
@@ -1438,7 +1438,7 @@ public class MantAnotacionRegistroForm extends ActionForm {
         return listaUorsCorreo;
     }
     
-    //Usado en tramitación para la jsp 'consultaAsiento'
+    //Usado en tramitaciÃ³n para la jsp 'consultaAsiento'
     public int getNumTerceros() {
         return laAnotacionVO.getNumTerceros();
     }        
@@ -1479,6 +1479,7 @@ public class MantAnotacionRegistroForm extends ActionForm {
     // Necesario para que Struts reconozca cuando el checkbox no esta seleccionado.
     public void reset(ActionMapping mapping, HttpServletRequest request) {
         setEnviarCorreo(false);
+        setCbTipoEntrada(0); // Valor por defecto para tipoEntrada
     }
     private int columna;
     private String tipoOrden;
@@ -1562,7 +1563,7 @@ public class MantAnotacionRegistroForm extends ActionForm {
     private boolean registroTelematico = false;
     private boolean registroTelematicoModicable = false;
     
-    // #239565: indica si mostrar o no el enlace para generar el modelo_peticion_respuesta según el valor de una propiedad en Registro.properties
+    // #239565: indica si mostrar o no el enlace para generar el modelo_peticion_respuesta segÃºn el valor de una propiedad en Registro.properties
     private String mostrarGenerarModelo;
     // #288821: indica si mostrar o no el enlace para generar el justificante de registrado desde el listado de consulta
     private String generarJustificanteConsulta;
@@ -1744,7 +1745,7 @@ public class MantAnotacionRegistroForm extends ActionForm {
         return hijosArbolClasifAsuntos;
     }
 
-    //Mantenemos esta estructura tab, para pasar a la .jsp, el vector de hijos,de forma más sencilla
+    //Mantenemos esta estructura tab, para pasar a la .jsp, el vector de hijos,de forma mÃ¡s sencilla
     public void setHijosArbolClasifAsuntos(ArrayList<Vector<MantAsuntosValueObject>> hijosArbolClasifAsuntos) {
         this.hijosArbolClasifAsuntos = hijosArbolClasifAsuntos;
     }
