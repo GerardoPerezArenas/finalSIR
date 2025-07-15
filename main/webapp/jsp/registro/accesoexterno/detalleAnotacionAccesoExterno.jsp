@@ -27,7 +27,7 @@
 
 <html:html>
     <head>
-        <TITLE>::: Acceso externo a detalle de anotación :::</TITLE>
+        <TITLE>::: Acceso externo a detalle de anotaciÃ³n :::</TITLE>
         <jsp:include page="/jsp/registro/tpls/app-constants.jsp" />
         <%@ include file="/jsp/registro/accesoexterno/inicializacion.jsp" %>
         <%
@@ -247,7 +247,7 @@
             %>
                 // array con los objetos tipo uor mapeados por el array de arriba
                 uors[<%=j%>] = new Uor<%=dto.toJavascriptArgs()%>;
-                // array con los códigos visibles
+                // array con los cÃ³digos visibles
                 uorcods[<%=j%>] = '<%=dto.getUor_cod_vis()%>';
                 uorcodsinternos[<%=j%>] = '<%=dto.getUor_cod()%>';
                 uordescs[<%=j%>] = "<str:escape><%=dto.getUor_nom()%></str:escape>";
@@ -372,6 +372,8 @@
             var integracionSIRLanbide = <%=integracionSIRLanbide%>;
 
             function inicializar() {
+                if(document.forms[0].cbTipoEntrada.value=="")
+                    document.forms[0].cbTipoEntrada.value=0;
                 top.menu.modificando = 'N';
                 tp1.setSelectedIndex(0);
                 compruebaModificadoRegistro();
@@ -429,7 +431,7 @@
                         document.getElementById("TEOtroReg").style.display = 'none';
                         document.getElementById("capaOrigen").style.display = 'none';
                         tp1_p3.setPrimerElementoFoco(document.forms[0].cod_uor); // TODO chged
-                        // Cambiar 'tipo documento' y UOR a obligatorio si estamos en modificación o alta.
+                        // Cambiar 'tipo documento' y UOR a obligatorio si estamos en modificaciÃ³n o alta.
                         if (top.menu.modificando == 'S')
                             normalAobligatorio(elementos);
                         habilitarTipoDocYRemitente();
@@ -478,8 +480,8 @@
                         document.getElementById("capaOrigen").style.display = 'none';
                         tp1_p3.setPrimerElementoFoco(document.forms[0].cod_orgDestino);
                         if ("" == borrarCampos || ("" != borrarCampos && "0" != borrarCampos)) {
-                            // Cambiar 'tipo documento' y UOR a NO obligatorio si estamos en modificación o alta.
-                            // Además, borrar tipo de documento y remitente.
+                            // Cambiar 'tipo documento' y UOR a NO obligatorio si estamos en modificaciÃ³n o alta.
+                            // AdemÃ¡s, borrar tipo de documento y remitente.
                             document.forms[0].txtCodigoDocumento.value = '';
                             document.forms[0].txtNomeDocumento.value = '';
                             document.forms[0].cod_tipoRemitente.value = '';
@@ -495,7 +497,7 @@
                         document.getElementById("TEOtroReg").style.display = 'none';
                         document.getElementById("capaOrigen").style.display = 'block';
                         tp1_p3.setPrimerElementoFoco(document.forms[0].cod_uor);
-                        // Cambiar 'tipo documento' y UOR a obligatorio si estamos en modificación o alta.
+                        // Cambiar 'tipo documento' y UOR a obligatorio si estamos en modificaciÃ³n o alta.
                         if (top.menu.modificando == 'S')
                             normalAobligatorio(elementos);
                         habilitarTipoDocYRemitente();
@@ -727,7 +729,7 @@
                 document.forms[0].desc_procedimiento.value = datos[59];
                 document.forms[0].mun_procedimiento.value = datos[64];
 
-                if (datos[68] == "true") { /**  Si el asunto de la anotación está dado de baja **/
+                if (datos[68] == "true") { /**  Si el asunto de la anotaciÃ³n estÃ¡ dado de baja **/
                     habilitarDivMsgAsuntoBaja(true);
                     var mensaje = '<%=descriptor.getDescripcion("etiqErrorAsuntoRegBaja1")%>' + " " + datos[65] + " " + '<%=descriptor.getDescripcion("etiqErrorAsuntoRegBaja2")%>' + " " + datos[69];
                     document.getElementById("divAsuntoBaja").innerHTML = mensaje;
@@ -805,7 +807,7 @@
                         changeNotifs = false;
                         mod = 0;
                         activarFormulario();
-                        //NO SE PUEDE MODIFICAR LA FECHA DE GRABACIÓN
+                        //NO SE PUEDE MODIFICAR LA FECHA DE GRABACIÃ“N
                         var vectorFecDoc = [document.forms[0].fechaDocumento];
                         deshabilitarGeneral(vectorFecDoc);
 
@@ -912,13 +914,13 @@
                             if ((comprobarFecha(document.forms[0].fechaAnotacion,mensajeFechaNoValida)) && (comprobarFecha(document.forms[0].fechaDocumento,mensajeFechaNoValida))) {
                                 if (comparaFecha()) {
                                     var l = new Array();
-                                    for (i=0; i < lista.length; i++) l[i]=lista[i][0]+'§¥'; // Solo códigos
+                                    for (i=0; i < lista.length; i++) l[i]=lista[i][0]+'Â§Â¥'; // Solo cÃ³digos
                                     document.forms[0].listaTemas.value=l;
                                     document.forms[0].opcion.value="grabarModificaciones";
                                     document.forms[0].target="oculto";
                                     document.forms[0].action="<html:rewrite page='/MantAnotacionRegistro.do'/>";
                                     // Hay que habilitar los campos tipo doc y tipo remitente
-                                    // aunque esten vacíos o no se copian al form.
+                                    // aunque esten vacÃ­os o no se copian al form.
                                     habilitarTipoDocYRemitente();
                                     // Datos SIR
                                     if($('[name="codigoUnidadDestinoSIRHidden"]') != undefined){
@@ -1398,7 +1400,7 @@
             this.pulsarBuscarTerceros = pulsarBuscarTercerosImpl;
 
 
-            /* Fin Pestaña formularios */
+            /* Fin PestaÃ±a formularios */
 
             function recuperaBusquedaTerceros(Terceros) {
                 this.pulsarBuscarTerceros = pulsarBuscarTercerosImpl;
@@ -1555,21 +1557,21 @@
                 document.forms[0].fechaDoc.value = ''; // Fecha documento (3.10)
                 document.forms[0].cod_actuacion.value = ''; // Actuacion.
                 document.forms[0].txtNomeActuacion.value = '';
-                // Pestaña 2.
+                // PestaÃ±a 2.
                 document.forms[0].cbTipoDoc.value = ''; // Tipo documento.
                 document.forms[0].descTipoDoc.value = '';
                 document.forms[0].txtDNI.value = ''; // Documento.
                 document.forms[0].txtInteresado.value = ''; // Razon Social.
                 document.forms[0].txtApell1.value = ''; // Apellidos.
                 document.forms[0].txtApell2.value = '';
-                document.forms[0].txtPart.value = ''; // Partículas.
+                document.forms[0].txtPart.value = ''; // PartÃ­culas.
                 document.forms[0].txtPart2.value = '';
                 document.forms[0].txtTelefono.value = ''; // Telefono.
                 document.forms[0].txtCorreo.value = ''; // Email.
                 document.forms[0].txtPais.value = ''; // Pais.
                 document.forms[0].txtProv.value = ''; // Provincia.
                 document.forms[0].txtMuni.value = ''; // Municipio.
-                document.forms[0].txtDomicilio.value = ''; // Nombre vía.
+                document.forms[0].txtDomicilio.value = ''; // Nombre vÃ­a.
                 document.forms[0].txtPoblacion.value = '';
                 document.forms[0].txtCP.value = ''; // Codigo.
                 document.forms[0].codRolTercero.value = '';
@@ -1587,7 +1589,7 @@
                     document.forms[0].cod_estadoAnotacion.value = '';
                     document.forms[0].desc_estadoAnotacion.value = '';
                 }
-                //Pestaña 5
+                //PestaÃ±a 5
                 document.forms[0].observaciones.value = '';
             }
             
@@ -1656,9 +1658,9 @@
                         ) {
                     var condiciones = new Array();
 
-                    //condiciones[0]='UOR_DEP'+'§¥';
+                    //condiciones[0]='UOR_DEP'+'Â§Â¥';
                     //condiciones[1]= document.forms[0].cod_dptoDestino.value ;
-                    condiciones[0] = 'UOREX_ORG' + '§¥';
+                    condiciones[0] = 'UOREX_ORG' + 'Â§Â¥';
                     condiciones[1] = document.forms[0].cod_orgDestino.value;
                     muestraListaTabla('UOREX_COD', 'UOREX_NOM', EsquemaGenerico + 'A_UOREX A_UOREX', condiciones, 'cod_uniRegDestino', 'desc_uniRegDestino', 'botonUnidadeRexistro', '100');
                 } else
@@ -1672,7 +1674,7 @@
 
                 if ((Trim(document.forms[0].cod_orgOrigen.value) != '')) {
                     var condiciones = new Array();
-                    condiciones[0] = 'UOREX_ORG' + '§¥';
+                    condiciones[0] = 'UOREX_ORG' + 'Â§Â¥';
                     condiciones[1] = document.forms[0].cod_orgOrigen.value;
                     muestraListaTabla('UOREX_COD', 'UOREX_NOM', EsquemaGenerico + 'A_UOREX A_UOREX', condiciones, 'cod_unidadeRexistroOrixe', 'desc_unidadeRexistroOrixe', 'botonUnidadeRexistroOrigen', '100');
                 } else
@@ -1841,7 +1843,7 @@
                     var source = "<%=request.getContextPath()%>/jsp/verPdf.jsp?opcion=null&nombre=" + nombre + "&tipoFichero=" + tipoFichero;
 
                     if (tipoFichero == 'html') {
-                        // Es imprescindible abrir en una ventana nueva sin frames para poder imprimir bien el cuño en la Epson TM-295
+                        // Es imprescindible abrir en una ventana nueva sin frames para poder imprimir bien el cuÃ±o en la Epson TM-295
                         ventanaInforme = window.open(source, 'ventana', 'width=280px,height=170px,status=' + '<%=statusBar%>' + ',toolbar=no, location=no,resizable=yes');
                     } else {
                         ventanaInforme = window.open("<%=request.getContextPath()%>/jsp/mainVentana.jsp;jsessionid=<%=idSesion%>?source=" + source, 'ventana', 'width=800px,height=550px,status=' + '<%=statusBar%>' + ',toolbar=no, location=no,resizable=yes');
@@ -2018,7 +2020,7 @@
 
                 var l = new Array();
                 for (i = 0; i < lista.length; i++)
-                    l[i] = lista[i][0] + '§¥'; // Solo códigos
+                    l[i] = lista[i][0] + 'Â§Â¥'; // Solo cÃ³digos
 
                 var source = "<html:rewrite page='/MantAnotacionRegistro.do'/>" + "?opcion=cargarTemas&busqueda=" + busqueda + "&modificando=" +
                         top.menu.modificando + "&fechaAnotacion=" + document.forms[0].fechaAnotacion.value +
@@ -2410,7 +2412,7 @@
                 var documento = campo.value;
                 var LONGITUD = 9;
                 // Si se trata de un NIF
-                // Primero comprobamos si el NIF esta vacio, en ese caso no permitirá seguir completando el formulario
+                // Primero comprobamos si el NIF esta vacio, en ese caso no permitirÃ¡ seguir completando el formulario
                 //En Chrome no lanza mensaje de alerta ya que sino entra en bucle con el evento onblur
                 if (documento == '') {
                     campo.value = "";
@@ -2564,7 +2566,7 @@
                         refrescaDoc();
 
                     } else
-                        jsp_alerta("A", "Ha ocurrido un error al recuperar los datos que necesita el complemento de digitalización para ejecutarse.")
+                        jsp_alerta("A", "Ha ocurrido un error al recuperar los datos que necesita el complemento de digitalizaciÃ³n para ejecutarse.")
                 });
 
             }
@@ -2605,7 +2607,7 @@
             <input type="hidden" name="esAccesoExterno" id="esAccesoExterno" value="si">
             <input type="hidden" name="mantARForm" id="mantARForm">
             
-            <!-- código de la UOR -->
+            <!-- cÃ³digo de la UOR -->
             <html:hidden  property="opcion" value=""/>
             <html:hidden  property="codigoDocumento" value=""/> <!-- Utilizado para eliminar el documento -->
             <html:hidden property="codigoDocAnterior" value=""/> <!-- Utilizado para eliminar el documento anterior aportado -->
@@ -2792,7 +2794,7 @@
                                 <div id="capaAnotacionContestada" style="position:relative; visibility: hidden; width:100%;"></div>
                                 <% }%>
                             </TD>
-                            <TD style="height:20px;vertical-align:top"><!-- Cuño -->
+                            <TD style="height:20px;vertical-align:top"><!-- CuÃ±o -->
                                 <DIV id="capaCunho" name="capaCunho" STYLE="position:relative;width:100%; visibility:hidden;height:0px;cursor:pointer">
                                     <a class="botonjustificante" title='<%=descriptor.getDescripcion("altHistorico")%>' alt='<%=descriptor.getDescripcion("altHistorico")%>' href="" onClick="javascript:{
                                                 pulsarHistoricoAnotacion();
@@ -3160,11 +3162,11 @@
                                                 <%=descriptor.getDescripcion("etiqEnviarNotif")%>
                                             </html:checkbox>
                                         </span>
-                                        <!-- Botón NOTIFICAR A -->
+                                        <!-- BotÃ³n NOTIFICAR A -->
                                         <input type="button" class="botonLargo" title="<%=descriptor.getDescripcion("altNotificar")%>" alt="<%=descriptor.getDescripcion("altNotificar")%>" 
                                                value="<%=descriptor.getDescripcion("gbNotificar")%>" style="float:right;margin-right: 2%;"
                                                name="cmdNotificar"  onClick="pulsarNotificar();return false;"/>
-                                        <!-- Fin Botón NOTIFICAR A -->
+                                        <!-- Fin BotÃ³n NOTIFICAR A -->
                                     </div>
                                     <div id="capaTiposEstadoAnotacion" name="capaTiposEstadoAnotacion" style="width:50%;float:left;visibility:visible" >
                                         <span class="etiqueta"><%=descriptor.getDescripcion("etiq_estadoAnot")%>:&nbsp;</span>
@@ -3233,7 +3235,7 @@
 
                                             <html:text styleClass="inputTexto"  property="cod_procedimiento" style="width:16%" onkeyup="return xAMayusculas(this);" onchange="javascript:{onchangeCod_procedimiento();divSegundoPlano=true}"  onfocus="javascript:{this.select();onFocus_CodProcedimiento();}"/>
 
-                                            <!-- #231150: se añade onBlur para que cargue siempre los documentos del procedimiento-->
+                                            <!-- #231150: se aÃ±ade onBlur para que cargue siempre los documentos del procedimiento-->
                                             <html:text styleClass="inputTexto" property="desc_procedimiento" style="width:50%" readonly="true" onclick="javascript:{onClickDesc_procedimiento();}" onblur="javascript:{onFocus_CodProcedimiento();}"/>
                                             <A style="text-decoration:none;" id="anclaD" name="anchorProcedimiento" onclick="javascript:window.focus();" onfocus="javascript:{
                                                         cambiaFoco();}">
@@ -3407,7 +3409,7 @@
                                         </TABLE>
                                     </DIV>
                                     <!-- FIN Tipo de entrada procedente de otro registro -->
-                                    <!-- Botón RELACIONES -->
+                                    <!-- BotÃ³n RELACIONES -->
                                     <TABLE width="100%">
                                         <TR>
                                             <TD class="sub3titulo"><%=descriptor.getDescripcion("gEtiqOtrasOpciones")%></TD>
@@ -3418,13 +3420,13 @@
                                                        class="botonGeneral" value="<%=descriptor.getDescripcion("tit_Rel")%>"
                                                        alt="<%=descriptor.getDescripcion("altRelaciones")%>" title="<%=descriptor.getDescripcion("altRelaciones")%>"
                                                        id="cmdRelaciones" name="cmdRelaciones" onClick="pulsarRelaciones();"/>
-                                                <input type="button" title="Incluir los temas y actuaciones relativos a la anotación"
+                                                <input type="button" title="Incluir los temas y actuaciones relativos a la anotaciÃ³n"
                                                        class="botonGeneral" value="Temas" style="float:right;"
                                                        id="cmdActuaciones" name="cmdActuaciones" onClick="pulsarActuaciones();/>
                                             </td>
                                         </tr>
                                     </table>
-                                    <!-- Fin Botón RELACIONES -->
+                                    <!-- Fin BotÃ³n RELACIONES -->
                                     <!-- bloque Datos SGA -->	
                                     <% if(datosSga){%>	
                                     <% if ("E".equals(tipoAnotacion)) {%>  
@@ -3509,29 +3511,29 @@
                     </TABLE>
                 </DIV>
 
-                <!-- Definimos varias capas para los botones según lo que se permite hacer. -->
-                <!-- Botones PÁGINA BUSCADA:
+                <!-- Definimos varias capas para los botones segÃºn lo que se permite hacer. -->
+                <!-- Botones PÃGINA BUSCADA:
                              1. Modificar.
                              2. Salir (de consultar)
                 -->
                 <DIV id="capaBotones3" name="capaBotones3" style="display:none" class="botoneraPrincipal">
                     <% 	if ("E".equals(tipoAnotacion)&& permisoMantenimiento) {%>
 
-                    <!-- Botón MODIFICAR. -->
+                    <!-- BotÃ³n MODIFICAR. -->
                     <input type="button" title='<%=descriptor.getDescripcion("toolTip_bModificarAnot")%>' alt='<%=descriptor.getDescripcion("toolTip_bModificarAnot")%>' 
                            class="botonGeneral" value='<%=descriptor.getDescripcion("gbModificar")%>' name="cmdModificar" id="cmdModificar" onClick="divSegundoPlano = true;
                             pulsarModificar();
                             return false;"/>
-                    <!-- Fin botón MODIFICAR. -->
+                    <!-- Fin botÃ³n MODIFICAR. -->
                     
                     
                     <% } else if (permisoMantenimiento) {%> <!--Es anotacion de tipo S-->
-                    <!-- Botón MODIFICAR. -->
+                    <!-- BotÃ³n MODIFICAR. -->
                     <input type="button" title='<%=descriptor.getDescripcion("toolTip_bModificarAnot")%>' alt='<%=descriptor.getDescripcion("toolTip_bModificar")%>'
                            class="botonGeneral" value='<%=descriptor.getDescripcion("gbModificar")%>'
                            name="cmdModificar" id="cmdModificar" onClick="pulsarModificar();
                                    return false;"/>
-                    <!-- Fin botón MODIFICAR. -->
+                    <!-- Fin botÃ³n MODIFICAR. -->
                     <% }%>
                 </div>
                 
@@ -3562,21 +3564,21 @@
 
                 <% if (permisoMantenimiento) {%>
 
-                <!-- Botones MODIFICACIÓN:
+                <!-- Botones MODIFICACIÃ“N:
                     2. Registrar cambios.
                     3. Cancelar cambios. -->
                 <DIV id="capaBotones4" name="capaBotones4" style="display:none" class="botoneraPrincipal">
-                    <!-- Botón REGISTRAR CAMBIOS. -->
+                    <!-- BotÃ³n REGISTRAR CAMBIOS. -->
                     <input type="button" title='<%=descriptor.getDescripcion("toolTip_bModificar")%>' alt='<%=descriptor.getDescripcion("toolTip_bModificar")%>'
                            class="botonGeneral" value='<%=descriptor.getDescripcion("gbGrabar")%>'
                            name="cmdRexistrarModificacion" onClick="comprobarCodProcedimientoValido('Mod');return false;"/>
-                    <!-- Fin botón REGISTRAR CAMBIOS. -->
-                    <!-- Botón CANCELAR CAMBIOS. -->
+                    <!-- Fin botÃ³n REGISTRAR CAMBIOS. -->
+                    <!-- BotÃ³n CANCELAR CAMBIOS. -->
                     <input type="button" title='<%=descriptor.getDescripcion("toolTip_bVolver")%>' alt='<%=descriptor.getDescripcion("toolTip_bVolver")%>'
                            class="botonGeneral" value='<%=descriptor.getDescripcion("gbCancelar")%>'
                            name="cmdCancelarModificar" onClick="pulsarCancelarModificar();
                                    return false;"/>
-                    <!-- Fin botón CANCELAR CAMBIOS. -->
+                    <!-- Fin botÃ³n CANCELAR CAMBIOS. -->
                 </DIV>
 
                 <% }%>
@@ -3650,7 +3652,7 @@
                     return 'gris';
             }
 
-            // JAVASCRIPT DE LA PESTAÑA DOCUMENTOS
+            // JAVASCRIPT DE LA PESTAÃ‘A DOCUMENTOS
             
             var tabDoc = new Tabla(true, '<%=descriptor.getDescripcion("buscar")%>', '<%=descriptor.getDescripcion("anterior")%>', '<%=descriptor.getDescripcion("siguiente")%>', '<%=descriptor.getDescripcion("mosFilasPag")%>', '<%=descriptor.getDescripcion("msgNoResultBusq")%>', '<%=descriptor.getDescripcion("mosPagDePags")%>', '<%=descriptor.getDescripcion("noRegDisp")%>', '<%=descriptor.getDescripcion("filtrDeTotal")%>', '<%=descriptor.getDescripcion("primero")%>', '<%=descriptor.getDescripcion("ultimo")%>', document.getElementById('tablaDoc'));
             tabDoc.addColumna('80','center',' <%= descriptor.getDescripcion("gEtiqAportadoAlta")%>');
@@ -3681,7 +3683,7 @@
 
             tabAnt.addColumna('80', 'center', 'Tipo de Documento');
             tabAnt.addColumna('500', 'left', 'Nombre de Documento');
-            tabAnt.addColumna('100', 'center', 'Órgano');
+            tabAnt.addColumna('100', 'center', 'Ã“rgano');
             tabAnt.addColumna('100', 'center', '<%= descriptor.getDescripcion("gEtiqFecha")%>');
             tabAnt.addColumna('0', 'center', '');
             tabAnt.displayCabecera = true;
@@ -3813,6 +3815,13 @@
                     jsp_alerta('A', '<%=descriptor.getDescripcion("noImprimirJustificante")%>');
                 }
             }
+        $(function(){
+            if($("[name=cbTipoEntrada]").val()=="" ){
+                $("[name=cbTipoEntrada]").val("0");
+                actualizarDescripcion("cbTipoEntrada","txtNomeTipoEntrada",cod_tipoEntrada,desc_tipoEntrada);
+            }
+        });
+
         </script>
     </BODY>
 </html:html>
