@@ -502,6 +502,12 @@
                 // Log para asegurarse de que todo está ok antes del submit
                 console.log("[seleccionRegistro] Form justo antes del submit:", document.forms[0]);
 
+                // Limpiamos los filtros SIR antes de enviar el formulario para evitar
+                // que se arrastren valores a altaRE.jsp y provoquen errores
+                document.getElementById('identificadorRegistroSIRValue').value = '';
+                document.getElementById('codEstadoSIR').value = '';
+                document.getElementById('codigoUnidadDestinoSIRHidden').value = '';
+
                 document.forms[0].submit();
             } //seleccionRegistro
 
