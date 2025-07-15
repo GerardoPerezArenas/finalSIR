@@ -141,6 +141,7 @@
       }else if("<%= cp_anotacion.elementAt(20) %>" == "2"){
         entrada='<%=StringEscapeUtils.escapeJavaScript(descriptor.getDescripcion("procOtroReg"))%>';
       }
+      console.log("[ocultoCargarPagina] numAnot=", numAnot, "tipoEntrada=", "<%= cp_anotacion.elementAt(20) %>", "descripcion=", entrada);
 
 //variable estado2 que es la que aparece en la columna de la tabla estado y necesita el estado pendiente
       // 1) finDigitalizacion
@@ -150,7 +151,7 @@
         finDigitalizacion = "";
       }
 
-// 2) 縱iene estado SIR?
+// 2) 驴viene estado SIR?
       <%
         String sirStateTmp = "";
         if (cp_anotacion.size() > 24) {
@@ -160,12 +161,12 @@
           }
         }
       %>
-      var sirState = "<%= sirStateTmp %>";  // 0..15 o vac韔
+      var sirState = "<%= sirStateTmp %>";  // 0..15 o vac铆o
       if (sirState) {
         switch (sirState) {
           case "0":
-            estado  = '<FONT>Pendiente de env韔</FONT><BR>';
-            estado2 = 'Pendiente de env韔 ' + finDigitalizacion;
+            estado  = '<FONT>Pendiente de env铆o</FONT><BR>';
+            estado2 = 'Pendiente de env铆o ' + finDigitalizacion;
             break;
           case "1":
             estado  = '<FONT>Enviado</FONT><BR>';
@@ -224,8 +225,8 @@
             estado2 = 'Validado ' + finDigitalizacion;
             break;
           case "15":
-            estado  = '<FONT>Reintentar validaci髇</FONT><BR>';
-            estado2 = 'Reintentar validaci髇 ' + finDigitalizacion;
+            estado  = '<FONT>Reintentar validaci贸n</FONT><BR>';
+            estado2 = 'Reintentar validaci贸n ' + finDigitalizacion;
             break;
           default:
             estado  = '';
@@ -298,7 +299,7 @@
         entrSal = 'Salida';
       }
 
-      <%-- Obt閚 el identificador SIR (韓dice 26) y la fecha del estado SIR (韓dice 25) --%>
+      <%-- Obt茅n el identificador SIR (铆ndice 26) y la fecha del estado SIR (铆ndice 25) --%>
       <%
         String idSir = "";
         if (cp_anotacion.size() > 26 && cp_anotacion.elementAt(26) != null) {
@@ -320,11 +321,11 @@
         estadoCell += "<br><span style='font-size:80%;color:#666;'>" + fechaEstado + "</span>";
       }
 
-      // 2) Fechas de presentaci髇 y grabaci髇
+      // 2) Fechas de presentaci贸n y grabaci贸n
       var fechaPres = "<%= cp_anotacion.elementAt(5) %>";
-      var fechaGrab = "<%= cp_anotacion.elementAt(6) %>";  // <-- a馻dido ;
+      var fechaGrab = "<%= cp_anotacion.elementAt(6) %>";  // <-- a帽adido ;
 
-      // 3) N鷐ero de anotaci髇 + idSir (columna 5)
+      // 3) N煤mero de anotaci贸n + idSir (columna 5)
       var numSirCell = ejer + "/" + numAnot +
               ("<%= cp_anotacion.elementAt(20) %>" === "1" && idSir
                               ? "<br><span style='font-size:80%;color:#666;'>" + idSir + "</span>"
@@ -349,10 +350,10 @@
           /* 2 */ procedimiento,
           /* 3 */ expediente,
           /* 4 */ "<%= cp_anotacion.elementAt(19) %>",    // Usuario Alta
-          /* 5 */ numSirCell,                             // N鷐ero + idSir
+          /* 5 */ numSirCell,                             // N煤mero + idSir
           /* 6 */ entrSal,                                // Entrada/Salida
-          /* 7 */ fechaPres,                              // Fecha de presentaci髇
-          /* 8 */ fechaGrab,                              // Fecha de grabaci髇
+          /* 7 */ fechaPres,                              // Fecha de presentaci贸n
+          /* 8 */ fechaGrab,                              // Fecha de grabaci贸n
           /* 9 */ "<%= StringEscapeUtils.escapeJavaScript(nombreFormateado) %>", // Remitente
           /*10*/ asunto,                                  // Extracto
           /*11*/ "<%= cp_anotacion.elementAt(12) %>",      // Unidad de destino
