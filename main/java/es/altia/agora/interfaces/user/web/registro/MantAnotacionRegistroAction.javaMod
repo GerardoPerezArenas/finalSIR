@@ -2529,11 +2529,14 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                     }
                 }
                 if (request.getParameter("cbTipoEntrada") != null) {
-                    if ("".equals(request.getParameter("cbTipoEntrada").trim())) {
-                        elRegistroESVO.setTipoAnot(-1);
+                    String tmp = request.getParameter("cbTipoEntrada").trim();
+                    if ("".equals(tmp)) {
+                        elRegistroESVO.setTipoAnot(0);
+                    } else {
+                        elRegistroESVO.setTipoAnot(Integer.parseInt(tmp));
                     }
                 } else {
-                    elRegistroESVO.setTipoAnot(-1);
+                    elRegistroESVO.setTipoAnot(0);
                 }
 
                 String asunto = request.getParameter("asunto");
