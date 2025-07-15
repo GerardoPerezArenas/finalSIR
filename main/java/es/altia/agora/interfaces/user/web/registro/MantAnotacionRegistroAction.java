@@ -160,6 +160,12 @@ public final class MantAnotacionRegistroAction extends ActionSession {
         RegistroUsuarioValueObject regUsuarioVO = null;
         String codigoUorRegistro = request.getParameter("codigoUorRegistro");
 
+        // Asignar valor por defecto para tipoEntrada si no llega del formulario
+        String tipoEntradaParam = request.getParameter("cbTipoEntrada");
+        if (tipoEntradaParam == null || "".equals(tipoEntradaParam.trim())) {
+            ((MantAnotacionRegistroForm) form).setCbTipoEntrada(0);
+        }
+
         if (session.getAttribute("usuario") != null && "cargarNombre".equalsIgnoreCase(request.getParameter("opcion"))) {
             m_Log.info(session.getId() + " " + usuarioActualLog + " Caso : usuario != null && " + request.getParameter("opcion"));
             // nuevas UORs
