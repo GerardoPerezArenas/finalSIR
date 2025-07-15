@@ -981,16 +981,22 @@ public final class MantAnotacionRegistroAction extends ActionSession {
                 } else {
                     elRegistroESVO.setTipoReg("E");
                 }
-                //TODO comprobar nulidad ejercicio
+                // Ejercicio (año) y número del registro
                 String ejercicio = request.getParameter("ano");
-                m_Log.info(session.getId() + " " + usuarioActualLog + " Ejercicio (request): " + ejercicio);
-                elRegistroESVO.setAnoReg(Integer.parseInt(ejercicio));
-                // numero de registro
-                //TODO comprobar nulidad numero
-                String numero = request.getParameter("numero");
-                m_Log.info(session.getId() + " " + usuarioActualLog + " Numero (request): " + numero);
+                if (ejercicio != null && !ejercicio.trim().isEmpty()) {
+                    m_Log.info(session.getId() + " " + usuarioActualLog + " Ejercicio (request): " + ejercicio);
+                    elRegistroESVO.setAnoReg(Integer.parseInt(ejercicio.trim()));
+                } else {
+                    m_Log.warn(session.getId() + " " + usuarioActualLog + " Ejercicio nulo o vacío");
+                }
 
-                elRegistroESVO.setNumReg(Long.parseLong(numero));
+                String numero = request.getParameter("numero");
+                if (numero != null && !numero.trim().isEmpty()) {
+                    m_Log.info(session.getId() + " " + usuarioActualLog + " Numero (request): " + numero);
+                    elRegistroESVO.setNumReg(Long.parseLong(numero.trim()));
+                } else {
+                    m_Log.warn(session.getId() + " " + usuarioActualLog + " Numero nulo o vacío");
+                }
 
                 // Buscamos el asiento por su clave
                 elRegistroESVO = AnotacionRegistroManager.getInstance().getByPrimaryKey(elRegistroESVO, params);
