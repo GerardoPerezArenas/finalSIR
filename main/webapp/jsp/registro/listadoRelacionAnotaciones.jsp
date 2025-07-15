@@ -159,115 +159,7 @@
             var aplic = <%=apl%>;
 
             var mostrarDigitalizar = <%=mostrarDigitalizar%>;
-            function cargarInicio() {
-                console.log("cargarInicio: start");
-
-                // 1) Inicializar checks
-                inicializaListasChecks();
-                console.log("cargarInicio: checks inicializados");
-
-                // 2) Recuperar orden si viene guardado
-                <logic:notEmpty name="MantAnotacionRegistroForm" property="tipoOrden">
-                tipoOrdenacion = <bean:write name="MantAnotacionRegistroForm" property="tipoOrden"/>;
-                </logic:notEmpty>
-                idOrden = '<bean:write name="MantAnotacionRegistroForm" property="columna"/>';
-                console.log("cargarInicio: tipoOrden =", tipoOrdenacion, " idOrden =", idOrden);
-
-                columnaOrden = 0;
-            console.log("cargarInicio: columnaOrden set to 0");
-
-            // Construcción dinámica de los campos/columnas
-            var i = 1;
-            console.log("cargarInicio: building listaCampos...");
-            <logic:iterate id="campos" name="MantAnotacionRegistroForm" property="camposListados">
-            <%-- Si es campo CHECK, lo ponemos en posición 0 --%>
-            <logic:equal name="campos" property="nomCampo" value="CHECK">
-            listaCampos[0] = [
-                '<bean:write name="campos" property="codCampo"/>',
-                '<bean:write name="campos" property="nomCampo"/>',
-                '<bean:write name="campos" property="tamanoCampo"/>',
-                '<bean:write name="campos" property="actCampo"/>',
-                '<bean:write name="campos" property="ordenCampo"/>'
-            ];
-            console.log("  listaCampos[0] (CHECK) =", listaCampos[0]);
-            </logic:equal>
-            <%-- Resto de campos, incrementamos índice --%>
-            <logic:notEqual name="campos" property="nomCampo" value="CHECK">
-            listaCampos[i] = [
-                '<bean:write name="campos" property="codCampo"/>',
-                '<bean:write name="campos" property="nomCampo"/>',
-                '<bean:write name="campos" property="tamanoCampo"/>',
-                '<bean:write name="campos" property="actCampo"/>',
-                '<bean:write name="campos" property="ordenCampo"/>'
-            ];
-            console.log("  listaCampos[" + i + "] =", listaCampos[i]);
-            i++;
-            </logic:notEqual>
-            </logic:iterate>
-            console.log("cargarInicio: listaCampos built, length =", listaCampos.length);
-
-            // Variables de texto para columnas especiales según entrada/salida
-            var cont = 0;
-            var destino = "";
-            var salida = "";
-            <% if (("E".equals(tipoAnotacion)) || ("Relacion_E".equals(tipoAnotacion)) ){ %>
-            destino = "<%= descriptor.getDescripcion("rotulo_uniDestino") %>";
-            salida  = "<%= descriptor.getDescripcion("rotulo_entrada") %>";
-            <% } else { %>
-            destino = "<%= descriptor.getDescripcion("rotulo_uniOrigen") %>";
-            salida  = "<%= descriptor.getDescripcion("rotulo_salida") %>";
-            <% } %>
-            console.log("cargarInicio: destino =", destino, ", salida =", salida);
-
-            // Construcción de la configuración de columnas
-            cont = 0;
-            cols = [
-                { title: "<i class='fa fa-check' aria-hidden='true'></i>", sWidth: parseInt(listaCampos[cont++][2]) + '%', sClass: "centrado"  },
-                { title: "Estado",                       sWidth: parseInt(listaCampos[cont++][2]) + '%', sClass: "centrado" },
-                { title: "<%= descriptor.getDescripcion("rotulo_proc") %>",  sWidth: parseInt(listaCampos[cont++][2]) + '%', sClass: "centrado" },
-                { title: "<%= descriptor.getDescripcion("rotulo_exp") %>",   sWidth: parseInt(listaCampos[cont++][2]) + '%', sClass: "centrado" },
-                { title: "<%= descriptor.getDescripcion("rotulo_usu") %>",   sWidth: parseInt(listaCampos[cont++][2]) + '%', sClass: "centrado" },
-                { title: "<%= descriptor.getDescripcion("rotulo_numAnot") %>", sWidth: parseInt(listaCampos[cont++][2]) + '%', sClass: "centrado" },
-                { title: "<%= descriptor.getDescripcion("rotulo_tipo") %>",  sWidth: parseInt(listaCampos[cont++][2]) + '%', sClass: "centrado" },
-                { title: "<%= descriptor.getDescripcion("rotulo_fechaPres") %>", sWidth: parseInt(listaCampos[cont++][2]) + '%', sClass: "centrado" },
-                { title: "<%= descriptor.getDescripcion("rotulo_fechaGrab") %>", sWidth: parseInt(listaCampos[cont++][2]) + '%', sClass: "centrado" },
-                <% if (("E".equals(tipoAnotacion)) || ("Relacion_E".equals(tipoAnotacion))){ %>
-                { title: "<%= descriptor.getDescripcion("rotulo_remite") %>",   sWidth: parseInt(listaCampos[cont++][2]) + '%', sClass: "centrado" },
-                <% } else { %>
-                { title: "<%= descriptor.getDescripcion("rotuloDestinatario") %>", sWidth: parseInt(listaCampos[cont++][2]) + '%', sClass: "centrado" },
-                <% } %>
-                { title: "<%= descriptor.getDescripcion("rotulo_asunto") %>", sWidth: parseInt(listaCampos[cont++][2]) + '%', sClass: "centrado" },
-                { title: destino, sWidth: parseInt(listaCampos[cont++][2]) + '%', sClass: "centrado" },
-                { title: salida,  sWidth: parseInt(listaCampos[cont++][2]) + '%', sClass: "centrado" }
-            ];
-            console.log("cargarInicio: cols built, cols.length =", cols.length);
-
-            // 6) Aplicar visibilidad y conservar orden
-            for (cont = 0; cont < listaCampos.length; cont++) {
-                if (listaCampos[cont][3] === 'NO') {
-                    cols[cont].sClass = "estiloOculto";
-                } else {
-                    listaOrden[cont] = listaCampos[cont][4];
-                    if (listaCampos[cont][4] == idOrden) {
-                        columnaOrden = cont;
-                    }
-                }
-            }
-            console.log("cargarInicio: applied visibility & order, columnaOrden =", columnaOrden);
-
-            cargarComboFilasPagina();
-            paginaActual = 1;
-
-            // 7) Rama SIR vs normal
-            <% if ("1".equals(esConsultaSIR)) { %>
-            console.log("cargarInicio: esConsultaSIR, including ocultoCargarPaginaAnotaciones.jsp");
-
-            cargarPaginaSIR();
-            <% } else { %>
-            console.log("cargarInicio: normal load, calling cargaPagina(", paginaActual, ")");
-            cargaPagina(paginaActual);
-            <% } %>
-        }
+        
 
             function cargarInicio() {
                 console.log("cargarInicio: start");
@@ -379,7 +271,6 @@
             }
 
 
-
             function enlaces(){
                 numeroPaginas = Math.ceil(numRelacionAnotaciones /lineasPagina);
                 document.getElementById('enlace').innerHTML = enlacesPaginacion('<%=descriptor.getDescripcion("mosPagDePags")%>','<%=descriptor.getDescripcion("anterior")%>','<%=descriptor.getDescripcion("siguiente")%>',paginaActual,numeroPaginas,'cargaPagina','<%=descriptor.getDescripcion("numResultados")%>', numRelacionAnotaciones);
@@ -401,14 +292,11 @@
 
             // Cambiar la opción a consultaOcultaEnSIR
             document.getElementById('opcion').value = "consultaOcultaEnSIR";
-            console.log("cargarPaginaSIR: después opcion =",
-                document.getElementById('opcion').value);
+            console.log("cargarPaginaSIR: después opcion =", document.getElementById('opcion').value);
 
             // 3) Envía al iframe
             document.forms[0].target = "oculto";
             document.forms[0].action = "<%=request.getContextPath()%>/MantAnotacionRegistro.do";
-            document.forms[0].paginaListado.value = 1;
-            document.forms[0].numLineasPaginaListado.value = lineasPagina;
             document.forms[0].submit();
         }
 
@@ -444,7 +332,7 @@
                     paginaCliente = true;
                 }
 
-                if (esConsultaSIR == '1') {
+                if (esConsultaSIR) {
                     for (var i = 0; i < listaSel.length; i++) {
                         var estadoSIR = listaSel[i][24] || '';
                         var fechaSIR = listaSel[i][25];
@@ -485,15 +373,10 @@
                     "paging" : paginaCliente,
                     "pageLength": lineasPagina,
                     "autoWidth": false,
-                    "createdRow": function(row, data, dataIndex) {
-                        $(row).attr("id", dataIndex);
-                    },
                     "language": {
                         "search": "<%=descriptor.getDescripcion("buscar")%>",
-                        "paginate": {
-                            "previous": "<%=descriptor.getDescripcion("anterior")%>",
-                            "next": "<%=descriptor.getDescripcion("siguiente")%>"
-                        },
+                        "previous": "<%=descriptor.getDescripcion("anterior")%>",
+                        "next": "<%=descriptor.getDescripcion("siguiente")%>",
                         "lengthMenu": "<%=descriptor.getDescripcion("mosFilasPag")%>",
                         "zeroRecords": "<%=descriptor.getDescripcion("msgNoResultBusq")%>",
                         "info": "<%=descriptor.getDescripcion("mosPagDePags")%>",
@@ -502,8 +385,12 @@
                     }
                 });
 
-                
-                $("#tablaAnotaciones tbody").off("dblclick", "tr").on("dblclick", "tr", function() {
+                // Solo una vez después de crear la tabla
+                if (esConsultaSIR == '1') {
+                    $('#tablaAnotaciones thead tr th').eq(1).html("Estado SIR");
+                }
+
+                for(var i = 0; i < listaSel.length; i++) {
                     $('#tablaAnotaciones tbody tr:nth-child('+(i+1)+')').attr('id', i);
                     // logs solo si te interesan
                 }
@@ -546,19 +433,6 @@
                 });
                 if (esConsultaSIR != '1') {
                     enlaces();
-                    var contenedor = document.getElementById('enlace');
-                    if (contenedor) {
-                        contenedor.style.display = '';
-                    }
-                } else {
-                    // Puede quedar la paginación generada por el servidor
-                    // de una consulta anterior. La ocultamos para evitar
-                    // controles duplicados en pantalla.
-                    var contenedor = document.getElementById('enlace');
-                    if (contenedor) {
-                        contenedor.innerHTML = '';
-                        contenedor.style.display = 'none';
-                    }
                 }
                 actualizarChecksPagina();
                 remarcarFilasObservacion();
@@ -566,7 +440,7 @@
             }
 
 
-        //Se remarcan las anotaciones que tengan observaciones
+            //Se remarcan las anotaciones que tengan observaciones
             function remarcarFilasObservacion() {
 
                 if (listaAnotacionesCompleta) {
@@ -616,10 +490,6 @@
                 // Log de los valores para depuración
                 console.log("[seleccionRegistro] Datos fila:", listaOriginal[ind]);
                 console.log("[seleccionRegistro] ano:", ano, "numero:", numero);
-                console.log("seleccionRegistro -> indice:", indice, " ano:", ano, " numero:", numero);
-                console.log("Recibido indice=" + indice + ", ano=" + ano + ", numero=" + numero);
-                  var tipoEntradaRaw = (listaAnotacionesCompleta && listaAnotacionesCompleta[ind]) ? listaAnotacionesCompleta[ind][20] : "NA";
-                  console.log("[seleccionRegistro] tipoEntradaRaw:", tipoEntradaRaw);
 
                 // Rellenar campos del form
                 document.forms[0].posicionAnotacion.value = (paginaActual - 1) * document.forms[0].numLineasPaginaListado.value + ind + 1;
@@ -811,31 +681,6 @@
                 document.forms[0].action="<%=request.getContextPath()%>/InformesRegistro.do";
                 document.forms[0].submit();
             }
-        // Inserta un campo de texto para saltar a una página concreta cuando
-        // la paginación la gestiona DataTables (consultas SIR)
-        function insertarInputPaginacion() {
-            var pagDiv = $('#tablaAnotaciones_paginate');
-            if (pagDiv.length && pagDiv.find('#input_paginate').length === 0) {
-                var info = dataTable.page.info();
-                var input = $('<input/>', {type:'text', id:'input_paginate', size:3})
-                    .val(info.page + 1)
-                    .on('keypress', function(e){
-                        if (e.which == 13) {
-                            var p = parseInt(this.value, 10);
-                            if (!isNaN(p) && p >= 1 && p <= info.pages) {
-                                dataTable.page(p - 1).draw('page');
-                            }
-                        }
-                    });
-                pagDiv.prepend(input);
-            }
-        }
-
-        // Actualiza el valor del input de salto de página al cambiar de página
-        function actualizarInputPaginacion() {
-            var info = dataTable.page.info();
-            $('#input_paginate').val(info.page + 1);
-        }
             function abrirInformeCSV(nombre,dir) {
                 pleaseWait('off');
                 var source = "<c:url value='/jsp/verPdf.jsp?opcion=null&tipoFichero=csv&nombre='/>" + nombre+"&dir="+dir;
