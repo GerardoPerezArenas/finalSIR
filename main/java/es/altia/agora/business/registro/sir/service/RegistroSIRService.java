@@ -1205,6 +1205,38 @@ public class RegistroSIRService {
         return parametrosInforme;
     }
 
+    /**
+     * Valida que una entrada de registro cuente con procedimiento y unidad de
+     * tramitadora destino antes de crear el asiento registral en REGEXLAN.
+     * El asiento se crea con tipo "2" (Procedente otra administración).
+     */
+    public SirDestinoRRes validarAsientoRegistral(RegistroValueObject registro, int idiomaUsuario, String[] paramsBD) throws ServicioSIRException {
+        log.info("validarAsientoRegistral - Begin");
+        if (registro == null) {
+            throw new ServicioSIRException("Registro nulo");
+        }
+        if (StringUtils.isBlank(registro.getCodProcedimiento()) || StringUtils.isBlank(registro.getCodigoUnidadDestinoSIR())) {
+            throw new ServicioSIRException("Debe indicar procedimiento y unidad destino");
+        }
+
+        SirDestinoRRes destino = new SirDestinoRRes();
+        destino.setRES_DEP(registro.getIdentDepart());
+        destino.setRES_UOR(registro.getUnidadOrgan());
+        destino.setRES_TIP(registro.getTipoReg());
+        destino.setRES_EJE(registro.getAnoReg());
+        destino.setRES_NUM((int) registro.getNumReg());
+        destino.setCodigoUnidad(registro.getCodigoUnidadDestinoSIR());
+        destino.setNumeroRegistroSIR("2");
+
+        try {
+            AdaptadorSQLBD adaptadorSQLBD = new AdaptadorSQLBD(paramsBD);
+            return sIRDestinoRResService.crearDatosSirDestinoRRes(idiomaUsuario, destino, adaptadorSQLBD);
+        } catch (Exception e) {
+            log.error("Error al validar asiento registral", e);
+            throw new ServicioSIRException("Error al validar asiento registral", e);
+        }
+    }
+
     public String getCodigoOficinaForCodigoUnidad(String codigoUnidad, AdaptadorSQLBD adapt) throws Exception {
         String respuesta = null;
         Connection con = null;
